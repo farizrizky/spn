@@ -1,0 +1,110 @@
+<?php
+
+namespace App\Http\Controllers\Web;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+class StaticController extends Controller
+{
+    public function home()
+    {
+        $data = [
+            'title' => 'Welcome to SPN Official',
+            'description' => 'Professional, Fast, Save, and Competitive',
+            'partial_hero' => PartialController::hero('custom1'),
+        ];
+        
+        return view('web.page.static.home', $data);
+    }
+
+    public function profile()
+    {
+        $data = [
+            'title' => 'Profil PT. Sindo Prima Niaga',
+            'partial_title' => PartialController::title('Profil'),
+        ];
+        
+        return view('web.page.static.profile', $data);
+    }
+
+    public function visionMission()
+    {
+        $data = [
+            'title' => 'Visi & Misi',
+            'partial_title' => PartialController::title('Visi & Misi'),
+        ];
+        
+        return view('web.page.static.vision-mission', $data);
+    }
+
+    public function bussinessPartner()
+    {
+        $data = [
+            'title' => 'Bussiness Partner',
+            'partial_title' => PartialController::title('Bussiness Partner'),
+        ];
+        
+        return view('web.page.static.bussiness-partner', $data);
+    }
+
+    public function award()
+    {
+        $data = [
+            'title' => 'Award',
+            'partial_title' => PartialController::title('Award'),
+        ];
+        
+        return view('web.page.static.award', $data);
+    }
+
+    public function service()
+    {
+        $data = [
+            'title' => 'Layanan Kami',
+            'partial_title' => PartialController::title('Layanan Kami'),
+        ];
+        
+        return view('web.page.static.service', $data);
+    }
+
+    public function lubeTruck()
+    {
+        $data = [
+            'title' => 'Lube Truck',
+            'partial_title' => PartialController::title('Lube Truck'),
+        ];
+        
+        return view('web.page.static.lube-truck', $data);
+    }
+
+    public function lubeStation()
+    {
+        $data = [
+            'title' => 'Lube Station',
+            'partial_title' => PartialController::title('Lube Station'),
+        ];
+        
+        return view('web.page.static.lube-station', $data);
+    }
+
+    public function contact()
+    {
+        $data = [
+            'title' => 'Hubungi Kami',
+            'partial_title' => PartialController::title('Hubungi Kami'),
+        ];
+        
+        return view('web.page.static.contact', $data);
+    }
+
+    public function notFound()
+    {
+        $data = [
+            'title' => 'Halaman Tidak Ditemukan',
+            'partial_title' => PartialController::title('Halaman Tidak Ditemukan'),
+        ];
+        
+        return view('web.page.static.not-found', $data);
+    }
+}
