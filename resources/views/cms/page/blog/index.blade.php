@@ -4,10 +4,10 @@
 <div class="page-inner">
     <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
         <div>
-            <h3 class="fw-bold mb-3">Kategori Produk</h3>
+            <h3 class="fw-bold mb-3">Blog</h3>
         </div>
         <div class="ms-md-auto py-2 py-md-0">
-            <a href="{{ route('cms.product-category.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Buat Kategori Produk</a>
+            <a href="{{ route('cms.blog.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Buat Blog</a>
         </div>
     </div>
     <div class="row">
@@ -18,17 +18,23 @@
                         <table id="basic-datatables" class="table table-bordered table-striped" width="100%">
                             <thead> 
                                 <tr class="table-primary">
+                                    <th>Tanggal</th>
+                                    <th>Judul</th>
                                     <th>Kategori</th>
+                                    <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($product_category as $pc)
+                                @foreach ($blog as $b)
                                 <tr>
-                                    <td>{{ $pc->name }}</td>
+                                    <td>{{ DateHelper::fullDateFormatWithoutTime($b->date) }}</td>
+                                    <td>{{ $b->title }}</td>
+                                    <td>{{ $b->blogCategory?->name }}</td>
+                                    <td>{{ $b->status == 'published' ? 'Published' : 'Draft' }}</td>
                                     <td>
-                                        <a class="btn btn-success btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Ubah" href="{{ route('cms.product-category.edit', $pc->id) }}"><span class="icon-pencil"></span></a>
-                                        <a class="btn btn-danger btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus" onclick="confirmAlert('{{ route('cms.product-category.delete', $pc->id) }}', 'Anda yakin akan menghapus kategori ini?')"><span class="icon-trash"></span></a>
+                                        <a class="btn btn-success btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Ubah" href="{{ route('cms.blog.edit', $b->id) }}"><span class="icon-pencil"></span></a>
+                                        <a class="btn btn-danger btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus" onclick="confirmAlert('{{ route('cms.blog.delete', $b->id) }}', 'Anda yakin akan menghapus blog ini?')"><span class="icon-trash"></span></a>
                                     </td>
                                 </tr>
                                 @endforeach

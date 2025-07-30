@@ -53,7 +53,7 @@
                             <ul>
                                 <li><a href="https://www.linkedin.com/company/pt-spniaga/"><i class="ri-linkedin-line"></i></a></li>
                                 <li><a href="https://www.instagram.com/spniaga_"><i class="ri-instagram-line"></i></a></li>
-                                <li><a href="https://www.tiktok.com/@spniaga_"><i class="ri-linkedin-fill"></i></a></li>
+                                <li><a href="https://www.tiktok.com/@spniaga_"><i class="ri-tiktok-fill"></i></a></li>
                             </ul>
                         </div>
                     </div>

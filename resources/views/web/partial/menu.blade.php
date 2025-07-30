@@ -20,15 +20,21 @@
                             </ul>
                         </li>
                         <li class="has-submenu">
-                            <a href="{{ route('web.product-category') }}">Produk</a>
+                            <a href="{{ route('web.product-type') }}">Produk</a>
                             <ul class="submenu">
-                                @foreach(DataHelper::getProductCategory() as $pc)
-                                    <li><a href="{{ route('web.product-list', ['product_category_slug' => $pc['slug']]) }}">{{ $pc['name'] }}</a></li>
+                                @foreach(DataHelper::getType() as $t)
+                                    <li><a href="{{ route('web.product', ['type' => $t['slug']]) }}">{{ $t['name'] }}</a></li>
                                 @endforeach
                             </ul>
                         </li>
                         <li><a href="{{ route('web.service') }}">Layanan</a></li>
-                        {{-- <li><a href="{{ route('post.list') }}">Informasi</a></li> --}}
+                        <li><a class="has-submenu" href="{{ route('web.blog') }}">Informasi</a>
+                            <ul class="submenu">
+                                @foreach(DataHelper::getBlogCategory() as $bc)
+                                    <li><a href="{{ route('web.blog', ['category' => $bc->slug]) }}">{{ $bc->name }}</a></li>
+                                @endforeach
+                            </ul>
+                        </li>
                         <li><a href="{{ route('web.contact') }}">Kontak</a> </li>
                     </ul>
                 </nav>

@@ -17,6 +17,7 @@
     <section class="project-details pt-120 pb-120">
         <div class="container">
             <div class="row">
+                @if($product->productImage())
                 <div class="col-md-6 wow fadeIn text-center" data-wow-delay=".2s">
                     <div class="d-flex justify-content-center">
                         <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -41,13 +42,15 @@
                                 <span class="visually-hidden">Next</span>
                             </button>
                         </div>
-                        
                     </div>
                 </div>
+                @endif
                 <div class="col-md-6 wow fadeIn" data-wow-delay=".3s">
                     <h3 class="title">{{ $product->name }}</h3>
+                    
                     {!! $product->description !!}
-
+                    Kategori:
+                    {{ implode(', ', $product->productType->pluck('name')->toArray()) }}
                     <div class="mt-30 w-100">
                         <a href="https://wa.me/1234567890" class="primary-btn">
                             <span  class="text">Dapatkan Produk Ini</span>
@@ -56,43 +59,31 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12 mt-100">
-                    <h4 class="title mb-50">Deskripsi Produk</h4>
-                    <div class="accordion custom-accordion" id="accordionExample">
-                        <!-- Item 1 -->
-                        <div class="accordion-item border-0 border-bottom">
-                            <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button collapsed custom-accordion-btn" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                                    aria-expanded="false" aria-controls="collapseOne">
-                                    <h6>Quality levels, approvals and recommendations</h6>
-                                </button>
-                            </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    {{ $product->qualityLevel()->pluck('name')->join(', ') }}
+            @if ($product->productAdditionalInformation->isNotEmpty())
+                <div class="row">
+                    <div class="col-md-12 mt-100">
+                        <h4 class="title mb-50">Deskripsi Produk</h4>
+                        @foreach($product->productAdditionalInformation as $i)
+                            <div class="accordion custom-accordion" id="accordionExample">
+                                <div class="accordion-item border-0 border-bottom">
+                                    <h2 class="accordion-header" id="heading{{ $i->id }}">
+                                        <button class="accordion-button collapsed custom-accordion-btn" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapse{{ $i->id }}"
+                                            aria-expanded="false" aria-controls="collapse{{ $i->id }}">
+                                            <h6>{{ $i->title }}</h6>
+                                        </button>
+                                    </h2>
+                                    <div id="collapse{{ $i->id }}" class="accordion-collapse collapse" aria-labelledby="heading{{ $i->id }}" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            {!! $i->information !!}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- Item 2 -->
-                        <div class="accordion-item border-0 border-bottom">
-                            <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button collapsed custom-accordion-btn" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-                                    aria-expanded="false" aria-controls="collapseTwo">
-                                    <h6>Spesifikasi</h6>
-                                </button>
-                            </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
-            </div>
+            @endif
         </div>
         {{-- @livewire('web.partial.cta') --}}
     </section>

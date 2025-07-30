@@ -4,44 +4,74 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
-use App\Models\ProductCategory;
+use App\Models\Type;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function productCategory()
+    public function type()
     {
         $data = [
             'title' => 'Kategori Produk',
             'partial_title' => PartialController::title('Kategori Produk'),
-            'product_category' => ProductCategory::all()
+            'type' => Type::all()
         ];
         
-        return view('web.page.product.category', $data);
+        return view('web.page.product.type', $data);
     }
 
-    public function productList($slug)
+    public function list(Request $request)
     {
-        $productCategory = ProductCategory::where('slug', $slug)->first();
-        if (!$productCategory) {
-            return redirect()->route('web.not-found');
+        if($request->has('type')) {
+           $product = Product::with('productType', 'productImage')
+                ->where('status', 'published')
+                ->whereHas('productType', function($query) use ($request) {
+                    $query->where('slug', $request->get('type'));
+                })
+                ->orderBy('created_at', 'desc')
+                ->paginate(9);
+            
+            if($product->isEmpty()) {
+                return redirect()->route('web.not-found');
+            }
+            $partial_title = PartialController::title($product->first()->productType->first()->name);
+
+        }else if($request->has('search')) {
+            $search = $request->get('search');
+            $product = Product::with('productType', 'productImage')
+                ->where('status', 'published')
+                ->where(function($query) use ($search) {
+                    $query->where('name', 'like', "%{$search}%")
+                          ->orWhere('description', 'like', "%{$search}%");
+                })
+                ->orderBy('created_at', 'desc')
+                ->paginate(9);
+
+            if($product->isEmpty()) {
+                return redirect()->route('web.not-found');
+            }
+
+            $partial_title = PartialController::title('Hasil Pencarian: ' . $search);
+            
+        } else {
+            $product = Product::with('productType', 'productImage')
+                ->where('status', 'published')
+                ->orderBy('created_at', 'desc')
+                ->paginate(9);
+
+            $partial_title = PartialController::title('Daftar Produk');
         }
-
-        $product = Product::with('productImage', 'productCategory')->whereHas('productCategory', function ($query) use ($slug) {
-            $query->where('slug', $slug);
-        })->where('status', 'published')->orderBy('created_at', 'desc');
-
 
         $data = [
             'title' => 'Daftar Produk',
-            'partial_title' => PartialController::title('Daftar Produk ' . $productCategory->name),
-            'product' => $product->paginate(10)
+            'partial_title' => $partial_title,
+            'product' => $product
         ];
         
         return view('web.page.product.list', $data);
     }
 
-    public function productDetail($slug)
+    public function detail($slug)
     {
         $product = Product::where(['slug' => $slug, 'status' => 'published']);
         if (!$product->exists()) {

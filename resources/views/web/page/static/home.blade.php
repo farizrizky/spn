@@ -184,14 +184,14 @@
                         <div class="single-card dark-bg mb-30" data-background="{{ asset('assets/web/images/truckdistribution.png') }}">
                             <h5 class="title">Lube Truck Distribution</h5>
                             <p class="mt-100">Layanan distribusi oli menggunakan truck khusus yang memberikan mobilitas tinggi dalam pengiriman pelumas ke lokasi pelanggan.</p>
-                            <a href="about.html" class="secondary-btn primary-bg"><span class="text">Selengkapnya</span> <span class="icon"><i class="ri-arrow-right-double-line"></i></span></a>
+                            <a href="{{ route('web.lube-truck') }}" class="secondary-btn primary-bg"><span class="text">Selengkapnya</span> <span class="icon"><i class="ri-arrow-right-double-line"></i></span></a>
                         </div>
                     </div>
                     <div class="col-lg-6 wow fadeInLeft" data-wow-delay=".2s">
                         <div class="single-card dark-bg mb-30" data-background="{{ asset('assets/web/images/lubestation.png') }}">
                             <h5 class="title">Lube Station</h5>
                             <p class="mt-100">Stasiun distribusi oli yang dirancang untuk memberikan kemudahan dalam pengisian dan penggantian pelumas di lokasi pelanggan.</p>
-                            <a href="about.html" class="secondary-btn primary-bg""><span class="text">Selengkapnya</span> <span class="icon"><i class="ri-arrow-right-double-line"></i></span></a>
+                            <a href="{{ route('web.lube-station') }}" class="secondary-btn primary-bg"><span class="text">Selengkapnya</span> <span class="icon"><i class="ri-arrow-right-double-line"></i></span></a>
                         </div>
                     </div>
                 </div>

@@ -1,3 +1,41 @@
+document.addEventListener('DOMContentLoaded', function () {
+    $("#basic-datatables").DataTable();
+
+    $('.select2').select2({
+        theme: 'bootstrap-5',
+        placeholder: 'Pilih',
+        allowClear: true
+    });
+
+    initTinyMce('textarea#editor');
+});
+
+function initTinyMce(selector) {
+    tinymce.init({
+        selector: selector,
+        plugins: 'lists link image code table media wordcount fullscreen',
+        toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link image | code | customfile',
+        setup: function (editor) {
+            editor.on('OpenWindow', function () {
+                setTimeout(() => {
+                    document.querySelectorAll('.tox-dialog').forEach(dialog => {
+                        dialog.style.zIndex = 1060;
+                    });
+                }, 10);
+            });
+
+            editor.ui.registry.addButton('customfile', {
+                text: 'Insert File',
+                icon: 'browse',
+                onAction: function() {
+                    openFileBrowser(function(fileUrl) {
+                        editor.insertContent(`<a href="${fileUrl}" target="_blank">${fileUrl}</a>`);
+                    });
+                }
+            });
+        }
+    });
+}
 // Validate Forms
 (() => {
     'use strict'
@@ -16,6 +54,7 @@
     })
 })()
 
+// Menampilkan alert dengan SweetAlert2
 function showAlert(title, message, state){
     var button = "";
     if(state == "success"){
@@ -38,6 +77,7 @@ function showAlert(title, message, state){
     });
 }
 
+// Konfirmasi alert dengan SweetAlert2
 function confirmAlert(action, text){
     Swal.fire({
         title: "Peringatan!",
@@ -57,7 +97,7 @@ function confirmAlert(action, text){
     });
 }
 
-
+// Menampilkan notifikasi dengan Bootstrap Notify
 function showNotify(title, message, state) {
     var placementFrom = "top";
     var placementAlign = "center";
@@ -82,7 +122,26 @@ function showNotify(title, message, state) {
     });
 };
  
-
+// Fungsi untuk mengubah teks menjadi slug
 function slugify(text) {
     return text.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 }
+
+// Penting! untuk menghindari konflik dengan TinyMCE dialog didalam modal
+document.addEventListener('focusin', (e) => {
+    if (e.target.closest(".tox-tinymce-aux, .moxman-window, .tam-assetmanager-root") !== null) {
+        e.stopImmediatePropagation();
+    }
+});
+
+
+function openFileBrowser(callback) {
+    const fileWindow = window.open('/panel/file/picker', 'File Manager', 'width=800,height=500');
+
+    window.SetFileUrl = function(url) {
+        callback(url);
+        fileWindow.close();
+    }
+}
+
+    

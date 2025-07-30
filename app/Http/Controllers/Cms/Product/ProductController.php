@@ -6,12 +6,11 @@ use App\Helpers\NotifyHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductAdditionalInformation;
-use App\Models\ProductCategory;
 use App\Models\ProductImage;
-use App\Models\ProductQualityLevel;
-use App\Models\QualityLevel;
-use App\Models\SpecificationVariable;
+use App\Models\ProductType;
+use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -21,7 +20,7 @@ class ProductController extends Controller
     public function index()
     {
         $data = [
-            'product' => Product::with('productCategory')->get(),
+            'product' => Product::get(),
         ];
         return view('cms.page.product.index', $data);
     }
@@ -32,8 +31,7 @@ class ProductController extends Controller
     public function create()
     {
         $data = [
-            'product_category' => ProductCategory::select('id', 'name')->get(),
-            'quality_levels' => QualityLevel::select('id', 'name')->get(),
+            'type' => Type::select('id', 'name')->where('is_active', '1')->get(),
         ];
         return view('cms.page.product.create', $data);
     }
@@ -46,11 +44,10 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|string|max:150',
             'slug' => 'required|string|max:150|unique:product,slug',
-            'product_category' => 'required|exists:product_category,id',
             'description' => 'required|string',
         ]);
 
-        $data = $request->only(['name', 'slug', 'product_category', 'description', 'status']);
+        $data = $request->only(['name', 'slug', 'description', 'status']);
         $createProduct = Product::create($data);
 
         if ($request->images) {
@@ -63,18 +60,20 @@ class ProductController extends Controller
             }
         }
 
-        if($request->quality_level) {
-           foreach ($request->quality_level as $ql) {
-                if(!QualityLevel::find($ql)) {
-                    $newQualityLevel = QualityLevel::create(['name' => $ql]);
-                    $ql = $newQualityLevel->id;
+        if($request->type) {
+           foreach ($request->type as $t) {
+                if(!Type::find($t)) {
+                    $newType = Type::create([
+                        'name' => $t,
+                        'slug' => Str::slug($t),
+                    ]);
+                    $t = $newType->id;
                 }
-
-                $dataQualityLevel = [
+                $dataType = [
                     'product' => $createProduct->id,
-                    'quality_level' => $ql,
+                    'type' => $t,
                 ];
-               ProductQualityLevel::create($dataQualityLevel);
+               ProductType::create($dataType);
             }
         }
 
@@ -112,9 +111,8 @@ class ProductController extends Controller
         }
 
         $data = [
-            'product_category' => ProductCategory::select('id', 'name')->get(),
-            'quality_levels' => QualityLevel::select('id', 'name')->get(),
-            'product' => $product->load(['productCategory', 'productImage', 'qualityLevel', 'productAdditionalInformation']),
+            'type' => Type::select('id', 'name')->where('is_active', '1')->get(),
+            'product' => $product->load(['productType', 'productImage', 'productAdditionalInformation']),
         ];
         return view('cms.page.product.update', $data);
     }
@@ -132,15 +130,14 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|string|max:150',
             'slug' => 'required|string|max:150|unique:product,slug,' . $product->id,
-            'product_category' => 'required|exists:product_category,id',
             'description' => 'required|string',
         ]);
 
-        $data = $request->only(['name', 'slug', 'product_category', 'description', 'status']);
+        $data = $request->only(['name', 'slug', 'description', 'status']);
         $product->update($data);
 
         // Delete existing images
-        $product->productImage()->delete();
+        ProductImage::where('product', $product->id)->delete();
         if ($request->images) {
             foreach ($request->images as $image) {
                 $dataImages = [
@@ -151,25 +148,28 @@ class ProductController extends Controller
             }
         }
 
-        // Delete existing quality levels
-        $product->productQualityLevel()->delete();
-        if ($request->quality_level) {
-            foreach ($request->quality_level as $ql) {
-                if(!QualityLevel::find($ql)) {
-                    $newQualityLevel = QualityLevel::create(['name' => $ql]);
-                    $ql = $newQualityLevel->id;
+        // Delete existing types
+        ProductType::where('product', $product->id)->delete();
+        if ($request->type) {
+            foreach ($request->type as $t) {
+                if(!Type::find($t)) {
+                    $type = Type::create([
+                        'name' => $t,
+                        'slug' => Str::slug($t),
+                    ]);
+                    $t = $type->id;
                 }
-                
-                $dataQualityLevel = [
+
+                $dataType = [
                     'product' => $product->id,
-                    'quality_level' => $ql,
+                    'type' => $t,
                 ];
-                ProductQualityLevel::create($dataQualityLevel);
+                ProductType::create($dataType);
             }
         }
 
         // Delete existing additional information
-        $product->productAdditionalInformation()->delete();
+        ProductAdditionalInformation::where('product', $product->id)->delete();
         if ($request->additional_information) {
             foreach ($request->additional_information as $key => $info) {
                 $dataAdditionalInformation = [
@@ -198,8 +198,11 @@ class ProductController extends Controller
         // Delete associated images
         $product->productImage()->delete();
 
-        // Delete associated quality levels
-        $product->productQualityLevel()->delete();
+        // Delete associated types
+        $product->productType()->delete();
+
+        // Delete associated additional information
+        $product->productAdditionalInformation()->delete();
 
         // Finally, delete the product itself
         $product->delete();

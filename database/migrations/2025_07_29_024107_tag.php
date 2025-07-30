@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_quality_level', function (Blueprint $table) {
+        Schema::create('tag', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('product')->references('id')->on('product')->onDelete('cascade');
-            $table->foreignUuid('quality_level')->references('id')->on('quality_level')->onDelete('cascade');
+            $table->string('name');
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_quality_level');
+        Schema::dropIfExists('tag');
     }
 };

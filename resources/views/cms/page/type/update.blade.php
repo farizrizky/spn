@@ -11,12 +11,12 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <form method="POST" action="{{ route('cms.product-category.update', $product_category->id) }}" class="needs-validation" novalidate enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('cms.type.update', $type->id) }}" class="needs-validation" novalidate enctype="multipart/form-data">
                         @csrf
                         <div class="form-group form-inline row">
                             <label for="name" class="col-md-3 col-form-label text-wrap"><b>Nama Kategori</b></label>
                             <div class="col-md-9 p-0">
-                                <input type="text" class="form-control input-full" value="{{ $product_category->name }}" name="name" id="name" required>
+                                <input type="text" class="form-control input-full" value="{{ $type->name }}" name="name" id="name" required>
                                 <div class="invalid-feedback">Nama kategori harus diisi</div>
                                 @error('name')
                                     <div class="text-danger">{{ $message }}</div>
@@ -26,7 +26,7 @@
                         <div class="form-group form-inline row">
                             <label for="slug" class="col-md-3 col-form-label text-wrap"><b>Slug</b></label>
                             <div class="col-md-9 p-0">
-                                <input type="text" class="form-control input-full" value="{{ $product_category->slug }}" name="slug" id="slug" required>
+                                <input type="text" class="form-control input-full" value="{{ $type->slug }}" name="slug" id="slug" required>
                                 <div class="invalid-feedback">Slug harus diisi</div>
                                 @error('slug')
                                     <div class="text-danger">{{ $message }}</div>
@@ -36,7 +36,7 @@
                         <div class="form-group form-inline row">
                             <label for="description" class="col-md-3 col-form-label text-wrap"><b>Deskripsi</b></label>
                             <div class="col-md-9 p-0">
-                                 <textarea class="form-control" name="description" id="editor">{{ $product_category->description }}</textarea>
+                                 <textarea class="form-control" name="description" id="editor">{{ $type->description }}</textarea>
                                 <div class="invalid-feedback">Deskripsi harus diisi</div>
                             </div>
                         </div>
@@ -45,8 +45,8 @@
                             <div class="col-md-9 p-0">
                                 <div class="input-group mb-3">
                                     <input type="file" class="form-control" name="image" id="image" accept="image/*">
-                                    @if($product_category->image_path)
-                                        <a href="{{ asset('storage/' . $product_category->image_path) }}" data-fancybox class="input-group-text">Lihat Gambar</a>
+                                    @if($type->image_path)
+                                        <a href="{{ asset('storage/' . $type->image_path) }}" data-fancybox class="input-group-text">Lihat Gambar</a>
                                     @endif
                                 </div>
                                 <div class="invalid-feedback">Gambar harus diisi</div>
@@ -57,7 +57,7 @@
                         </div>
                 </div>
                 <div class="card-action">
-                    <a href="{{ route('cms.product-category.index') }}" class="btn btn-black"><span class="icon-action-undo"></span> Kembali</a>
+                    <a href="{{ route('cms.type.index') }}" class="btn btn-black"><span class="icon-action-undo"></span> Kembali</a>
                     <button class="btn btn-success float-end" name="submit"><span class="icon-check"></span> Simpan</button>
                     </form>
                   </div>

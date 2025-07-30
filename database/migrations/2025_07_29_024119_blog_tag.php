@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_category', function (Blueprint $table) {
+        Schema::create('blog_tag', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
-            $table->string('slug')->unique();
-            $table->text('description')->nullable();
-            $table->text('image_path')->nullable();
-            $table->boolean('is_active')->default(true);
+            $table->foreignUuid('blog')->references('id')->on('blog')->onDelete('cascade');
+            $table->foreignUuid('tag')->references('id')->on('tag')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_category');
+        Schema::dropIfExists('blog_tag');
     }
 };

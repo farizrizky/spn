@@ -12,9 +12,12 @@ Route::get('/lube-truck', [App\Http\Controllers\Web\StaticController::class, 'lu
 Route::get('/lube-station', [App\Http\Controllers\Web\StaticController::class, 'lubeStation'])->name('web.lube-station');
 Route::get('/kontak', [App\Http\Controllers\Web\StaticController::class, 'contact'])->name('web.contact');
 
-Route::get('/kategori-produk', [App\Http\Controllers\Web\ProductController::class, 'productCategory'])->name('web.product-category');
-Route::get('/daftar-produk/{product_category_slug}', [App\Http\Controllers\Web\ProductController::class, 'productList'])->name('web.product-list');
-Route::get('/produk/{product_slug}', [App\Http\Controllers\Web\ProductController::class, 'productDetail'])->name('web.product-detail');
+Route::get('/kategori-produk', [App\Http\Controllers\Web\ProductController::class, 'type'])->name('web.product-type');
+Route::get('/produk', [App\Http\Controllers\Web\ProductController::class, 'list'])->name('web.product');
+Route::get('/produk/{product_slug}', [App\Http\Controllers\Web\ProductController::class, 'detail'])->name('web.product-detail');
+
+Route::get('/blog', [App\Http\Controllers\Web\BlogController::class, 'list'])->name('web.blog');
+Route::get('/blog/{slug}', [App\Http\Controllers\Web\BlogController::class, 'detail'])->name('web.blog-detail');
 
 Route::get('/not-found', [App\Http\Controllers\Web\StaticController::class, 'notFound'])->name('web.not-found');
 Route::fallback(function () {

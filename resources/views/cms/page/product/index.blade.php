@@ -18,9 +18,8 @@
                         <table id="basic-datatables" class="table table-bordered table-striped" width="100%">
                             <thead> 
                                 <tr class="table-primary">
-                                    <th>Tanggal</th>
+                                    <th>Terakhir Diperbarui</th>
                                     <th>Nama Produk</th>
-                                    <th>Kategori</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -28,9 +27,8 @@
                             <tbody>
                                 @foreach ($product as $p)
                                 <tr>
-                                    <td>{{ DateHelper::fullDateFormat($p->created_at) }}</td>
+                                    <td>{{ DateHelper::fullDateFormat($p->updated_at) }}</td>
                                     <td>{{ $p->name }}</td>
-                                    <td>{{ $p->productCategory->name }}</td>
                                     <td>{{ $p->status == 'published' ? 'Published' : 'Draft' }}</td>
                                     <td>
                                         <a class="btn btn-success btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Ubah" href="{{ route('cms.product.edit', $p->id) }}"><span class="icon-pencil"></span></a>

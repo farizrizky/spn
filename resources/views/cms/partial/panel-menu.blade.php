@@ -21,7 +21,7 @@
 <div class="sidebar-wrapper scrollbar scrollbar-inner">
     <div class="sidebar-content">
        <ul class="nav nav-secondary">
-            <li class="nav-item">
+            <li class="nav-item {{ request()->routeIs('cms.dashboard') ? 'active' : '' }}">
                 <a href="{{ route('cms.dashboard') }}" class="nav-link">
                     <i class="fas fa-home"></i>
                     <p>Dashboard</p>
@@ -33,28 +33,46 @@
                 </span>
                 <h4 class="text-section">Produk</h4>
             </li>
-            <li class="nav-item">
+            <li class="nav-item {{ request()->routeIs('cms.product.*') ? 'active' : '' }}">
                 <a href="{{ route('cms.product.index') }}">
                     <i class="fas fa-oil-can"></i>
                     <p>Produk</p>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="{{ route('cms.product-category.index') }}">
+            <li class="nav-item {{ request()->routeIs('cms.product-category.*') ? 'active' : '' }}">
+                <a href="{{ route('cms.type.index') }}">
                     <i class="fas fa-th"></i>
                     <p>Kategori Produk</p>
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a href="{{ route('cms.quality-level.index') }}">
                     <i class="fas fa-star"></i>
                     <p>Level Kualitas Produk</p>
                 </a>
+            </li> --}}
+            <li class="nav-section">
+                <span class="sidebar-mini-icon">
+                <i class="fa fa-ellipsis-h"></i>
+                </span>
+                <h4 class="text-section">Blog</h4>
             </li>
-            <li class="nav-item">
-                <a href="{{ route('cms.specification-variable.index') }}">
-                    <i class="fas fa-flask"></i>
-                    <p>Spesifikasi Variabel Produk</p>
+            <li class="nav-item {{ request()->routeIs('cms.blog.*') ? 'active' : '' }}">
+                <a href="{{ route('cms.blog.index') }}">
+                    	<i class="fas fa-newspaper"></i>
+                    <p>Blog</p>
+                </a>
+            </li>
+            <li class="nav-item {{ request()->routeIs('cms.blog-category.*') ? 'active' : '' }}">
+                <a href="{{ route('cms.blog-category.index') }}">
+                    <i class="fas fa-th"></i>
+                    <p>Kategori Blog</p>
+                </a>
+            </li>
+            <li class="nav-item {{ request()->routeIs('cms.tag.*') ? 'active' : '' }}">
+                <a href="{{ route('cms.tag.index') }}">
+                    <i class="fas fa-tags"></i>
+                    <p>Tag</p>
                 </a>
             </li>
         </ul>

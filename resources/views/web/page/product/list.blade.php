@@ -15,9 +15,11 @@
                 @foreach ($product as $p)
                     <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay=".2s">
                         <div class="single-service">
-                            <div class="d-flex justify-content-center align-items-center mb-30">
-                                <img src="{{ $p->productImage->first()->image_path }}"  style="width:100px;" alt="icon">
-                            </div>
+                            @if($p->productImage->isNotEmpty())
+                                <div class="d-flex justify-content-center align-items-center mb-30">
+                                    <img src="{{ $p->productImage->first()->image_path }}"  style="width:100px;" alt="icon">
+                                </div>
+                            @endif
                             <h5 class="title text-center"><a href="{{ route('web.product-detail', ['product_slug' => $p->slug]) }}">{{ $p->name }}</a></h5>
                             <p class="mt-10 text-center">{{ Str::limit(strip_tags($p->description), 120) }}</p>
                             <div class="d-flex justify-content-center align-items-center mb-30">
@@ -26,7 +28,7 @@
                         </div>                    
                     </div>
                 @endforeach
-                {{ $product->links() }}
+                {{ $product->links('vendor.pagination.web-pagination') }}
             </div>
         </div>
     </section>

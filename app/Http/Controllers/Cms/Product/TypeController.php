@@ -5,11 +5,10 @@ namespace App\Http\Controllers\Cms\Product;
 use App\Helpers\NotifyHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
-use App\Models\ProductCategory;
+use App\Models\Type;
 use Illuminate\Http\Request;
-use Mockery\Matcher\Not;
 
-class ProductCategoryController extends Controller
+class TypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +16,10 @@ class ProductCategoryController extends Controller
     public function index()
     {
         $data = [
-            'product_category' => ProductCategory::all(),
+            'type' => Type::all(),
         ];
 
-        return view('cms.page.product-category.index', $data);
+        return view('cms.page.type.index', $data);
     }
 
     /**
@@ -28,7 +27,7 @@ class ProductCategoryController extends Controller
      */
     public function create()
     {
-        return view('cms.page.product-category.create');
+        return view('cms.page.type.create');
     }
 
     /**
@@ -38,7 +37,7 @@ class ProductCategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:150',
-            'slug' => 'required|string|unique:product_category,slug|max:150',
+            'slug' => 'required|string|unique:type,slug|max:150',
             'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
@@ -48,16 +47,16 @@ class ProductCategoryController extends Controller
             $data['image_path'] = $request->file('image')->store('files', 'public');
         }
 
-        ProductCategory::create($data);
+        Type::create($data);
 
         $notify = NotifyHelper::successfullyCreated();
-        return redirect()->route('cms.product-category.index')->with('notify', $notify);
+        return redirect()->route('cms.type.index')->with('notify', $notify);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(ProductCategory $productCategory)
+    public function show(Type $type)
     {
         //
     }
@@ -65,33 +64,33 @@ class ProductCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ProductCategory $productCategory)
+    public function edit(Type $type)
     {
-        if(!$productCategory) {
+        if(!$type) {
              $notify = NotifyHelper::notFound();
             return back()->with('notify', $notify);
         }
         
         $data = [
-            'product_category' => $productCategory,
+            'type' => $type,
         ];
 
-        return view('cms.page.product-category.update', $data);
+        return view('cms.page.type.update', $data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ProductCategory $productCategory)
+    public function update(Request $request, Type $type)
     {
-        if(!$productCategory) {
+        if(!$type) {
             $notify = NotifyHelper::notFound();
             return back()->with('notify', $notify);
         }
 
         $request->validate([
             'name' => 'required|string|max:150',
-            'slug' => 'required|string|unique:product_category,slug,' . $productCategory->id . '|max:150',
+            'slug' => 'required|string|unique:type,slug,' . $type->id . '|max:150',
             'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
@@ -101,31 +100,25 @@ class ProductCategoryController extends Controller
             $data['image_path'] = $request->file('image')->store('files', 'public');
         }
 
-        $productCategory->update($data);
+        $type->update($data);
 
         $notify = NotifyHelper::successfullyUpdated();
-        return redirect()->route('cms.product-category.index')->with('notify', $notify);
+        return redirect()->route('cms.type.index')->with('notify', $notify);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProductCategory $productCategory)
+    public function destroy(Type $type)
     {
-        if(!$productCategory) {
+        if(!$type) {
             $notify = NotifyHelper::notFound();
             return back()->with('notify', $notify)->withInput();
         }
 
-        // Check if there are products associated with this category
-        if (Product::where('product_category', $productCategory->id)->exists()) {
-            $notify = NotifyHelper::errorOccurred('Kategori produk ini masih memiliki produk terkait.');
-            return back()->with('notify', $notify);
-        }
-
-        $productCategory->delete();
+        $type->delete();
         
         $notify = NotifyHelper::successfullyDeleted();
-        return redirect()->route('cms.product-category.index')->with('notify', $notify);
+        return redirect()->route('cms.type.index')->with('notify', $notify);
     }
 }

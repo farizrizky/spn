@@ -37,15 +37,6 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="product_category_id"><b>Kategori Produk</b></label>
-                            <select class="form-select form-control select2" style="width: 100%" name="product_category" required>
-                                <option value="">Pilih Kategori Produk</option>
-                                @foreach ($product_category as $c)
-                                    <option value="{{ $c->id }}">{{ $c->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
                             <label for="description"><b>Deskripsi</b></label>
                             <textarea class="form-control" name="description" id="editor"></textarea>
                             <div class="invalid-feedback">Deskripsi harus diisi</div>
@@ -86,7 +77,7 @@
                         </h6>
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordered mt-2 sortableTable" id="imageTable">
+                        <table class="table table-bordered mt-2" id="imageTable">
                             <thead>
                                 <tr>
                                     <th>Preview</th>
@@ -99,12 +90,12 @@
                 </div>
                 <div class="card">
                     <div class="card-header">
-                        <h6><strong>Level Kualitas</strong></h6>
+                        <h6><strong>Kategori</strong></h6>
                     </div>
                     <div class="card-body">
-                        <select style="width: 100%" name="quality_level[]" id="selectQuality" multiple>
-                            @foreach ($quality_levels as $ql)
-                                <option value="{{ $ql->id }}">{{ $ql->name }}</option>
+                        <select style="width: 100%" name="type[]" id="selectType" multiple>
+                            @foreach ($type as $t)
+                                <option value="{{ $t->id }}">{{ $t->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -118,7 +109,7 @@
                         </h6>
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordered mt-2 sortableTable" id="informationTable">
+                        <table class="table table-bordered mt-2" id="informationTable">
                             <thead>
                                 <tr>
                                     <th>Judul</th>
@@ -170,8 +161,8 @@
                 <div class="invalid-feedback">Konten informasi harus diisi</div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" id="addInformation">
-                    <i class="fa fa-upload"></i> Tambah
+                <button type="button" class="btn btn-success" id="saveInformation">
+                    <i class="fa fa-save"></i> simpan
                 </button>
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                     <i class="fa fa-times"></i> Tutup
@@ -185,7 +176,8 @@
 
 @section('script')
 <script>
-    let sortable = new Sortable(document.querySelector('.sortableTable tbody'));
+    let sortableImage = new Sortable(document.querySelector('#imageTable tbody'));
+    let sortableInformation = new Sortable(document.querySelector('#informationTable tbody'));
     let image = [];
     let additionalInformation = {};
 
@@ -193,29 +185,24 @@
         renderImageTable();
         renderAdditionalInformation();
 
-        $('#selectQuality').select2({
-            placeholder: "Pilih Level Kualitas",
+        $('#selectType').select2({
             allowClear: true,
             tags: true,
             tokenSeparators: [','],
             createTag: function (params) {
                 var term = $.trim(params.term);
-
                 if (term === '') {
                     return null;
                 }
-
                 return {
                     id: term,
                     text: term,
-                    newTag: true // add additional parameters
+                    newTag: true
                 }
             }
         });
     });
-
    
-
     $('#saveProduct').on('click', function() {
         if ($('form').get(0).checkValidity()) {
             $('form').submit();
@@ -304,7 +291,7 @@
         
     });
 
-    $('#addInformation').on('click', function () {
+    $('#saveInformation').on('click', function () {
         let title = $('#additionalInfoTitle').val();
         let content = tinymce.get('additionalInfoContent').getContent();
         let id = $('#additionalInfoId').val();

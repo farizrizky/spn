@@ -11,7 +11,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <form method="POST" action="{{ route('cms.product-category.store') }}" class="needs-validation" novalidate enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('cms.type.store') }}" class="needs-validation" novalidate enctype="multipart/form-data">
                         @csrf
                         <div class="form-group form-inline row">
                             <label for="name" class="col-md-3 col-form-label text-wrap"><b>Nama Kategori</b></label>
@@ -52,7 +52,7 @@
                         </div>
                 </div>
                 <div class="card-action">
-                    <a href="{{ route('cms.product-category.index') }}" class="btn btn-black"><span class="icon-action-undo"></span> Kembali</a>
+                    <a href="{{ route('cms.type.index') }}" class="btn btn-black"><span class="icon-action-undo"></span> Kembali</a>
                     <button class="btn btn-success float-end" name="submit"><span class="icon-check"></span> Simpan</button>
                     </form>
                   </div>

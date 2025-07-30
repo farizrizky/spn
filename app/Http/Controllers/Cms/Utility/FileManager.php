@@ -63,5 +63,15 @@ class FileManager extends Controller
         }
 
         return 'other';
-    }   
+    }
+    
+    public function filePicker($type = 'all')
+    {
+        if($type === 'all') {
+            $files = Files::all();
+        } else {
+            $files = Files::where('type', $type)->get();
+        }
+        return view('cms.partial.file-picker', compact('files', 'type'));
+    }
 }

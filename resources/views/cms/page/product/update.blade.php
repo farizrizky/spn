@@ -37,15 +37,6 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="product_category_id"><b>Kategori Produk</b></label>
-                            <select class="form-select form-control select2" style="width: 100%" name="product_category" required>
-                                <option value="">Pilih Kategori Produk</option>
-                                @foreach ($product_category as $c)
-                                    <option value="{{ $c->id }}" {{ $c->id == $product->product_category ? 'selected' : '' }}>{{ $c->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
                             <label for="description"><b>Deskripsi</b></label>
                             <textarea class="form-control" name="description" id="editor">
                                 {{ $product->description }}
@@ -88,7 +79,8 @@
                         </h6>
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordered mt-2 sortableTable" id="imageTable">
+                        <small><i>Tekan dan tahan untuk memindahkan item</i></small>
+                        <table class="table table-bordered mt-2" id="imageTable">
                             <thead>
                                 <tr>
                                     <th>Preview</th>
@@ -101,12 +93,12 @@
                 </div>
                 <div class="card">
                     <div class="card-header">
-                        <h6><strong>Level Kualitas</strong></h6>
+                        <h6><strong>Kategori Produk</strong></h6>
                     </div>
                     <div class="card-body">
-                        <select style="width: 100%" name="quality_level[]" id="selectQuality" multiple>
-                            @foreach ($quality_levels as $ql)
-                                <option value="{{ $ql->id }}" {{ in_array($ql->id, $product->qualityLevel()->pluck('quality_level')->toArray()) ? 'selected' : '' }}>{{ $ql->name }}</option>
+                        <select style="width: 100%" name="type[]" id="selectType" multiple>
+                            @foreach ($type as $t)
+                                <option value="{{ $t->id }}" {{ in_array($t->id, $product->productType->pluck('id')->toArray()) ? 'selected' : '' }}>{{ $t->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -120,11 +112,12 @@
                         </h6>
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordered mt-2 sortableTable" id="informationTable">
+                        <small><i>Tekan dan tahan untuk memindahkan item</i></small>
+                        <table class="table table-bordered mt-2" id="informationTable">
                             <thead>
                                 <tr>
                                     <th>Judul</th>
-                                    <th>Aksi</th>
+                                    <th width="100">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
@@ -157,11 +150,11 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="addAdditionalInformation" tabindex="-1" role="dialog">
+<div class="modal fade" id="addAdditionalInformation" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Tambah Informasi Tambahan</h5>
+                <h5 class="modal-title">Tambah Informasi Tambahan </h5>
                 <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
@@ -172,8 +165,8 @@
                 <div class="invalid-feedback">Konten informasi harus diisi</div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" id="addInformation">
-                    <i class="fa fa-upload"></i> Tambah
+                <button type="button" class="btn btn-success" id="saveInformation">
+                    <i class="fa fa-save"></i> Simpan
                 </button>
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                     <i class="fa fa-times"></i> Tutup
@@ -187,7 +180,9 @@
 
 @section('script')
 <script>
-    let sortable = new Sortable(document.querySelector('.sortableTable tbody'));
+    let sortableImage = new Sortable(document.querySelector('#imageTable tbody'));
+    let sortableInformation = new Sortable(document.querySelector('#informationTable tbody'));
+
     let image = [];
     let specification = {};
     let uploadedFiles = "{{ $product->productImage->pluck('image_path')->implode(',') }}";
@@ -213,8 +208,7 @@
         renderImageTable();
         renderAdditionalInformation();
 
-        $('#selectQuality').select2({
-            placeholder: "Pilih Level Kualitas",
+        $('#selectType').select2({
             allowClear: true,
             tags: true,
             tokenSeparators: [','],
@@ -323,7 +317,7 @@
         
     });
 
-    $('#addInformation').on('click', function () {
+    $('#saveInformation').on('click', function () {
         let title = $('#additionalInfoTitle').val();
         let content = tinymce.get('additionalInfoContent').getContent();
         let id = $('#additionalInfoId').val();
@@ -363,14 +357,17 @@
                         <input type="hidden" name="additional_information[${key}][title]" value="${info.title}">
                         <input type="hidden" name="additional_information[${key}][information]" value='${info.content}'>
                         ${info.title}
+                        
                     </td>
-                    <td>
-                        <button type="button" class="btn btn-success btn-sm" data-id="${key}" data-bs-toggle="modal" data-bs-target="#addAdditionalInformation">
+                    <td style="width: 150px;">
+                        <div class="btn-group float-end" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-success btn-sm float-end" data-id="${key}" data-bs-toggle="modal" data-bs-target="#addAdditionalInformation">
                             <i class="fa fa-edit"></i>
                         </button>
-                        <button type="button" class="btn btn-danger btn-sm" onclick="removeAdditionalInformation('${key}')">
+                        <button type="button" class="btn btn-danger btn-sm float-end" onclick="removeAdditionalInformation('${key}')">
                             <i class="fa fa-trash"></i>
                         </button>
+                        </div>
                     </td>
                 </tr>
             `);

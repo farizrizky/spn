@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('product', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('product_category')->nullable()->references('id')->on('product_category')->onDelete('set null');
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('description');

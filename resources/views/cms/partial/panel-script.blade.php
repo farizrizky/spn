@@ -19,28 +19,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.0/dist/fancybox/fancybox.umd.js"></script>
 <script src="{{ asset('assets/cms/js/kaiadmin.min.js') }}"></script>
 <script src="{{ asset('assets/cms/js/setting-demo.js') }}"></script>
-<script src="{{ asset('assets/cms/js/function.js') }}"></script>
 <script src="{{ asset('assets/cms/js/plugin/tinymce/tinymce.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
-<script>
-    $(document).ready(function() {
-       $("#basic-datatables").DataTable();
+<script src="{{ asset('assets/cms/js/function.js') }}"></script>
 
-        $('.select2').select2({
-            theme: 'bootstrap-5',
-            placeholder: 'Pilih',
-            allowClear: true
-        });
-
-        initTinyMce('textarea#editor');
-    });
-
-    function initTinyMce(selector) {
-        tinymce.init({
-            selector: selector,
-            plugins: 'lists link image code table media wordcount fullscreen',
-            toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link image | code'
-        });
-    }
-
-</script>
