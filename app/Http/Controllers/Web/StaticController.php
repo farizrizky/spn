@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\Type;
 use Illuminate\Http\Request;
 
 class StaticController extends Controller
@@ -13,6 +14,8 @@ class StaticController extends Controller
             'title' => 'Welcome to SPN Official',
             'description' => 'Professional, Fast, Save, and Competitive',
             'partial_hero' => PartialController::hero('custom1'),
+            'partial_recent_blog' => PartialController::recentBlog(),
+            'data_type' => Type::where('is_active', '1')->get(),
         ];
         
         return view('web.page.static.home', $data);

@@ -50,6 +50,18 @@ Route::prefix('panel')->group(function () {
         Route::post('blog/update/{blog}', [\App\Http\Controllers\Cms\Blog\BlogController::class, 'update'])->name('cms.blog.update');
         Route::get('blog/hapus/{blog}', [\App\Http\Controllers\Cms\Blog\BlogController::class, 'destroy'])->name('cms.blog.delete');
 
+        Route::get('/form-kontak', [\App\Http\Controllers\Cms\Contact\ContactFormController::class, 'index'])->name('cms.contact-form.index');
+        Route::get('/form-kontak/detail/{contactForm}', [\App\Http\Controllers\Cms\Contact\ContactFormController::class, 'show'])->name('cms.contact-form.detail');
+        Route::get('/form-kontak/hapus/{contactForm}', [\App\Http\Controllers\Cms\Contact\ContactFormController::class, 'destroy'])->name('cms.contact-form.delete');
+        Route::get('/form-kontak/status-dibaca/{contactForm}', [\App\Http\Controllers\Cms\Contact\ContactFormController::class, 'changeStatus'])->name('cms.contact-form.change-status');
+
+        Route::get('/data-kontak', [\App\Http\Controllers\Cms\Contact\ContactDataController::class, 'index'])->name('cms.contact-data.index');
+        Route::get('/data-kontak/input', [\App\Http\Controllers\Cms\Contact\ContactDataController::class, 'create'])->name('cms.contact-data.create');
+        Route::post('/data-kontak/tambah', [\App\Http\Controllers\Cms\Contact\ContactDataController::class, 'store'])->name('cms.contact-data.store');
+        Route::get('/data-kontak/edit/{contactData}', [\App\Http\Controllers\Cms\Contact\ContactDataController::class, 'edit'])->name('cms.contact-data.edit');
+        Route::post('/data-kontak/update/{contactData}', [\App\Http\Controllers\Cms\Contact\ContactDataController::class, 'update'])->name('cms.contact-data.update');
+        Route::get('/data-kontak/hapus/{contactData}', [\App\Http\Controllers\Cms\Contact\ContactDataController::class, 'destroy'])->name('cms.contact-data.delete');
+
         Route::get('file/picker', [\App\Http\Controllers\Cms\Utility\FileManager::class, 'filePicker'])->name('cms.file.picker');
         Route::post('file/upload', [\App\Http\Controllers\Cms\Utility\FileManager::class, 'uploadFile'])->name('cms.file.upload');
     });

@@ -34,7 +34,9 @@ class ProductController extends Controller
             if($product->isEmpty()) {
                 return redirect()->route('web.not-found');
             }
-            $partial_title = PartialController::title($product->first()->productType->first()->name);
+
+            $type = Type::where('slug', $request->get('type'))->first();
+            $partial_title = PartialController::title($type ? $type->name : 'Produk');
 
         }else if($request->has('search')) {
             $search = $request->get('search');

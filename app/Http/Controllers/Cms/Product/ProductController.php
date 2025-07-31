@@ -20,7 +20,7 @@ class ProductController extends Controller
     public function index()
     {
         $data = [
-            'product' => Product::get(),
+            'product' => Product::with('productType')->get(),
         ];
         return view('cms.page.product.index', $data);
     }

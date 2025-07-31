@@ -30,6 +30,7 @@
         @include('web.partial.script')
 
         @include('web.partial.whatsapp-button')
+        @yield('script')
     </body>
 </html>
 

@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-use function Termwind\render;
+use App\Models\Blog;
 
 class PartialController extends Controller
 {
@@ -26,12 +24,15 @@ class PartialController extends Controller
         return view('web.partial.title', $data);
     }
 
-    public static function cta()
+    public static function recentBlog()
     {
         $data = [
-            'title' => 'Hubungi Kami',
-            'description' => 'Untuk informasi lebih lanjut, silakan hubungi kami melalui form di bawah ini.',
+            'blog' => Blog::with('blogCategory')->where('status', 'published')->latest()->take(3)->get(),
         ];
-        return view('web.partial.cta', $data);
+
+        return view('web.partial.recent-blog', $data);
     }
+
+
+    
 }

@@ -18,8 +18,10 @@ Route::get('/produk/{product_slug}', [App\Http\Controllers\Web\ProductController
 
 Route::get('/blog', [App\Http\Controllers\Web\BlogController::class, 'list'])->name('web.blog');
 Route::get('/blog/{slug}', [App\Http\Controllers\Web\BlogController::class, 'detail'])->name('web.blog-detail');
+Route::post('/contact-form/submit', [App\Http\Controllers\Web\ContactFormController::class, 'store'])->name('web.contact-form.store');
 
 Route::get('/not-found', [App\Http\Controllers\Web\StaticController::class, 'notFound'])->name('web.not-found');
+
 Route::fallback(function () {
     return redirect()->route('web.not-found');
 });

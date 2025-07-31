@@ -20,7 +20,7 @@
                                         </div>
                                         <div class="info-text">
                                             <h5 class="title">Telepon</h5>
-                                            <a href="#">(307) 555-0133</a>
+                                            <a href="#">{{ DataHelper::getContactData('telepon')->value }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -31,7 +31,7 @@
                                         </div>
                                         <div class="info-text">
                                             <h5 class="title">Email</h5>
-                                            <a href="#">sales@spniaga.co.id</a>
+                                            <a href="#">{{ DataHelper::getContactData('email')->value }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -42,7 +42,7 @@
                                         </div>
                                         <div class="info-text">
                                             <h5 class="title">Alamat</h5>
-                                            <a href="#">Rukan Cordoba Blok C No.18 LT.1 Pantai Indah, DKI Jakarta</a>
+                                            <a href="#">{{ DataHelper::getContactData('alamat')->value }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -63,30 +63,36 @@
                     <div class="form-part">
                         <h4 class="title">Biarkan Kami Membantu Anda</h4>
                         <div class="theme-form mt-40">
-                            <form action="#">
+                            <form method="POST" id="contactForm" class="needs-validation" novalidate>
+                                @csrf
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <input type="text" placeholder="Nama Anda">
+                                        <input type="text" name="name" placeholder="Nama Anda" required>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="email" placeholder="Email Anda">
+                                        <input type="email" name="email" placeholder="Email Anda" required>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="tel" placeholder="Nomor Telepon">
+                                        <input type="tel" name="phone" placeholder="Nomor Telepon" required>
                                     </div>
                                     <div class="col-md-6">
-                                        <select>
+                                        <select name="subject" required>
                                             <option value="">Pilih Topik</option>
-                                            <option value="ca">Informasi Produk</option>
-                                            <option value="au">Informasi Layanan</option>
-                                            <option value="bd">Informasi Kemitraan</option>
+                                            <option value="Informasi Produk">Informasi Produk</option>
+                                            <option value="Informasi Layanan">Informasi Layanan</option>
+                                            <option value="Informasi Kemitraan">Informasi Kemitraan</option>
+                                            <option value="Lainnya">Lainnya</option>
                                         </select>
                                     </div>
                                     <div class="col-12">
                                         <textarea name="message" placeholder="Pertanyaan Anda"></textarea>
                                     </div>
                                 </div>
-                                <button type="submit" class="primary-btn primary-bg"><span class="text">Kirim</span> <span class="icon"><i class="ri-arrow-right-double-line"></i></span></button>
+                                <div class="col-12">
+                                    
+                                    <button id="contactFormSubmit" class="primary-btn primary-bg"><span class="text">Kirim</span> <span class="icon"><i class="ri-arrow-right-double-line"></i></span></button>
+                                    <span class="form-message"></span>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -94,4 +100,35 @@
             </div>
         </div>
     </section>
+@endsection
+@section('script')
+    <script>
+        $('#contactFormSubmit').on('click', function(e) {
+            e.preventDefault();
+            $('.form-message').text('Mengirim...');
+            var form = $('#contactForm');
+            var formData = form.serialize();
+
+            $.ajax({
+                url: '{{ route('web.contact-form.store') }}', // Adjust the URL to your contact form submission route
+                type: 'POST',
+                data: formData,
+                success: function(response) {
+                    console.log(response);
+                    if (response.status === 'success') {
+                        form[0].reset();
+                    }
+                    $('.form-message').text(response.message);
+                },
+                error: function(xhr) {
+                    var errors = xhr.responseJSON.errors;
+                    var errorMessage = '';
+                    for (var key in errors) {
+                        errorMessage += errors[key][0] + '\n';
+                    }
+                    $('.form-message').text(errorMessage);
+                }
+            });
+        });
+    </script>
 @endsection

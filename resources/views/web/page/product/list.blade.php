@@ -8,7 +8,7 @@
                     <div class="col-md-12">
                         <div class="text-center">
                             <h3 class="title">Tidak ada produk yang ditemukan</h3>
-                            <p>Silakan cek kembali kategori atau hubungi kami untuk informasi lebih lanjut.</p>
+                            <p>Silakan cek kembali tipe atau hubungi kami untuk informasi lebih lanjut.</p>
                         </div>
                     </div>
                 @endif

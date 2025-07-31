@@ -12,7 +12,6 @@ class BlogController extends Controller
     public function list(Request $request)
     {
         if($request->has('category')) {
-            
             $blog = Blog::with('user', 'blogCategory', 'blogTag')
                 ->where('status', 'published')
                 ->whereHas('blogCategory', function($query) use ($request) {
@@ -52,9 +51,6 @@ class BlogController extends Controller
                 ->paginate(9);
             $blog->appends(['search' => $search]);
 
-            if($blog->isEmpty()) {
-                return redirect()->route('web.not-found');
-            }
             $partial_title = PartialController::title('Hasil Pencarian: ' . $search);
 
         }else {

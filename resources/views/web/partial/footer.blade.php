@@ -9,7 +9,7 @@
                     </div>
                     <div class="content">
                         <span>Nomor Layanan</span>
-                        <h5 class="title"><a href="#">+236 523 5896</a></h5>
+                        <h5 class="title"><a href="#">{{ DataHelper::getContactData('telepon')->value }}</a></h5>
                     </div>
                 </div>
                 <div class="single-item d-flex align-items-center gap-3">
@@ -18,7 +18,7 @@
                     </div>
                     <div class="content">
                         <span>Email</span>
-                        <h5 class="title"><a href="#">sales@spniaga.co.id</a></h5>
+                        <h5 class="title"><a href="#">{{ DataHelper::getContactData('email')->value }}</a></h5>
                     </div>
                 </div>
                 <div class="single-item d-flex align-items-center gap-3">
@@ -27,7 +27,7 @@
                     </div>
                     <div class="content">
                         <span>Alamat</span>
-                        <h5 class="title"><a href="#">Jakarta, Indonesia</a></h5>
+                        <h5 class="title"><a href="#">{{ DataHelper::getContactData('alamat')->value }}</a></h5>
                     </div>
                 </div>
             </div>
@@ -46,15 +46,15 @@
                             </div>
                             <strong class="mt-50">PT. Sindo Prima Niaga</strong>
                             <p>
-                                Rukan Cordoba Blok C No.18 LT.1 Pantai Indah, DKI Jakarta. <br>Telepon: +62 123 4567 890
+                                {{ DataHelper::getContactData('alamat')->value }} <br>Telepon: {{ DataHelper::getContactData('telepon')->value }}
                             </p>
                             
                             <div class="footer-social mt-20">
                                 <h6 class="title">follow us</h6>
                                 <ul class="mt-10">
-                                    <li><a href="https://www.linkedin.com/company/pt-spniaga/"><i class="ri-linkedin-line"></i></a></li>
-                                    <li><a href="https://www.instagram.com/spniaga_"><i class="ri-instagram-line"></i></a></li>
-                                    <li><a href="https://www.tiktok.com/@spniaga_"><i class="ri-tiktok-fill"></i></a></li>
+                                    <li><a href="{{ DataHelper::getContactData('linkedin')->url }}"><i class="ri-linkedin-line"></i></a></li>
+                                    <li><a href="{{ DataHelper::getContactData('instagram')->url }}"><i class="ri-instagram-line"></i></a></li>
+                                    <li><a href="{{ DataHelper::getContactData('tiktok')->url }}"><i class="ri-tiktok-fill"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -66,11 +66,9 @@
                                 <h5 class="title">Produk</h5>
                             </div>
                             <ul class="nav-links mt-30">
-                                <li><a href="">Pelumas Mesin Diesel</a></li>
-                                <li><a href="">Pelumas Gear & Transmisi</a></li>
-                                <li><a href="">Pelumas Hidraulik</a></li>
-                                <li><a href="">Pelumas Compressor</a></li>
-                                <li><a href="">Pelumas Heat Transfer</a></li>
+                                @foreach (DataHelper::getType() as $t)
+                                    <li><a href="{{ $t->slug }}">{{ $t->name }}</a></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>

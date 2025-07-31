@@ -15,4 +15,9 @@ Class DataHelper{
         return \App\Models\BlogCategory::get();
     }
 
+    public static function getContactData($name)
+    {
+        return \App\Models\ContactData::where('name', $name)->first();
+    }
+
 }

@@ -1,0 +1,43 @@
+<section class="blog-area py-120">
+    <div class="container">
+        <div class="section-top">
+            <div class="row">
+                <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
+                    <div class="section-top text-center">
+                        <span class="sub-title">Informasi</span> 
+                        <h3 class="title mt-10">Informasi Terkini</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="blog-posts mt-50">
+            <div class="row">
+                @foreach($blog as $b)
+                <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay=".2s">
+                    <div class="single-blog">
+                        <div class="blog-thumbnail">
+                            <a href="blog-details.html"><img src="{{ $b->image_path }}" alt="blog" style="max-width: 100%; max-height: 200px;  object-fit: cover;object-position: center;"></a>
+                        </div>
+                        <div class="blog-content" style="height: 300px; overflow: hidden;">
+                            <ul class="blog-meta mb-20">
+                                <li><a href="blog-details.html"><span class="icon"><i class="ri-calendar-line"></i></span> {{ DateHelper::fullDateFormatWithoutTime($b->date) }}</a></li>
+                                <li><a href="blog-details.html"><span class="icon"><i class="ri-user-line"></i></span> by {{ $b->user->name }}</a></li>
+                            </ul>
+
+                            <h5 class="title"><a href="blog-details.html">{{ $b->title }}</a></h5>
+
+                            <a href="{{ route('web.blog-detail', $b->slug) }}" class="primary-btn mt-20"><span class="text">Selengkapnya</span> <span class="icon"><i class="ri-arrow-right-double-line"></i></span></a>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+
+        <div class="blog-button text-center mt-20">
+            <a href="{{ route('web.blog') }}" class="primary-btn primary-bg"><span class="text">Selengkapnya</span> <span class="icon"><i class="ri-arrow-right-double-line"></i></span></a>
+        </div>
+    </div>
+    
+</section>

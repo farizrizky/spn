@@ -19,21 +19,26 @@
                                 <li><a href="{{ route('web.award') }}">Penghargaan</a></li>
                             </ul>
                         </li>
-                        <li class="has-submenu">
+                        <li class="@if(DataHelper::getType()->isNotEmpty()) has-submenu @endif">
                             <a href="{{ route('web.product-type') }}">Produk</a>
+                            @if(DataHelper::getType()->isNotEmpty())
                             <ul class="submenu">
                                 @foreach(DataHelper::getType() as $t)
                                     <li><a href="{{ route('web.product', ['type' => $t['slug']]) }}">{{ $t['name'] }}</a></li>
                                 @endforeach
                             </ul>
+                            @endif
                         </li>
                         <li><a href="{{ route('web.service') }}">Layanan</a></li>
-                        <li><a class="has-submenu" href="{{ route('web.blog') }}">Informasi</a>
+                        <li class="@if(DataHelper::getBlogCategory()->isNotEmpty()) has-submenu @endif">
+                            <a href="{{ route('web.blog') }}">Informasi</a>
+                            @if(DataHelper::getBlogCategory()->isNotEmpty())
                             <ul class="submenu">
                                 @foreach(DataHelper::getBlogCategory() as $bc)
                                     <li><a href="{{ route('web.blog', ['category' => $bc->slug]) }}">{{ $bc->name }}</a></li>
                                 @endforeach
                             </ul>
+                            @endif
                         </li>
                         <li><a href="{{ route('web.contact') }}">Kontak</a> </li>
                     </ul>

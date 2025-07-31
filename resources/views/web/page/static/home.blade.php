@@ -200,7 +200,7 @@
     </section>
 
     <!-- service area starts -->
-    {{-- <section class="service-area py-120">
+    <section class="service-area py-120">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -211,36 +211,17 @@
                 </div>
             </div>
             <div class="service-slider mt-50">
-                <div class="single-service single-card dark-bg" data-background="{{ asset('assets/web/images/heavy-equipment.jpg') }}">
-                    <h5 class="title mb-100"><a href="{{ route('product.list', ['category' => 'pelumas-mesin-diesel']) }}" class="text-white">Pelumas Mesin Diesel</a></h5>
-                    <a href="{{ route('product.list', ['category' => 'pelumas-mesin-diesel']) }}" class="secondary-btn primary-bg"><span class="text">Selengkapnya</span> <span class="icon"><i class="ri-arrow-right-double-line"></i></span></a>
-                </div>
-
-                <div class="single-service single-card dark-bg" data-background="{{ asset('assets/web/images/gear.png') }}">
-                    <h5 class="title mb-100"><a href="{{ route('product.list', ['category' => 'pelumas-gear-transmisi']) }}" class="text-white">Pelumas Gear & Transmisi</a></h5>
-                    <a href="{{ route('product.list', ['category' => 'pelumas-gear-transmisi']) }}" class="secondary-btn primary-bg"><span class="text">Selengkapnya</span> <span class="icon"><i class="ri-arrow-right-double-line"></i></span></a>
-                </div>
-
-                <div class="single-service single-card dark-bg" data-background="{{ asset('assets/web/images/hidraulik.png') }}">
-                    <h5 class="title mb-100"><a href="{{ route('product.list', ['category' => 'pelumas-hidraulik']) }}" class="text-white">Pelumas Hidraulik</a></h5>
-                    <a href="{{ route('product.list', ['category' => 'pelumas-hidraulik']) }}" class="secondary-btn primary-bg"><span class="text">Selengkapnya</span> <span class="icon"><i class="ri-arrow-right-double-line"></i></span></a>
-                </div>
-
-                <div class="single-service single-card dark-bg" data-background="{{ asset('assets/web/images/compressor.png') }}">
-                    <h5 class="title mb-100"><a href="{{ route('product.list', ['category' => 'pelumas-compressor']) }}" class="text-white">Pelumas Compressor</a></h5>
-                    <a href="{{ route('product.list', ['category' => 'pelumas-compressor']) }}" class="secondary-btn primary-bg"><span class="text">Selengkapnya</span> <span class="icon"><i class="ri-arrow-right-double-line"></i></span></a>
-                </div>
-
-                <div class="single-service single-card dark-bg" data-background="{{ asset('assets/web/images/heat-transfer.png') }}">
-                    <h5 class="title mb-100"><a href="{{ route('product.list', ['category' => 'pelumas-heat-transfer']) }}" class="text-white">Pelumas Heat Transfer</a></h5>
-                    <a href="{{ route('product.list', ['category' => 'pelumas-heat-transfer']) }}" class="secondary-btn primary-bg"><span class="text">Selengkapnya</span> <span class="icon"><i class="ri-arrow-right-double-line"></i></span></a>
-                </div>
-                
+                @foreach($data_type as $type)
+                    <div class="single-service single-card dark-bg" data-background="{{ asset('storage/' . $type->image_path) }}">
+                        <h5 class="title mb-100"><a href="{{ route('web.product', ['type' => $type->slug]) }}" class="text-white">{{ $type->name }}</a></h5>
+                        <a href="{{ route('web.product', ['type' => $type->slug]) }}" class="secondary-btn primary-bg"><span class="text">Selengkapnya</span> <span class="icon"><i class="ri-arrow-right-double-line"></i></span></a>
+                    </div>
+                @endforeach
             </div>
         </div>
 
         <div class="service-bg-card d-none d-sm-block" style="background-image: url('{{ asset('assets/web/images/coalloaded.png') }}');background-size: cover;"></div>
-    </section> --}}
+    </section>
 
     <!-- testimonial area starts -->
     <section class="testimonial-area py-120">
@@ -299,30 +280,36 @@
                     <div class="form-part">
                         <h4 class="title">Butuh Diskusi Lebih Lanjut?</h4>
                         <div class="theme-form mt-40">
-                            <form action="#">
+                            <form method="POST" id="contactForm" class="needs-validation" novalidate>
+                                @csrf
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <input type="text" placeholder="Nama Anda">
+                                        <input type="text" name="name" placeholder="Nama Anda" required>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="email" placeholder="Email Anda">
+                                        <input type="email" name="email" placeholder="Email Anda" required>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="tel" placeholder="Nomor Telepon">
+                                        <input type="tel" name="phone" placeholder="Nomor Telepon" required>
                                     </div>
                                     <div class="col-md-6">
-                                        <select>
+                                        <select name="subject" required>
                                             <option value="">Pilih Topik</option>
-                                            <option value="ca">Informasi Produk</option>
-                                            <option value="au">Informasi Layanan</option>
-                                            <option value="bd">Informasi Kemitraan</option>
+                                            <option value="Informasi Produk">Informasi Produk</option>
+                                            <option value="Informasi Layanan">Informasi Layanan</option>
+                                            <option value="Informasi Kemitraan">Informasi Kemitraan</option>
+                                            <option value="Lainnya">Lainnya</option>
                                         </select>
                                     </div>
                                     <div class="col-12">
                                         <textarea name="message" placeholder="Pertanyaan Anda"></textarea>
                                     </div>
                                 </div>
-                                <button type="submit" class="primary-btn primary-bg"><span class="text">Kirim</span> <span class="icon"><i class="ri-arrow-right-double-line"></i></span></button>
+                                <div class="col-12">
+                                    
+                                    <button id="contactFormSubmit" class="primary-btn primary-bg"><span class="text">Kirim</span> <span class="icon"><i class="ri-arrow-right-double-line"></i></span></button>
+                                    <span class="form-message"></span>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -332,83 +319,40 @@
     </section>
 
     <!-- blog area starts -->
-    <section class="blog-area py-120">
-        <div class="container">
-            <div class="section-top">
-                <div class="row">
-                    <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
-                        <div class="section-top text-center">
-                            <span class="sub-title">our blogs</span> 
-                            <h3 class="title mt-10">Latest <span>Blogs</span> & News</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="blog-posts mt-50">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay=".2s">
-                        <div class="single-blog">
-                            <div class="blog-thumbnail">
-                                <a href="blog-details.html"><img src="{{ asset('assets/web/images/heavy-equipment.jpg') }}" alt="blog"></a>
-                            </div>
-                            <div class="blog-content">
-                                <ul class="blog-meta mb-20">
-                                    <li><a href="blog-details.html"><span class="icon"><i class="ri-calendar-line"></i></span> May 20, 2025</a></li>
-                                    <li><a href="blog-details.html"><span class="icon"><i class="ri-user-line"></i></span> by admin</a></li>
-                                </ul>
-
-                                <h5 class="title"><a href="blog-details.html">Wherever You Go, We'll Take You There Ride with Confidence</a></h5>
-
-                                <a href="blog-details.html" class="primary-btn mt-20"><span class="text">read more</span> <span class="icon"><i class="ri-arrow-right-double-line"></i></span></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay=".3s">
-                        <div class="single-blog">
-                            <div class="blog-thumbnail">
-                                <a href="blog-details.html"><img src="{{ asset('assets/web/images/heavy-equipment.jpg') }}" alt="blog"></a>
-                            </div>
-                            <div class="blog-content">
-                                <ul class="blog-meta mb-20">
-                                    <li><a href="blog-details.html"><span class="icon"><i class="ri-calendar-line"></i></span> May 20, 2025</a></li>
-                                    <li><a href="blog-details.html"><span class="icon"><i class="ri-user-line"></i></span> by admin</a></li>
-                                </ul>
-
-                                <h5 class="title"><a href="blog-details.html">eligible Transport Reliable Service Travel safe for with Ease</a></h5>
-
-                                <a href="blog-details.html" class="primary-btn mt-20"><span class="text">read more</span> <span class="icon"><i class="ri-arrow-right-double-line"></i></span></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay=".4s">
-                        <div class="single-blog">
-                            <div class="blog-thumbnail">
-                                <a href="blog-details.html"><img src="{{ asset('assets/web/images/heavy-equipment.jpg') }}" alt="blog"></a>
-                            </div>
-                            <div class="blog-content">
-                                <ul class="blog-meta mb-20">
-                                    <li><a href="blog-details.html"><span class="icon"><i class="ri-calendar-line"></i></span> May 20, 2025</a></li>
-                                    <li><a href="blog-details.html"><span class="icon"><i class="ri-user-line"></i></span> by admin</a></li>
-                                </ul>
-
-                                <h5 class="title"><a href="blog-details.html">Speedy Wheels Transport Metro Motion CityLink Services</a></h5>
-
-                                <a href="blog-details.html" class="primary-btn mt-20"><span class="text">read more</span> <span class="icon"><i class="ri-arrow-right-double-line"></i></span></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="blog-button text-center mt-20">
-                <a href="blog.html" class="primary-btn primary-bg"><span class="text">Selengkapnya</span> <span class="icon"><i class="ri-arrow-right-double-line"></i></span></a>
-            </div>
-        </div>
-        
-        @include('web.partial.cta')
-    </section>
+    {!! $partial_recent_blog !!}
+    <!-- cta area starts -->
+    @include('web.partial.cta')
     
+@endsection
+
+@section('script')
+    <script>
+        $('#contactFormSubmit').on('click', function(e) {
+            e.preventDefault();
+            $('.form-message').text('Mengirim...');
+            var form = $('#contactForm');
+            var formData = form.serialize();
+
+            $.ajax({
+                url: '{{ route('web.contact-form.store') }}',
+                type: 'POST',
+                data: formData,
+                success: function(response) {
+                    console.log(response);
+                    if (response.status === 'success') {
+                        form[0].reset();
+                    }
+                    $('.form-message').text(response.message);
+                },
+                error: function(xhr) {
+                    var errors = xhr.responseJSON.errors;
+                    var errorMessage = '';
+                    for (var key in errors) {
+                        errorMessage += errors[key][0] + '\n';
+                    }
+                    $('.form-message').text(errorMessage);
+                }
+            });
+        });
+    </script>
 @endsection

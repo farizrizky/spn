@@ -85,6 +85,6 @@
                 </div>
             @endif
         </div>
-        {{-- @livewire('web.partial.cta') --}}
+        @include('web.partial.cta')
     </section>
 @endsection

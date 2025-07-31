@@ -20,6 +20,7 @@
                                 <tr class="table-primary">
                                     <th>Terakhir Diperbarui</th>
                                     <th>Nama Produk</th>
+                                    <th>Kategori</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -29,6 +30,13 @@
                                 <tr>
                                     <td>{{ DateHelper::fullDateFormat($p->updated_at) }}</td>
                                     <td>{{ $p->name }}</td>
+                                    <td>
+                                        @if($p->productType->isNotEmpty())
+                                            {{ implode(', ', $p->productType->pluck('name')->toArray()) }}
+                                        @else
+                                            <a class="text-muted">Tidak ada kategori</a>
+                                        @endif
+                                    </td>
                                     <td>{{ $p->status == 'published' ? 'Published' : 'Draft' }}</td>
                                     <td>
                                         <a class="btn btn-success btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Ubah" href="{{ route('cms.product.edit', $p->id) }}"><span class="icon-pencil"></span></a>

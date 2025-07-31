@@ -8,4 +8,5 @@
 <script src="{{ asset('assets/web/js/waypoints.min.js') }}"></script>
 <script src="{{ asset('assets/web/js/wow.min.js') }}"></script>
 <script src="{{ asset('assets/web/js/main.js') }}"></script>
+<script src="{{ asset('assets/web/js/function.js') }}"></script>
 
