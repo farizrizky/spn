@@ -1,6 +1,6 @@
 <footer class="footer-area" data-background="{{ asset('assets/web/images/pengisian.png') }}">
     <!-- footer info  -->
-    <div class="footer-info pt-40 pb-10">
+    {{-- <div class="footer-info pt-40 pb-10">
         <div class="container">
             <div class="info-items">
                 <div class="single-item d-flex align-items-center gap-3">
@@ -32,9 +32,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
-    <div class="footer-content" style="background-color: rgb(29, 38, 47, 0.96);">
+    <div class="footer-content" style="background-color: #143F6B">
         <!-- widget area -->
         <div class="widget-area pt-80 pb-40">
             <div class="container">

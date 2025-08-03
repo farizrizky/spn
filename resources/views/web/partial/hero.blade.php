@@ -1,3 +1,15 @@
+<style>
+    .hero-area {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed; /* Efek parallax */
+        min-height: 100vh; /* Setinggi minimal 1 layar */
+        display: flex;
+        align-items: center; /* Agar konten di tengah secara vertikal */
+    }
+
+</style>
 @if($type == 'default')
 <section class="hero-area" data-background="{{ asset('assets/web/images/index-bg.jpg') }}">
     <div class="container">

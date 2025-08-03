@@ -906,7 +906,16 @@ img { width: 100%; height: auto; display: block; }
 
 @media (max-width: 575.98px) { .single-card.dark-bg { padding: 30px; } }
 
-.single-card.dark-bg::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(15, 27, 36, 0.8); z-index: -1; border-radius: 20px; }
+.single-card.dark-bg::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(15, 27, 36, 0.6); z-index: -1; border-radius: 20px; }
+.single-card.gradient-bg::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #E8630A, #143F6B);
+    z-index: -1;
+    border-radius: 20px;
+}
 
 .single-card.dark-bg .title { color: #ffffff; }
 
@@ -978,7 +987,7 @@ img { width: 100%; height: auto; display: block; }
 
 @media (min-width: 768px) and (max-width: 991.98px) { .service-slider .slick-slide:first-child { margin-left: 0; } }
 
-.service-slider .prev-arrow, .service-slider .next-arrow { position: absolute; top: -110px; color: #E8630A; background-color: rgba(43, 163, 196, 0.2); border: 1px solid transparent; width: 50px; height: 50px; line-height: 50px; border-radius: 50%; text-align: center; cursor: pointer; -webkit-transition: all 0.2s ease-in; -o-transition: all 0.2s ease-in; transition: all 0.2s ease-in; z-index: 1; }
+.service-slider .prev-arrow, .service-slider .next-arrow { position: absolute; top: -110px; color: #E8630A; background-color: rgba(78, 78, 78, 0.215); border: 1px solid transparent; width: 50px; height: 50px; line-height: 50px; border-radius: 50%; text-align: center; cursor: pointer; -webkit-transition: all 0.2s ease-in; -o-transition: all 0.2s ease-in; transition: all 0.2s ease-in; z-index: 1; }
 
 .service-slider .prev-arrow:hover, .service-slider .next-arrow:hover { color: #ffffff; background-color: #E8630A; border: 1px solid transparent; }
 
@@ -1542,4 +1551,8 @@ img { width: 100%; height: auto; display: block; }
 
 .topbar-location :hover {
     color: #143F6B;
+}
+
+.greyscale-bg {
+    filter: grayscale(100%);
 }

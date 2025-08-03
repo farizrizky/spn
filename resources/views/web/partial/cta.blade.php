@@ -1,5 +1,5 @@
-<section class="cta-area-1 pt-120 pb-120" >
-    <div class="container">
+<section class="cta-area-1 pt-100 pb-120" >
+    <div class="container"> 
         <div class="cta-box" style="background-image: url('{{ asset('assets/web/images/cta-bg.jpg') }}'); background-size: cover;">
             <div class="row align-items-center">
                 <div class="col-lg-7">
