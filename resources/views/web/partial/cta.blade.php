@@ -4,7 +4,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-7">
                     <div class="cta-content">
-                        <div class="section-top">
+                        <div class="section-top wow fadeInUp" data-wow-delay=".2s">
                             <h5 class="subtitle text-white">PT. Sindo Prima Niaga</h5>
                             <h3 class="title"><span>Melayani Kebutuhan Oli Anda</span> Dengan Produk dan Layanan Terbaik</h3>
                         </div>
@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="col-lg-4">
-                    <div class="cta-image">
+                    <div class="cta-image wow fadeInRight" data-wow-delay=".4s">
                         <img class="img-fluid d-block d-sm-none" src="{{ asset('assets/web/images/drums.png') }}" style="width:0px;" alt="drum">
                         <img class="img-fluid d-none d-sm-block" src="{{ asset('assets/web/images/drums.png') }}" style="width:500px;" alt="drum">
                     </div>

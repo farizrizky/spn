@@ -39,7 +39,7 @@
         color: #ffd369;
     }
 </style>
-<section class="breadcrumb-area" style="background-image: url('{{ asset('assets/web/images/truckdistribution.png') }}');">
+<section class="breadcrumb-area" style="background-image: url('{{ asset('assets/web/images/about-1.jpg') }}');">
     <div class="container">
         <div class="row">
             <div class="col-12">

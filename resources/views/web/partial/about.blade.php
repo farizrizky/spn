@@ -3,7 +3,7 @@
         <div class="row gx-xl-5 align-items-center">
             <div class="col-lg-6 wow fadeInLeft" data-wow-delay=".2s">
                 <div class="about-images">
-                    <img src="{{ asset('assets/web/images/aboutnew.png') }}" alt="about" style="border-radius: 10px;">
+                    <img src="{{ asset('assets/web/images/he4.jpg') }}" alt="about" style="border-radius: 10px;">
                 </div>
             </div>
 

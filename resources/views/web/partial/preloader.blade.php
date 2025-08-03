@@ -1,4 +1,4 @@
-<style>
+{{-- <style>
     .preloader-drum {
     position: fixed;
     width: 100%;
@@ -66,4 +66,4 @@
     window.addEventListener('load', function () {
         document.querySelector('.preloader-drum').style.display = 'none';
     });
-</script>
+</script> --}}
