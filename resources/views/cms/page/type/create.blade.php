@@ -43,11 +43,20 @@
                         <div class="form-group form-inline row">
                             <label for="image" class="col-md-3 col-form-label text-wrap"><b>Gambar</b></label>
                             <div class="col-md-9 p-0">
-                                <input type="file" class="form-control input-full" name="image" id="image" accept="image/*">
-                                <div class="invalid-feedback">Gambar harus diisi</div>
-                                @error('image')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
+                                <input type="hidden" name="image_path" id="image_path" value="" required>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-primary btn-sm float-end" data-allow="image/*" id="openFileUpload">
+                                        <i class="fa fa-upload"></i> Upload Gambar
+                                    </button>
+                                    <button type="button" class="btn btn-info btn-sm float-end" id="openCustomUrl">
+                                        <i class="fa fa-link"></i> Dari URL
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-sm float-end" id="removeImage">
+                                        <i class="fa fa-trash"></i> Hapus Gambar
+                                    </button>
+                                </div>
+                                <hr>
+                                <img id="imagePreview" class="img-fluid mt-2" src="{{ asset('images/no-image.png') }}" alt="Preview Gambar" />
                             </div>
                         </div>
                 </div>
@@ -55,15 +64,22 @@
                     <a href="{{ route('cms.type.index') }}" class="btn btn-black"><span class="icon-action-undo"></span> Kembali</a>
                     <button class="btn btn-success float-end" name="submit"><span class="icon-check"></span> Simpan</button>
                     </form>
-                  </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+@include('cms.page.files.custom-url')
+@include('cms.page.files.upload-file', ['multiple' => false, 'allow' => 'image/*'])
 @endsection
 
 @section('script')
 <script>
+    $(document).ready(function(){
+        $('#removeImage').hide();
+        $('#imagePreview').hide();
+    });
+
     $('#name').on('input', function() {
         var slug = slugify($(this).val());
         $('#slug').val(slug);
@@ -72,6 +88,36 @@
     $('#slug').on('input', function() {
         var slug = slugify($(this).val());
         $(this).val(slug);
+    });
+
+    window.addEventListener('fileUploaded', function (e) {
+        const uploaded = e.detail.urls;
+
+        if (uploaded.length > 0) {
+
+            for (let i = 0; i < uploaded.length; i++) {
+                let url = uploaded[i];
+                $('#imagePreview').attr('src', url).show();
+                $('#image_path').val(url);
+                $('#noImage').hide();
+                $('#removeImage').show();
+            }
+        }
+    });
+
+    window.addEventListener('fileUrlAdded', function (e) {
+        var url = e.detail.url;
+        if (url) {
+            $('#image_path').val(url);
+            $('#imagePreview').attr('src', url).show();
+            $('#removeImage').show();
+        }
+    });
+
+    $('#removeImage').on('click', function() {
+        $('#image_path').val('');
+        $('#imagePreview').hide();
+        $(this).hide();
     });
 
    

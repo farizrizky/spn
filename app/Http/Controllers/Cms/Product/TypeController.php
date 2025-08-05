@@ -39,13 +39,10 @@ class TypeController extends Controller
             'name' => 'required|string|max:150',
             'slug' => 'required|string|unique:type,slug|max:150',
             'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'image_path' => 'nullable|string',
         ]);
 
-        $data = $request->only(['name', 'slug', 'description']);
-        if ($request->hasFile('image')) {
-            $data['image_path'] = $request->file('image')->store('files', 'public');
-        }
+        $data = $request->only(['name', 'slug', 'description', 'image_path']);
 
         Type::create($data);
 
@@ -92,14 +89,10 @@ class TypeController extends Controller
             'name' => 'required|string|max:150',
             'slug' => 'required|string|unique:type,slug,' . $type->id . '|max:150',
             'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'image_path' => 'nullable|string',
         ]);
 
-        $data = $request->only(['name', 'slug', 'description']);
-        if ($request->hasFile('image')) {
-            $data['image_path'] = $request->file('image')->store('files', 'public');
-        }
-
+        $data = $request->only(['name', 'slug', 'description', 'image_path']);
         $type->update($data);
 
         $notify = NotifyHelper::successfullyUpdated();

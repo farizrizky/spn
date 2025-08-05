@@ -75,7 +75,7 @@
                     <p>Tag</p>
                 </a>
             </li>
-             <li class="nav-section">
+            <li class="nav-section">
                 <span class="sidebar-mini-icon">
                 <i class="fa fa-ellipsis-h"></i>
                 </span>
@@ -91,6 +91,13 @@
                 <a href="{{ route('cms.contact-data.index') }}">
                     <i class="fas fa-address-book"></i>
                     <p>Data Kontak</p>
+                </a>
+            </li>
+            <br>
+            <li class="nav-item {{ request()->routeIs('cms.file.*') ? 'active' : '' }}">
+                <a href="{{ route('cms.file') }}">
+                    <i class="fas fa-folder"></i>
+                    <p>File</p>
                 </a>
             </li>
         </ul>

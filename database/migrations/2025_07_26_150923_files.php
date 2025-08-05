@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('path');
             $table->string('extension')->nullable();
             $table->enum('type', ['image', 'video', 'document', 'compressed', 'other'])->default('other');
+            $table->integer('size')->nullable();
             $table->timestamps();
         });
     }

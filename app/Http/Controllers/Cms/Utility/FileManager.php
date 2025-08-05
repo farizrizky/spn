@@ -2,14 +2,47 @@
 
 namespace App\Http\Controllers\Cms\Utility;
 
+use App\Helpers\NotifyHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Files;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class FileManager extends Controller
 {
+    public function index($type = 'all'){
+        if ($type === 'all') {
+            $files = Files::all();
+        } else {
+            $files = Files::where('type', $type)->get();
+        }
+        $data = [
+            'files' => $files,
+            'type' => $type,
+        ];
+
+        return view('cms.page.files.index', $data);
+    }
+
+    public function destroy(Files $file){
+        if(!$file) {
+            $notify = NotifyHelper::notFound();
+            return redirect()->back()->with('notify', $notify);
+        }
+
+        if(!File::exists(public_path('storage/' . $file->path))) {
+            $notify = NotifyHelper::notFound();
+            return redirect()->back()->with('notify', $notify);
+        }
+        
+        Storage::disk('public')->delete($file->path);
+        $file->delete();
+        $notify = NotifyHelper::successfullyDeleted();
+        return redirect()->back()->with('notify', $notify);
+    }
+
     public function uploadFile(Request $request) 
     {
         $urls = [];
@@ -32,10 +65,11 @@ class FileManager extends Controller
 
                 // Simpan informasi file ke database
                 Files::create([
-                    'name' => $originalName,
+                    'name' => $finalName,
                     'path' => 'files/' . $finalName,
                     'extension' => $extension,
                     'type' => $this->getFileType($extension),
+                    'size' => $file->getSize(),
                 ]);
             }
 

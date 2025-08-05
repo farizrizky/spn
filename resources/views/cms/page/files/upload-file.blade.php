@@ -1,4 +1,4 @@
-<div class="modal fade" id="fileupload" tabindex="-1" role="dialog">
+<div class="modal fade" id="fileupload" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog">
     <div class="modal-dialog" role="document">
         <form id="uploadForm" enctype="multipart/form-data">
             @csrf
@@ -17,8 +17,8 @@
                     @endif
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success"><i class="fa fa-upload"></i> Upload</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa fa-times"></i> Tutup</button>
+                    <button type="submit" class="btn btn-success" id="uploadFileButton"><i class="fa fa-upload"></i> Upload</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="closeFileUpload"><i class="fa fa-times"></i> Tutup</button>
                 </div>
             </div>
         </form>
@@ -34,6 +34,12 @@
         $('#uploadInput').attr('accept', allow);
     });
 
+    $('#fileupload').on('hidden.bs.modal', function () {
+        $('#uploadInput').val('');
+        const event = new CustomEvent('fileUploadClosed');
+        window.dispatchEvent(event);
+    });
+
     // Submit form
     $('#uploadForm').on('submit', function (e) {
         e.preventDefault();
@@ -46,6 +52,9 @@
         $.each(files, function (i, file) {
             formData.append('files[]', file);
         });
+
+        $('#uploadFileButton').prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Uploading...');
+        $('#closeFileUpload').prop('disabled', true);
 
         $.ajax({
             url: '{{ route('cms.file.upload') }}',
@@ -71,6 +80,9 @@
                         <ul>${urls}</ul>
                     </div>
                 `);
+
+                $('#uploadFileButton').prop('disabled', false).html('<i class="fa fa-upload"></i> Upload');
+                $('#closeFileUpload').prop('disabled', false);
             },
             error: function (xhr) {
                 $('#uploadFeedback').html(`<div class="alert alert-danger">Gagal upload file.</div>`);

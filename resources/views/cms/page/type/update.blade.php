@@ -43,16 +43,20 @@
                         <div class="form-group form-inline row">
                             <label for="image" class="col-md-3 col-form-label text-wrap"><b>Gambar</b></label>
                             <div class="col-md-9 p-0">
-                                <div class="input-group mb-3">
-                                    <input type="file" class="form-control" name="image" id="image" accept="image/*">
-                                    @if($type->image_path)
-                                        <a href="{{ asset('storage/' . $type->image_path) }}" data-fancybox class="input-group-text">Lihat Gambar</a>
-                                    @endif
+                                <input type="hidden" name="image_path" id="image_path" value="{{ $type->image_path }}" required>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-primary btn-sm float-end" data-allow="image/*" id="openFileUpload">
+                                        <i class="fa fa-upload"></i> Upload Gambar
+                                    </button>
+                                    <button type="button" class="btn btn-info btn-sm float-end" id="openCustomUrl">
+                                        <i class="fa fa-link"></i> Dari URL
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-sm float-end" id="removeImage">
+                                        <i class="fa fa-trash"></i> Hapus Gambar
+                                    </button>
                                 </div>
-                                <div class="invalid-feedback">Gambar harus diisi</div>
-                                @error('image')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
+                                <hr>
+                                <img id="imagePreview" class="img-fluid mt-2" src="{{ $type->image_path }}" alt="Preview Gambar" />
                             </div>
                         </div>
                 </div>
@@ -65,10 +69,22 @@
         </div>
     </div>
 </div>
+@include('cms.page.files.custom-url')
+@include('cms.page.files.upload-file', ['multiple' => false, 'allow' => 'image/*'])
 @endsection
 
 @section('script')
 <script>
+    $(document).ready(function(){
+        if($('#image_path').val()) {
+            $('#imagePreview').show();
+            $('#removeImage').show();
+        } else {
+            $('#imagePreview').hide();
+            $('#imagePreview').hide();
+        }
+    });
+
     $('#name').on('input', function() {
         var slug = slugify($(this).val());
         $('#slug').val(slug);
@@ -79,8 +95,34 @@
         $(this).val(slug);
     });
 
-    Fancybox.bind("[data-fancybox]", {
-    // Your custom options
+    window.addEventListener('fileUploaded', function (e) {
+        const uploaded = e.detail.urls;
+
+        if (uploaded.length > 0) {
+
+            for (let i = 0; i < uploaded.length; i++) {
+                let url = uploaded[i];
+                $('#imagePreview').attr('src', url).show();
+                $('#image_path').val(url);
+                $('#noImage').hide();
+                $('#removeImage').show();
+            }
+        }
+    });
+
+    window.addEventListener('fileUrlAdded', function (e) {
+        var url = e.detail.url;
+        if (url) {
+            $('#image_path').val(url);
+            $('#imagePreview').attr('src', url).show();
+            $('#removeImage').show();
+        }
+    });
+
+    $('#removeImage').on('click', function() {
+        $('#image_path').val('');
+        $('#imagePreview').hide();
+        $(this).hide();
     });
 </script>
 @endsection

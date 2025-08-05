@@ -72,7 +72,7 @@
                                 <button type="button" class="btn btn-primary btn-sm float-end" data-allow="image/*" id="openFileUpload">
                                     <i class="fa fa-upload"></i> Upload Gambar
                                 </button>
-                                <button type="button" class="btn btn-info btn-sm float-end" data-allow="image/*" id="openAddImageFromUrl">
+                                <button type="button" class="btn btn-info btn-sm float-end" id="openCustomUrl">
                                     <i class="fa fa-link"></i> Dari URL
                                 </button>
                             </div>
@@ -128,28 +128,7 @@
         </div>
     </form>
 </div>
-<div class="modal fade" id="addImageFromUrl" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Tambah Gambar dari URL</h5>
-                <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <input type="text" id="imageUrl" name="imageUrl" class="form-control" placeholder="Masukkan URL Gambar">
-                <div class="invalid-feedback">URL gambar harus diisi</div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success" id="addUrl">
-                    <i class="fa fa-upload"></i> Tambah
-                </button>
-                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">
-                    <i class="fa fa-times"></i> Close
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
+
 <div class="modal fade" id="addAdditionalInformation" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
@@ -175,7 +154,8 @@
         </div>
     </div>
 </div>
-@include('cms.partial.upload-file', ['multiple' => true, 'allow' => 'image/*'])
+@include('cms.page.files.custom-url')
+@include('cms.page.files.upload-file', ['multiple' => true, 'allow' => 'image/*'])
 @endsection
 
 @section('script')
@@ -260,16 +240,12 @@
         renderImageTable();
     });
 
-    $('#openAddImageFromUrl').on('click', function () {
-        $('#addImageFromUrl').modal('show');
-        $('#imageUrl').val(''); // reset input
-        $('#imagePreview').html('');
-    });
-
-    $('#addUrl').on('click', function () {
-        let url = $('#imageUrl').val();
-        image.push(url);
-        renderImageTable();
+    window.addEventListener('fileUrlAdded', function (e) {
+        const url = e.detail.url;
+        if (url) {
+            image.push(url);
+            renderImageTable();
+        }
     });
 
     function renderImageTable() {

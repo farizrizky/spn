@@ -61,9 +61,13 @@ Route::prefix('panel')->group(function () {
         Route::get('/data-kontak/edit/{contactData}', [\App\Http\Controllers\Cms\Contact\ContactDataController::class, 'edit'])->name('cms.contact-data.edit');
         Route::post('/data-kontak/update/{contactData}', [\App\Http\Controllers\Cms\Contact\ContactDataController::class, 'update'])->name('cms.contact-data.update');
         Route::get('/data-kontak/hapus/{contactData}', [\App\Http\Controllers\Cms\Contact\ContactDataController::class, 'destroy'])->name('cms.contact-data.delete');
-
+        
+        Route::post('file/ajax/load', [\App\Http\Controllers\Cms\Utility\FileManager::class, 'loadFiles'])->name('cms.file.load');
+        Route::get('/file/{type?}', [\App\Http\Controllers\Cms\Utility\FileManager::class, 'index'])->name('cms.file');
+        Route::get('/file/hapus/{file}', [\App\Http\Controllers\Cms\Utility\FileManager::class, 'destroy'])->name('cms.file.delete');
         Route::get('file/picker', [\App\Http\Controllers\Cms\Utility\FileManager::class, 'filePicker'])->name('cms.file.picker');
         Route::post('file/upload', [\App\Http\Controllers\Cms\Utility\FileManager::class, 'uploadFile'])->name('cms.file.upload');
+        
     });
 
 });
