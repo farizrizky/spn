@@ -17,12 +17,20 @@ Class DataHelper{
 
     public static function getContactData($name)
     {
-        return \App\Models\ContactData::where('name', $name)->first();
+        $data = \App\Models\ContactData::where('name', $name);
+        if ($data->count() == 0) {
+            return null;
+        }
+        return $data->first();
     }
 
     public static function generateWhatsAppLink()
     {
-       $phone = self::getContactData('telepon')->value;
+       $phone = self::getContactData('telepon');
+       if (!$phone || !$phone->value) {
+           return null;
+       }
+       $phone = preg_replace('/[^0-9]/', '', $phone->value);
        return "https://wa.me/{$phone}";
     }
 }

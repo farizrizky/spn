@@ -20,7 +20,7 @@
                                         </div>
                                         <div class="info-text">
                                             <h5 class="title">Telepon</h5>
-                                            <a href="#">{{ DataHelper::getContactData('telepon')->value }}</a>
+                                            <a href="#">{{ DataHelper::getContactData('telepon') ? DataHelper::getContactData('telepon')->value : '' }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -31,7 +31,7 @@
                                         </div>
                                         <div class="info-text">
                                             <h5 class="title">Email</h5>
-                                            <a href="#">{{ DataHelper::getContactData('email')->value }}</a>
+                                            <a href="#">{{ DataHelper::getContactData('email') ? DataHelper::getContactData('email')->value : '' }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -42,7 +42,7 @@
                                         </div>
                                         <div class="info-text">
                                             <h5 class="title">Alamat</h5>
-                                            <a href="#">{{ DataHelper::getContactData('alamat')->value }}</a>
+                                            <a href="#">{{ DataHelper::getContactData('alamat') ? DataHelper::getContactData('alamat')->value : '' }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -51,9 +51,9 @@
 
                         <div class="contact-social">
                             <ul>
-                                <li><a href="https://www.linkedin.com/company/pt-spniaga/"><i class="ri-linkedin-line"></i></a></li>
-                                <li><a href="https://www.instagram.com/spniaga_"><i class="ri-instagram-line"></i></a></li>
-                                <li><a href="https://www.tiktok.com/@spniaga_"><i class="ri-tiktok-fill"></i></a></li>
+                                <li><a href="{{ DataHelper::getContactData('linkedin') ? DataHelper::getContactData('linkedin')->url : '' }}"><i class="ri-linkedin-line"></i></a></li>
+                                <li><a href="{{ DataHelper::getContactData('instagram') ? DataHelper::getContactData('instagram')->url : '' }}"><i class="ri-instagram-line"></i></a></li>
+                                <li><a href="{{ DataHelper::getContactData('tiktok') ? DataHelper::getContactData('tiktok')->url : '' }}"><i class="ri-tiktok-fill"></i></a></li>
                             </ul>
                         </div>
                     </div>

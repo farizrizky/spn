@@ -46,15 +46,15 @@
                             </div>
                             <strong class="mt-50">PT. Sindo Prima Niaga</strong>
                             <p>
-                                {{ DataHelper::getContactData('alamat')->value }} <br>Telepon: {{ DataHelper::getContactData('telepon')->value }}
+                                {{ DataHelper::getContactData('alamat') ? DataHelper::getContactData('alamat')->value : '' }} <br>Telepon: {{ DataHelper::getContactData('telepon') ? DataHelper::getContactData('telepon')->value : '' }}
                             </p>
                             
                             <div class="footer-social mt-20">
                                 <h6 class="title">follow us</h6>
                                 <ul class="mt-10">
-                                    <li><a href="{{ DataHelper::getContactData('linkedin')->url }}"><i class="ri-linkedin-line"></i></a></li>
-                                    <li><a href="{{ DataHelper::getContactData('instagram')->url }}"><i class="ri-instagram-line"></i></a></li>
-                                    <li><a href="{{ DataHelper::getContactData('tiktok')->url }}"><i class="ri-tiktok-fill"></i></a></li>
+                                    <li><a href="{{ DataHelper::getContactData('linkedin') ? DataHelper::getContactData('linkedin')->url : '' }}"><i class="ri-linkedin-line"></i></a></li>
+                                    <li><a href="{{ DataHelper::getContactData('instagram') ? DataHelper::getContactData('instagram')->url : '' }}"><i class="ri-instagram-line"></i></a></li>
+                                    <li><a href="{{ DataHelper::getContactData('tiktok') ? DataHelper::getContactData('tiktok')->url : '' }}"><i class="ri-tiktok-fill"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -79,11 +79,12 @@
                                 <h5 class="title">PT. SPN</h5>
                             </div>
                             <ul class="nav-links mt-30">
-                                <li><a href="">Tentang Kami</a></li>
-                                <li><a href="">Visi Misi</a></li>
-                                <li><a href="">Produk</a></li>
-                                <li><a href="">Layanan</a></li>
-                                <li><a href="">Kontak</a></li>
+                                <li><a href="{{ route('web.profile') }}">Profil</a></li>
+                                <li><a href="{{ route('web.vision-mission') }}">Visi Misi</a></li>
+                                <li><a href="{{ route('web.product-type') }}">Produk</a></li>
+                                <li><a href="{{ route('web.consignment-project') }}">Consignment Project</a></li>
+                                <li><a href="{{ route('web.distribution-service') }}">Layanan Distribusi</a></li>
+                                <li><a href="{{ route('web.contact') }}">Kontak</a></li>
                             </ul>
                         </div>
                     </div>

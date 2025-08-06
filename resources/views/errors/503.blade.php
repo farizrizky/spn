@@ -16,7 +16,7 @@
             height: 100%;
             font-family: 'Roboto', sans-serif;
             color: #fff;
-            background: url('{{ asset("assets/web/images/maintenance.jpg") }}') no-repeat center center/cover;
+            background: url('{{ asset("assets/web/images/maintenance2.jpg") }}') no-repeat center center/cover;
         }
 
         .overlay {

@@ -67,7 +67,7 @@
                                 <img src="{{ asset('assets/web/images/icon-5.png') }}" alt="icon">
                                 <div class="text-part">
                                     <span>Butuh Bantuan?</span>
-                                    <h5 class="title"><a href="#">{{ DataHelper::getContactData('telepon')->value }}</a></h5>
+                                    <h5 class="title"><a href="{{ DataHelper::getContactData('telepon')->url ?? '' }}">{{ DataHelper::getContactData('telepon')->value ?? '' }}</a></h5>
                                 </div>
                             </div>
                         </div>

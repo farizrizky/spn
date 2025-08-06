@@ -8,6 +8,9 @@
         <div class="form-group">
             <label for="username">Email</label>
             <input type="email" class="form-control" id="username" name="email" placeholder="Email" required>
+             @error('email')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
             <div class="invalid-feedback">
                 Email harus diisi.
             </div>
@@ -15,6 +18,9 @@
         <div class="form-group">
             <label for="password">Password</label>
             <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+             @error('password')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
             <div class="invalid-feedback">
                 Password harus diisi.
             </div>
