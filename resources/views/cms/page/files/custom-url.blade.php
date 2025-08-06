@@ -22,9 +22,11 @@
 </div>
 
 <script>
-    $('#openCustomUrl').on('click', function() {
+    let keyCustomUrl = '';
+    $('.openCustomUrl').on('click', function() {
         $('#customUrl').modal('show');
         $('#fileUrl').val(''); // reset input
+        keyCustomUrl = $(this).data('key');
     });
 
     $('#customUrl').on('hidden.bs.modal', function() {
@@ -33,7 +35,7 @@
 
     $('#addUrl').on('click', function(){
         let url = $('#fileUrl').val().trim();
-        const event = new CustomEvent('fileUrlAdded', { detail: { url: url } });
+        const event = new CustomEvent('fileUrlAdded', { detail: { url: url, key: keyCustomUrl } });
         window.dispatchEvent(event);
     });
 </script>

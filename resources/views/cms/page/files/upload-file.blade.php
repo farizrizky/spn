@@ -25,13 +25,14 @@
     </div>
 </div>
 <script>
-
-    $('#openFileUpload').on('click', function () {
+    let keyFileUpload = '';
+    $('.openFileUpload').on('click', function () {
         $('#fileupload').modal('show');
         $('#uploadInput').val(''); // reset input
         $('#uploadFeedback').html('');
         var allow = $(this).data('allow');
         $('#uploadInput').attr('accept', allow);
+        keyFileUpload = $(this).data('key');
     });
 
     $('#fileupload').on('hidden.bs.modal', function () {
@@ -68,7 +69,8 @@
                 // Trigger custom event
                 const event = new CustomEvent('fileUploaded', {
                     detail: {
-                        urls: res.urls
+                        urls: res.urls,
+                        key: keyFileUpload
                     }
                 });
                 window.dispatchEvent(event); // kirim event global ke window

@@ -9,7 +9,7 @@
                             <h3 class="title"><span>Melayani Kebutuhan Oli Anda</span> Dengan Produk dan Layanan Terbaik</h3>
                         </div>
                         <div class="cta-form mt-30 mb-30">
-                            <a href="https://wa.me/1234567890" class="primary-btn secondary-bg"><span class="text">Hubungi Kami</span> <span class="icon" style="background-color:#25D366;"><i class="ri-whatsapp-line"></i></span></a>
+                            <a href="{{ DataHelper::generateWhatsAppLink() }}" class="primary-btn secondary-bg"><span class="text">Hubungi Kami</span> <span class="icon" style="background-color:#25D366;"><i class="ri-whatsapp-line"></i></span></a>
                         </div>
                     </div>
                 </div>

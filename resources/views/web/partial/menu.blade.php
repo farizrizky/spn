@@ -15,7 +15,6 @@
                             <ul class="submenu">
                                 <li><a href="{{ route('web.profile') }}">Profil</a></li>
                                 <li><a href="{{ route('web.vision-mission') }}">Visi Misi</a></li>
-                                <li><a href="{{ route('web.bussiness-partner') }}">Mitra Bisnis</a></li>
                                 <li><a href="{{ route('web.award') }}">Penghargaan</a></li>
                             </ul>
                         </li>
@@ -29,7 +28,12 @@
                             </ul>
                             @endif
                         </li>
-                        <li><a href="{{ route('web.service') }}">Layanan</a></li>
+                        <li class="has-submenu"><a href="#">Layanan</a>
+                            <ul class="submenu">
+                                <li><a href="{{ route('web.consignment-project') }}">Consigment Project</a></li>
+                                <li><a href="{{ route('web.distribution-service') }}">Layanan Distribusi</a></li>
+                            </ul>
+                        </li>
                         <li class="@if(DataHelper::getBlogCategory()->isNotEmpty()) has-submenu @endif">
                             <a href="{{ route('web.blog') }}">Informasi</a>
                             @if(DataHelper::getBlogCategory()->isNotEmpty())

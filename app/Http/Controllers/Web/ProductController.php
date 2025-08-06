@@ -80,8 +80,8 @@ class ProductController extends Controller
             return redirect()->route('web.not-found');
         }
         $data = [
-            'title' => 'Detail Produk',
-            'partial_title' => PartialController::title('Detail Produk'),
+            'title' => 'Produk '.$product->first()->name,
+            'partial_title' => PartialController::title($product->first()->name),
             'product' => $product->first()
         ];
         

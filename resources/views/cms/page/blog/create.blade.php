@@ -88,10 +88,10 @@
                     <div class="card-header">
                         <h6><strong>Gambar</strong>
                             <div class="btn-group float-end" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-primary btn-sm float-end" data-allow="image/*" id="openFileUpload">
+                                <button type="button" class="btn btn-primary btn-sm float-end openFileUpload" data-allow="image/*">
                                     <i class="fa fa-upload"></i> Upload Gambar
                                 </button>
-                                <button type="button" class="btn btn-info btn-sm float-end" id="openCustomUrl">
+                                <button type="button" class="btn btn-info btn-sm float-end openCustomUrl">
                                     <i class="fa fa-link"></i> Dari URL
                                 </button>
                                 <button type="button" class="btn btn-danger btn-sm float-end" id="removeImage">

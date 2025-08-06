@@ -3,6 +3,7 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 <title>PT. Sindo Prima Niaga - {{ $title ?? 'Professional, Fast, Save, and Competitive' }}</title>
+<meta name="description" content="{{ 'PT. Sindo Prima Niaga - Distributor Resmi Repsol. Menyediakan produk pelumas berkualitas dan layanan terbaik.' }}">
 
 <link rel="shortcut icon" href="{{ asset('assets/web/images/logo-rectangle.png') }}">
 

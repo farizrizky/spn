@@ -45,10 +45,10 @@
                             <div class="col-md-9 p-0">
                                 <input type="hidden" name="image_path" id="image_path" value="" required>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-primary btn-sm float-end" data-allow="image/*" id="openFileUpload">
+                                    <button type="button" class="btn btn-primary btn-sm float-end openFileUpload" data-allow="image/*">
                                         <i class="fa fa-upload"></i> Upload Gambar
                                     </button>
-                                    <button type="button" class="btn btn-info btn-sm float-end" id="openCustomUrl">
+                                    <button type="button" class="btn btn-info btn-sm float-end openCustomUrl">
                                         <i class="fa fa-link"></i> Dari URL
                                     </button>
                                     <button type="button" class="btn btn-danger btn-sm float-end" id="removeImage">

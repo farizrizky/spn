@@ -41,14 +41,14 @@ class StaticController extends Controller
         return view('web.page.static.vision-mission', $data);
     }
 
-    public function bussinessPartner()
+    public function consignmentProject()
     {
         $data = [
-            'title' => 'Bussiness Partner',
-            'partial_title' => PartialController::title('Bussiness Partner'),
+            'title' => 'Consignment Project',
+            'partial_title' => PartialController::title('Consignment Project'),
         ];
         
-        return view('web.page.static.bussiness-partner', $data);
+        return view('web.page.static.consignment-project', $data);
     }
 
     public function award()
@@ -61,14 +61,14 @@ class StaticController extends Controller
         return view('web.page.static.award', $data);
     }
 
-    public function service()
+    public function distributionService()
     {
         $data = [
-            'title' => 'Layanan Kami',
-            'partial_title' => PartialController::title('Layanan Kami'),
+            'title' => 'Layanan Distribusi',
+            'partial_title' => PartialController::title('Layanan Distribusi'),
         ];
         
-        return view('web.page.static.service', $data);
+        return view('web.page.static.distribution-service', $data);
     }
 
     public function lubeTruck()

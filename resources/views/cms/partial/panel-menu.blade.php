@@ -100,6 +100,18 @@
                     <p>File</p>
                 </a>
             </li>
+            <li class="nav-section">
+                <span class="sidebar-mini-icon">
+                <i class="fa fa-ellipsis-h"></i>
+                </span>
+                <h4 class="text-section">Pengaturan Website</h4>
+            </li>
+            <li class="nav-item {{ request()->routeIs('cms.website-cover.*') ? 'active' : '' }}">
+                <a href="{{ route('cms.website-cover.index') }}">
+                    <i class="fas fa-image"></i>
+                    <p>Website Cover</p>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

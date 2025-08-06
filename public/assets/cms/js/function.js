@@ -14,7 +14,7 @@ function initTinyMce(selector) {
     tinymce.init({
         selector: selector,
         plugins: 'lists link image code table media wordcount fullscreen',
-        toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link image | code | customfile',
+        toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link image | code ',
         setup: function (editor) {
             editor.on('OpenWindow', function () {
                 setTimeout(() => {
@@ -23,19 +23,27 @@ function initTinyMce(selector) {
                     });
                 }, 10);
             });
+        }
+    });
+}
 
-            editor.ui.registry.addButton('customfile', {
-                text: 'Insert File',
-                icon: 'browse',
-                onAction: function() {
-                    openFileBrowser(function(fileUrl) {
-                        editor.insertContent(`<a href="${fileUrl}" target="_blank">${fileUrl}</a>`);
+function initMiniTinyMce(selector) {
+    tinymce.init({
+        selector: selector,
+        plugins: 'link',
+        toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright | link',
+        setup: function (editor) {
+            editor.on('OpenWindow', function () {
+                setTimeout(() => {
+                    document.querySelectorAll('.tox-dialog').forEach(dialog => {
+                        dialog.style.zIndex = 1060;
                     });
-                }
+                }, 10);
             });
         }
     });
 }
+
 // Validate Forms
 (() => {
     'use strict'

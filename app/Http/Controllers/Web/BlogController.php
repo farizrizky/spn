@@ -61,7 +61,7 @@ class BlogController extends Controller
         }
 
         $data = [
-            'title' => 'Blog List',
+            'title' => 'Informasi',
             'partial_title' => $partial_title ?? PartialController::title('Informasi'),
             'blog' => $blog
         ];
@@ -76,8 +76,8 @@ class BlogController extends Controller
             return redirect()->route('web.not-found');
         }
         $data = [
-            'title' => 'Blog Detail',
-            'partial_title' => PartialController::title('Blog Detail'),
+            'title' => $blog->first()->title,
+            'partial_title' => PartialController::title($blog->first()->title),
             'blog_category' => BlogCategory::select('id', 'name', 'slug')->get(),
             'recent_blog' => Blog::with('user', 'blogCategory', 'blogTag')
                 ->where('status', 'published')

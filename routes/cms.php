@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('panel')->group(function () {
 
-    Route::get('/login', [\App\Http\Controllers\Cms\Auth\LoginController::class, 'index'])->name('cms.login');
+    Route::get('/login', [\App\Http\Controllers\Cms\Auth\LoginController::class, 'index'])->name('login');
     Route::post('/login', [\App\Http\Controllers\Cms\Auth\LoginController::class, 'authenticate'])->name('cms.login');
 
     Route::middleware('auth')->group(function () {
@@ -67,6 +67,9 @@ Route::prefix('panel')->group(function () {
         Route::get('/file/hapus/{file}', [\App\Http\Controllers\Cms\Utility\FileManager::class, 'destroy'])->name('cms.file.delete');
         Route::get('file/picker', [\App\Http\Controllers\Cms\Utility\FileManager::class, 'filePicker'])->name('cms.file.picker');
         Route::post('file/upload', [\App\Http\Controllers\Cms\Utility\FileManager::class, 'uploadFile'])->name('cms.file.upload');
+
+        Route::get('/website-cover', [\App\Http\Controllers\Cms\WebsiteSetting\WebsiteCoverController::class, 'index'])->name('cms.website-cover.index');
+        Route::get('/website-cover/input', [\App\Http\Controllers\Cms\WebsiteSetting\WebsiteCoverController::class, 'create'])->name('cms.website-cover.create');
         
     });
 

@@ -20,4 +20,9 @@ Class DataHelper{
         return \App\Models\ContactData::where('name', $name)->first();
     }
 
+    public static function generateWhatsAppLink()
+    {
+       $phone = self::getContactData('telepon')->value;
+       return "https://wa.me/{$phone}";
+    }
 }

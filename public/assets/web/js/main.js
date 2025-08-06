@@ -195,6 +195,52 @@
             ]
         });
 
+        $('.hero-slider').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            fade: true,
+            speed: 1200,
+            autoplay: true,
+            autoplaySpeed: 3000,
+            infinite: true,
+            dots: true,
+            arrows: false,
+        });
+
+        $('.hero-slider').on('init', function (event, slick) {
+            new WOW().init();
+        });
+
+        $('.hero-slider').on('beforeChange', function (event, slick, index) {
+            // Trigger WOW animations on slide change
+            const wow = new WOW();
+            wow.sync(); // Sync WOW to ensure animations are ready
+            
+            // Reset animations for the current slide
+            slick.$slides.removeClass('animated');
+            slick.$slides.find('.wow').each(function () {
+                const el = $(this);
+                el.removeClass('animated');        // Remove previous animation
+                el.removeAttr('style');            // Remove inline styles
+                el.css('visibility', 'hidden');    // Hide it first
+            });
+        });
+
+        $('.hero-slider').on('afterChange', function (event, slick, currentSlide) {
+            // Reapply WOW animations after slide change
+            const currentSlideElement = slick.$slides.eq(currentSlide);
+            currentSlideElement.find('.wow').each(function () {
+                const el = $(this);
+                el.addClass('animated');           // Add animation class
+                el.css('visibility', 'visible');   // Make it visible
+            });
+
+            // Reinitialize WOW for the current slide
+            const wow = new WOW();
+            wow.init();
+        });
+        
+
         // copyright date
         var date = new Date().getFullYear();
         $("#date").html(date);
