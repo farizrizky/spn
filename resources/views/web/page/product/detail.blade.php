@@ -62,7 +62,7 @@
             @if ($product->productAdditionalInformation->isNotEmpty())
                 <div class="row">
                     <div class="col-md-12 mt-100">
-                        <h4 class="title mb-50">Deskripsi Produk</h4>
+                        <h4 class="title mb-50">Informasi Tambahan</h4>
                         @foreach($product->productAdditionalInformation as $i)
                             <div class="accordion custom-accordion" id="accordionExample">
                                 <div class="accordion-item border-0 border-bottom">
