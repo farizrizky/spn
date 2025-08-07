@@ -14,14 +14,14 @@
                         <ul class="blog-meta mb-20">
                             <li><a href="#"><span class="icon"><i class="ri-calendar-line"></i></span> {{ DateHelper::fullDateFormatWithoutTime($blog->date) }}</a></li>
                             <li><a href="#"><span class="icon"><i class="ri-user-line"></i></span> oleh {{ $blog->user->name }}</a></li>
-                            <li><a href="{{ route('web.blog', ['category' => $blog->blogCategory->slug]) }}"><span class="icon"><i class="ri-book-line"></i></span> {{ $blog->blogCategory->name }}</a></li>
+                            <li><a href="{{ route('web.blog-category', ['slug' => $blog->blogCategory->slug]) }}"><span class="icon"><i class="ri-book-line"></i></span> {{ $blog->blogCategory->name }}</a></li>
                         </ul>
                         <h3 class="title">{{ $blog->title }}</h3>
                         <p class="mt-20">{!! $blog->content !!}</p>
                         <div class="sidebar-widget tags-widget mt-30" style="border-style:none;">
                             <span class="widgets-title">Tags:</span>
                             @foreach($blog->blogTag as $tag)
-                                <a href="{{ route('web.blog', ['tag' => $tag->slug]) }}">{{ $tag->name }}</a>
+                                <a href="{{ route('web.blog-tag', ['slug' => $tag->slug]) }}">{{ $tag->name }}</a>
                             @endforeach
                         </div>  
                         {{-- <div class="page-pagination mt-30">
@@ -36,7 +36,7 @@
                         <div class="sidebar-widget search-widget">
                             <h4 class="widget-title">Cari</h4>
                             <div class="search-form">
-                                <form action="{{ route('web.blog') }}" method="GET">
+                                <form action="{{ route('web.blog-search') }}" method="GET">
                                     <input type="text" name="search" placeholder="Cari...">
                                     <button type="submit"><span class="icon"><i class="ri-search-line"></i></span></button>
                                 </form>
@@ -47,7 +47,7 @@
                             <h4 class="widget-title">Kategori</h4>
                             <ul>
                                 @foreach($blog_category as $c)
-                                    <li><a href="{{ route('web.blog', ['category' => $c->slug]) }}">{{ $c->name }}<span class="arrow-icon"><i class="ri-arrow-right-double-line"></i></span></a></li>
+                                    <li><a href="{{ route('web.blog-category', ['slug' => $c->slug]) }}">{{ $c->name }}<span class="arrow-icon"><i class="ri-arrow-right-double-line"></i></span></a></li>
                                 @endforeach
                             </ul>
                         </div>
@@ -61,7 +61,7 @@
                                             <a href="{{ route('web.blog-detail', ['slug' => $rb->slug]) }}"><img src="{{ $rb->image_path }}" alt="post"></a>
                                         </div>
                                         <div class="post-content">
-                                            <a href="{{ route('web.blog', ['category' => $rb->blogCategory->slug]) }}"><span class="icon"><i class="ri-folder-open-line"></i></span> {{ $rb->blogCategory->name }}</a>
+                                            <a href="{{ route('web.blog-category', ['slug' => $rb->blogCategory->slug]) }}"><span class="icon"><i class="ri-folder-open-line"></i></span> {{ $rb->blogCategory->name }}</a>
                                             <h6 class="title"><a href="{{ route('web.blog-detail', ['slug' => $rb->slug]) }}">{{ Str::limit(strip_tags($rb->title), 50) }}</a></h6>
                                         </div>
                                     </div>

@@ -9,60 +9,80 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    public function list(Request $request)
-    {
-        if($request->has('category')) {
-            $blog = Blog::with('user', 'blogCategory', 'blogTag')
-                ->where('status', 'published')
-                ->whereHas('blogCategory', function($query) use ($request) {
-                    $query->where('slug', $request->get('category'));
-                })
-                ->orderBy('date', 'desc')
-                ->paginate(9);
-
-            if($blog->isEmpty()) {
-                return redirect()->route('web.not-found');
-            }
-            $partial_title = PartialController::title($blog->first()->blogCategory->name);
-
-        }else if($request->has('tag')) {
-            $blog = Blog::with('user', 'blogCategory', 'blogTag')
-                ->where('status', 'published')
-                ->whereHas('blogTag', function($query) use ($request) {
-                    $query->where('slug', $request->get('tag'));
-                })
-                ->orderBy('date', 'desc')
-                ->paginate(9);
-
-            if($blog->isEmpty()) {
-                return redirect()->route('web.not-found');
-            }
-            $partial_title = PartialController::title('#' . $blog->first()->blogTag->first()->name);
-
-        }else if($request->has('search')) {
-            $search = $request->get('search');
-            $blog = Blog::with('user', 'blogCategory', 'blogTag')
-                ->where('status', 'published')
-                ->where(function($query) use ($search) {
-                    $query->where('title', 'like', "%{$search}%")
-                          ->orWhere('content', 'like', "%{$search}%");
-                })
-                ->orderBy('date', 'desc')
-                ->paginate(9);
-            $blog->appends(['search' => $search]);
-
-            $partial_title = PartialController::title('Hasil Pencarian: ' . $search);
-
-        }else {
-            $blog = Blog::with('user', 'blogCategory', 'blogTag')
-                ->where('status', 'published')
-                ->orderBy('date', 'desc')
-                ->paginate(9);
-        }
+    public function all(){
+        $blog = Blog::with('user', 'blogCategory', 'blogTag')
+            ->where('status', 'published')
+            ->orderBy('date', 'desc')
+            ->paginate(9);
 
         $data = [
             'title' => 'Informasi',
             'partial_title' => $partial_title ?? PartialController::title('Informasi'),
+            'blog' => $blog
+        ];
+        
+        return view('web.page.blog.list', $data);
+    }
+
+    public function category($slug){
+        $blogCategory = BlogCategory::where('slug', $slug);
+        if (!$blogCategory->exists()) {
+            return redirect()->route('web.not-found');
+        }
+        $blog = Blog::with('user', 'blogCategory', 'blogTag')
+            ->where('status', 'published')
+            ->where('blog_category', $blogCategory->first()->id)
+            ->orderBy('date', 'desc')
+            ->paginate(9);
+
+        $data = [
+            'title' => $blogCategory->first()->name,
+            'partial_title' => PartialController::title($blogCategory->first()->name),
+            'blog' => $blog
+        ];
+        
+        return view('web.page.blog.list', $data);
+    }
+
+    public function tag($slug){
+        $blogTag = Blog::with('blogTag')->whereHas('blogTag', function($query) use ($slug) {
+            $query->where('slug', $slug);
+        });
+
+        if (!$blogTag->exists()) {
+            return redirect()->route('web.not-found');
+        }
+        
+        $blog = $blogTag->with('user', 'blogCategory')
+            ->where('status', 'published')
+            ->orderBy('date', 'desc')
+            ->paginate(9);
+
+        $data = [
+            'title' => '#' . $blogTag->first()->blogTag->first()->name,
+            'partial_title' => PartialController::title('#' . $blogTag->first()->blogTag->first()->name),
+            'blog' => $blog
+        ];
+        
+        return view('web.page.blog.list', $data);
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->get('search');
+        $blog = Blog::with('user', 'blogCategory', 'blogTag')
+            ->where('status', 'published')
+            ->where(function($query) use ($search) {
+                $query->where('title', 'like', "%{$search}%")
+                      ->orWhere('content', 'like', "%{$search}%");
+            })
+            ->orderBy('date', 'desc')
+            ->paginate(9);
+        $blog->appends(['search' => $search]);
+
+        $data = [
+            'title' => 'Hasil Pencarian: ' . $search,
+            'partial_title' => PartialController::title('Hasil Pencarian: ' . $search),
             'blog' => $blog
         ];
         

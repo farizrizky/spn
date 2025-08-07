@@ -61,7 +61,7 @@
                     <div class="col-md-6 col-lg-4 mb-4 wow fadeIn" data-wow-delay="{{ 0.1 + ($count * 0.1) }}s">
                         <div class="custom-single-project" 
                              style="background-image: url('{{ $t['image_path'] }}');">
-                            <a href="{{ route('web.product', ['type' => $t['slug']]) }}" class="stretched-link"></a>
+                            <a href="{{ route('web.product-type-detail', ['slug' => $t['slug']]) }}" class="stretched-link"></a>
 
                             <div class="custom-hover-state">
                                 <div class="category">{{ $t['name'] }}</div>

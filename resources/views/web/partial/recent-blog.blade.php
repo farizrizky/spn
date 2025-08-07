@@ -17,15 +17,15 @@
                 <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay=".3s">
                     <div class="single-blog">
                         <div class="blog-thumbnail">
-                            <a href="blog-details.html"><img src="{{ $b->image_path }}" alt="blog" style="max-width: 100%; max-height: 200px;  object-fit: cover;object-position: center;"></a>
+                            <a href="{{ route('web.blog-detail', $b->slug) }}"><img src="{{ $b->image_path }}" alt="blog" style="max-width: 100%; max-height: 200px;  object-fit: cover;object-position: center;"></a>
                         </div>
                         <div class="blog-content" style="height: 300px; overflow: hidden;">
                             <ul class="blog-meta mb-20">
-                                <li><a href="blog-details.html"><span class="icon"><i class="ri-calendar-line"></i></span> {{ DateHelper::fullDateFormatWithoutTime($b->date) }}</a></li>
-                                <li><a href="blog-details.html"><span class="icon"><i class="ri-user-line"></i></span> by {{ $b->user->name }}</a></li>
+                                <li><a href="#"><span class="icon"><i class="ri-calendar-line"></i></span> {{ DateHelper::fullDateFormatWithoutTime($b->date) }}</a></li>
+                                <li><a href="#"><span class="icon"><i class="ri-user-line"></i></span> by {{ $b->user->name }}</a></li>
                             </ul>
 
-                            <h5 class="title"><a href="blog-details.html">{{ $b->title }}</a></h5>
+                            <h5 class="title"><a href="{{ route('web.blog-detail', $b->slug) }}">{{ $b->title }}</a></h5>
 
                             <a href="{{ route('web.blog-detail', $b->slug) }}" class="primary-btn mt-20"><span class="text">Selengkapnya</span> <span class="icon"><i class="ri-arrow-right-double-line"></i></span></a>
                         </div>

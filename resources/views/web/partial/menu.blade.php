@@ -23,7 +23,7 @@
                             @if(DataHelper::getType()->isNotEmpty())
                             <ul class="submenu">
                                 @foreach(DataHelper::getType() as $t)
-                                    <li><a href="{{ route('web.product', ['type' => $t['slug']]) }}">{{ $t['name'] }}</a></li>
+                                    <li><a href="{{ route('web.product-type-detail', ['slug' => $t['slug']]) }}">{{ $t['name'] }}</a></li>
                                 @endforeach
                             </ul>
                             @endif
@@ -39,7 +39,7 @@
                             @if(DataHelper::getBlogCategory()->isNotEmpty())
                             <ul class="submenu">
                                 @foreach(DataHelper::getBlogCategory() as $bc)
-                                    <li><a href="{{ route('web.blog', ['category' => $bc->slug]) }}">{{ $bc->name }}</a></li>
+                                    <li><a href="{{ route('web.blog-category', ['slug' => $bc->slug]) }}">{{ $bc->name }}</a></li>
                                 @endforeach
                             </ul>
                             @endif

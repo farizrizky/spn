@@ -19,7 +19,7 @@
                                 <a href=""><img src="{{ $b->image_path }}" alt="blog" style="max-width: 100%; max-height: 200px;  object-fit: cover;object-position: center;"></a>
                                 <ul class="blog-meta">
                                     <li><a href="#"><span class="icon"><i class="ri-calendar-line"></i></span> {{ DateHelper::fullDateFormatWithoutTime($b->date) }}</a></li>
-                                    <li><a href="{{ route('web.blog', ['category' => $b->blogCategory->slug]) }}"><span class="icon"><i class="ri-book-line"></i></span> {{ $b->blogCategory->name }}</a></li>
+                                    <li><a href="{{ route('web.blog-category', ['slug' => $b->blogCategory->slug]) }}"><span class="icon"><i class="ri-book-line"></i></span> {{ $b->blogCategory->name }}</a></li>
                                 </ul>
                             </div>
                             <div class="blog-content" style="height: 300px; overflow: hidden;">

@@ -12,14 +12,19 @@ Route::get('/lube-truck', [App\Http\Controllers\Web\StaticController::class, 'lu
 Route::get('/lube-station', [App\Http\Controllers\Web\StaticController::class, 'lubeStation'])->name('web.lube-station');
 Route::get('/kontak', [App\Http\Controllers\Web\StaticController::class, 'contact'])->name('web.contact');
 
-Route::get('/kategori-produk', [App\Http\Controllers\Web\ProductController::class, 'type'])->name('web.product-type');
-Route::get('/produk', [App\Http\Controllers\Web\ProductController::class, 'list'])->name('web.product');
-Route::get('/produk/{product_slug}', [App\Http\Controllers\Web\ProductController::class, 'detail'])->name('web.product-detail');
+Route::get('/produk', [App\Http\Controllers\Web\ProductController::class, 'all'])->name('web.product');
+Route::get('/produk/kategori', [App\Http\Controllers\Web\ProductController::class, 'type'])->name('web.product-type');
+Route::get('/produk/kategori/{slug}', [App\Http\Controllers\Web\ProductController::class, 'productType'])->name('web.product-type-detail');
+Route::get('/produk/{slug}', [App\Http\Controllers\Web\ProductController::class, 'detail'])->name('web.product-detail');
+Route::get('/produk/pencarian', [App\Http\Controllers\Web\ProductController::class, 'search'])->name('web.product-search');
 
-Route::get('/blog', [App\Http\Controllers\Web\BlogController::class, 'list'])->name('web.blog');
-Route::get('/blog/{slug}', [App\Http\Controllers\Web\BlogController::class, 'detail'])->name('web.blog-detail');
+Route::get('/informasi', [App\Http\Controllers\Web\BlogController::class, 'all'])->name('web.blog');
+Route::get('/informasi/kategori/{slug}', [App\Http\Controllers\Web\BlogController::class, 'category'])->name('web.blog-category');
+Route::get('/informasi/tag/{slug}', [App\Http\Controllers\Web\BlogController::class, 'tag'])->name('web.blog-tag');
+Route::get('/informasi/pencarian', [App\Http\Controllers\Web\BlogController::class, 'search'])->name('web.blog-search');
+Route::get('/informasi/{slug}', [App\Http\Controllers\Web\BlogController::class, 'detail'])->name('web.blog-detail');
+
 Route::post('/contact-form/submit', [App\Http\Controllers\Web\ContactFormController::class, 'store'])->name('web.contact-form.store');
-
 Route::get('/not-found', [App\Http\Controllers\Web\StaticController::class, 'notFound'])->name('web.not-found');
 
 Route::fallback(function () {

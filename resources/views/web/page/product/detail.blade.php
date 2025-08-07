@@ -52,7 +52,7 @@
                     Kategori:
                     {{ implode(', ', $product->productType->pluck('name')->toArray()) }}
                     <div class="mt-30 w-100">
-                        <a href="https://wa.me/1234567890" class="primary-btn">
+                        <a href="{{ DataHelper::generateWhatsAppLink() }}" class="primary-btn">
                             <span  class="text">Dapatkan Produk Ini</span>
                             <span  class="icon" style="background-color:#25D366;color:white;"><i class="ri-whatsapp-line"></i></span>
                         </a>
