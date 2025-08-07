@@ -1,6 +1,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <title>PT. SPN - {{ $title ?? 'Panel Admin' }}</title>
 <meta name="csrf-token" content="{{ csrf_token() }}">
+<meta name="robots" content="noindex">
 <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" >
 <link rel="icon" href="{{ asset('assets/cms/img/logo-rectangle.png') }}" type="image/x-icon">
 <script src="{{ asset('assets/cms/js/plugin/webfont/webfont.min.js') }}"></script>

@@ -55,7 +55,7 @@
                 <div class="hero-content">
                     <div class="section-top">
                         <span class="sub-title white-color">PT. Sindo Prima Niaga</span>
-                        <h1 class="title white-color mt-20">Professional, <span>Fast, Safe and Competitive</span></h1>
+                        <h1 class="title white-color mt-20"><h1>Professional, <span>Fast, Safe and Competitive</span></h1></h1>
                     </div>
 
                     <div class="button-group mt-30">

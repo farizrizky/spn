@@ -4,15 +4,18 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
+use App\Models\WebsiteCover;
 
 class PartialController extends Controller
 {
-    public static function hero($type = 'default')
+    public static function hero()
     {
         $data = [
-            'type' => $type,
+            'website_cover' => WebsiteCover::where('is_active', true)
+                ->orderBy('order', 'asc')
+                ->get()
         ];
-       return view('web.partial.hero', $data);
+       return view('web.partial.hero-slider', $data);
     }
 
     public static function title($title = 'PT. Sindo Prima Niaga')

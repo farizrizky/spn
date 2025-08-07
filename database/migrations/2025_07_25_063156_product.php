@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('description');
             $table->enum('status', ['draft', 'published'])->default('draft');
+            $table->text('meta_description')->nullable();
             $table->timestamps();
         });
     }

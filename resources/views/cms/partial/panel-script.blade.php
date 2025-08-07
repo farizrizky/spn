@@ -21,5 +21,6 @@
 <script src="{{ asset('assets/cms/js/setting-demo.js') }}"></script>
 <script src="{{ asset('assets/cms/js/plugin/tinymce/tinymce.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
 <script src="{{ asset('assets/cms/js/function.js') }}"></script>
 

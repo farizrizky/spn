@@ -70,7 +70,11 @@ Route::prefix('panel')->group(function () {
 
         Route::get('/website-cover', [\App\Http\Controllers\Cms\WebsiteSetting\WebsiteCoverController::class, 'index'])->name('cms.website-cover.index');
         Route::get('/website-cover/input', [\App\Http\Controllers\Cms\WebsiteSetting\WebsiteCoverController::class, 'create'])->name('cms.website-cover.create');
-        
+        Route::post('/website-cover/tambah', [\App\Http\Controllers\Cms\WebsiteSetting\WebsiteCoverController::class, 'store'])->name('cms.website-cover.store');
+        Route::get('/website-cover/edit/{websiteCover}', [\App\Http\Controllers\Cms\WebsiteSetting\WebsiteCoverController::class, 'edit'])->name('cms.website-cover.edit');
+        Route::post('/website-cover/update/{websiteCover}', [\App\Http\Controllers\Cms\WebsiteSetting\WebsiteCoverController::class, 'update'])->name('cms.website-cover.update');
+        Route::get('/website-cover/hapus/{websiteCover}', [\App\Http\Controllers\Cms\WebsiteSetting\WebsiteCoverController::class, 'destroy'])->name('cms.website-cover.delete');
+
     });
 
 });

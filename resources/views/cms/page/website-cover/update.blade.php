@@ -30,13 +30,13 @@
 <div class="page-inner">
     <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
         <div>
-            <h3 class="fw-bold mb-3">Website Cover Baru</h3>
+            <h3 class="fw-bold mb-3">Ubah Website Cover</h3>
         </div>
         <div class="ms-md-auto py-2 py-md-0">
             <a href="#" id="saveCover" class="btn btn-success"><i class="fas fa-save"></i> Simpan</a>
         </div>
     </div>
-    <form method="POST" action="{{ route('cms.website-cover.store') }}" class="needs-validation" novalidate enctype="multipart/form-data">
+    <form method="POST" action="{{ route('cms.website-cover.update', $website_cover->id) }}" class="needs-validation" novalidate enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-md-6">
@@ -44,7 +44,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="title" class="text-wrap"><b>Judul</b></label>
-                            <input type="text" class="form-control input-full" value="{{ old('title') }}" name="title" id="title" required> 
+                            <input type="text" class="form-control input-full" value="{{ $website_cover->title }}" name="title" id="title" required>
                             <div class="invalid-feedback">Judul harus diisi</div>
                             @error('title')
                                 <div class="text-danger">{{ $message }}</div>
@@ -53,43 +53,43 @@
                         <div class="form-group">
                             <label for="title_color" class="text-wrap"><b>Warna Judul</b></label>
                             <div class="input-group">
-                                <input type="text" class="form-control" value="#FFFFFF" name="title_color" id="title_color" placeholder="#FFFFFF">
-                                <input type="color" class="form-control" id="title_color_picker" value="#FFFFFF">
+                                <input type="text" class="form-control" value="{{ $website_cover->title_color }}" name="title_color" id="title_color" placeholder="#FFFFFF">
+                                <input type="color" class="form-control" id="title_color_picker" value="{{ $website_cover->title_color }}">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="subtitle" class="text-wrap"><b>Sub Judul</b></label>
-                            <input type="text" class="form-control input-full" value="{{ old('subtitle') }}" name="subtitle" id="subtitle">
+                            <input type="text" class="form-control input-full" value="{{ $website_cover->subtitle }}" name="subtitle" id="subtitle">
                         </div>
                         <div class="form-group">
                             <label for="subtitle" class="text-wrap"><b>Warna Sub Judul</b></label>
                             <div class="input-group">
-                                <input type="text" class="form-control" value="#FFFFFF" name="subtitle_color" id="subtitle_color" placeholder="#FFFFFF">
-                                <input type="color" class="form-control" id="subtitle_color_picker" value="#FFFFFF">
+                                <input type="text" class="form-control" value="{{ $website_cover->subtitle_color }}" name="subtitle_color" id="subtitle_color" placeholder="#FFFFFF">
+                                <input type="color" class="form-control" id="subtitle_color_picker" value="{{ $website_cover->subtitle_color }}">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="title_color" class="text-wrap"><b>Posisi Judul</b></label>
                             <select class="form-control input-full" name="title_position" id="title_position">
-                                <option value="left" {{ old('title_position') == 'left' ? 'selected' : '' }}>Kiri</option>
-                                <option value="right" {{ old('title_position') == 'right' ? 'selected' : '' }}>Kanan</option>
+                                <option value="left" {{ $website_cover->title_position == 'left' ? 'selected' : '' }}>Kiri</option>
+                                <option value="right" {{ $website_cover->title_position == 'right' ? 'selected' : '' }}>Kanan</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="button_type" class="text-wrap"><b>Tipe Tombol</b></label>
                             <select class="form-control input-full" name="button_type" id="button_type">
-                                <option value="none" {{ old('button_type') == 'none' ? 'selected' : '' }}>Tidak Ada</option>
-                                <option value="border" {{ old('button_type') == 'border' ? 'selected' : '' }}>Border</option>
-                                <option value="filled" {{ old('button_type') == 'filled' ? 'selected' : '' }}>Filled</option>
+                                <option value="none" {{ $website_cover->button_type == 'none' ? 'selected' : '' }}>Tidak Ada</option>
+                                <option value="border" {{ $website_cover->button_type == 'border' ? 'selected' : '' }}>Border</option>
+                                <option value="filled" {{ $website_cover->button_type == 'filled' ? 'selected' : '' }}>Filled</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="button_text" class="text-wrap"><b>Teks Tombol</b></label>
-                            <input type="text" class="form-control input-full" value="{{ old('button_text') }}" name="button_text" id="button_text" placeholder="Selengkapnya">
+                            <input type="text" class="form-control input-full" value="{{ $website_cover->button_text }}" name="button_text" id="button_text" placeholder="Selengkapnya">
                         </div>
                         <div class="form-group">
                             <label for="button_url" class="text-wrap"><b>URL Tombol</b></label>
-                            <input type="text" class="form-control input-full" value="{{ old('button_url') }}" name="button_url" id="button_url" placeholder="https://example.com">
+                            <input type="text" class="form-control input-full" value="{{ $website_cover->button_url }}" name="button_url" id="button_url" placeholder="https://example.com">
                         </div>
                     </div>
                 </div>
@@ -100,7 +100,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="title" class="text-wrap"><b>Gambar Background</b></label>
-                            <input type="hidden" name="background_path" id="background_path" value="">
+                            <input type="hidden" name="background_path" id="background_path" value="{{ $website_cover->background_path }}">
                             <div class="btn-group float-end" role="group" id="backgroundUploadButtons">
                                 <button type="button" class="btn btn-primary btn-sm float-end openFileUpload" data-allow="image/*" data-key="background" >
                                     <i class="fa fa-upload"></i> Upload Gambar
@@ -114,21 +114,21 @@
                             </div>
                             <hr>
                             <div class="image-wrapper">
-                                <img id="backgroundPreview" class="img-fluid mt-2" src="" alt="Preview Gambar"/>
+                                <img id="backgroundPreview" class="img-fluid mt-2" src="{{ asset($website_cover->background_path) }}" alt="Preview Gambar"/>
                                 <div class="overlay"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="overlay_color" class="text-wrap"><b>Warna Overlay</b></label>
                             <div class="input-group">
-                                <input type="text" class="form-control" value="{{ old('overlay_color') }}" name="overlay_color" id="overlay_color" placeholder="#000000">
-                                <input type="color" class="form-control" id="overlay_color_picker" value="#000000">
+                                <input type="text" class="form-control" value="{{ $website_cover->overlay_color }}" name="overlay_color" id="overlay_color" placeholder="#000000">
+                                <input type="color" class="form-control" id="overlay_color_picker" value="{{ $website_cover->overlay_color }}">
                             </div>
                             <small class="form-text text-muted">Warna overlay yang akan diterapkan di atas gambar background</small>
                         </div>
                         <div class="form-group">
                             <label for="overlay_opacity" class="text-wrap"><b>Opacity Overlay</b></label>
-                            <input type="number" class="form-control input-full" value="{{ old('overlay_opacity') }}" name="overlay_opacity" id="overlay_opacity" min="0" max="1" step="0.01" placeholder="0.5">
+                            <input type="number" class="form-control input-full" value="{{ $website_cover->overlay_opacity }}" name="overlay_opacity" id="overlay_opacity" min="0" max="1" step="0.01" placeholder="0.5">
                             <small class="form-text text-muted">Nilai antara 0 (transparan) hingga 1 (tidak transparan)</small>
                         </div>
                     </div>
@@ -138,7 +138,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="title" class="text-wrap"><b>Gambar</b></label>
-                            <input type="hidden" name="image_path" id="image_path" value="">
+                            <input type="hidden" name="image_path" id="image_path" value="{{ $website_cover->image_path }}">
                             <div class="btn-group float-end" role="group" id="imageUploadButtons">
                                 <button type="button" class="btn btn-primary btn-sm float-end openFileUpload" data-allow="image/*" data-key="image" >
                                     <i class="fa fa-upload"></i> Upload Gambar
@@ -151,7 +151,7 @@
                                 </button>
                             </div>
                             <hr>
-                            <img id="imagePreview" class="img-fluid mt-2" src="" alt="Preview Gambar" />
+                            <img id="imagePreview" class="img-fluid mt-2" src="{{ asset($website_cover->image_path) }}" alt="Preview Gambar" />
                         </div>
                     </div>
                 </div>
@@ -160,8 +160,8 @@
                         <div class="form-group">
                             <label for="is_active" class="text-wrap"><b>Status Aktif</b></label>
                             <select class="form-control input-full" name="is_active" id="is_active">
-                                <option value="1" {{ old('is_active', 1) ? 'selected' : '' }}>Aktif</option>
-                                <option value="0" {{ old('is_active', 0) ? 'selected' : '' }}>Tidak Aktif</option>
+                                <option value="1" {{ $website_cover->is_active ? 'selected' : '' }}>Aktif</option>
+                                <option value="0" {{ $website_cover->is_active ? '' : 'selected' }}>Tidak Aktif</option>
                             </select>
                         </div>
                     </div>
@@ -182,6 +182,19 @@
         $('#removeBackground').hide();
         $('#backgroundPreview').hide();
         $('#imagePreview').hide();
+
+        if ($('#background_path').val()) {
+            $('#backgroundPreview').attr('src', $('#background_path').val()).show();
+            $('#removeBackground').show();
+        }
+
+        if ($('#image_path').val()) {
+            $('#imagePreview').attr('src', $('#image_path').val()).show();
+            $('#removeImage').show();
+        }
+
+        $('.overlay').css('background-color', $('#overlay_color').val());
+        $('.overlay').css('opacity', $('#overlay_opacity').val() || 0.5);
         
     });
 
@@ -196,7 +209,7 @@
     $('#title_color_picker').on('input', function() {
         $('#title_color').val($(this).val());
     });
-
+    
     $('#subtitle_color_picker').on('input', function() {
         $('#subtitle_color').val($(this).val());
     });

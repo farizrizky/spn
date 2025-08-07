@@ -19,24 +19,24 @@
                             <thead> 
                                 <tr class="table-primary">
                                     <th>Judul</th>
-                                    <th>Sub Judul</th>
-                                    <th>Gambar</th>
-                                    <th>Background</th>
-                                    <th>Urutan</th> 
+                                    <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($website_cover as $wc)
                                 <tr>
-                                    <td>{{ $wc->title }}</td>
-                                    <td>{{ $wc->subtitle }}</td>
-                                    <td><img src="{{ asset($wc->image) }}" alt="{{ $wc->title }}" class="img-fluid" /></td>
-                                    <td><img src="{{ asset($wc->background_image) }}" alt="{{ $wc->title }}" class="img-fluid" /></td>
-                                    <td>{{ $wc->order }}</td>
+                                    <td>{!! $wc->title !!}</td>
                                     <td>
-                                        {{-- <a class="btn btn-success btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Ubah" href="{{ route('cms.website-cover.edit', $wc->id) }}"><span class="icon-pencil"></span></a>
-                                        <a class="btn btn-danger btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus" onclick="confirmAlert('{{ route('cms.website-cover.delete', $wc->id) }}', 'Anda yakin akan menghapus website cover ini?')"><span class="icon-trash"></span></a> --}}
+                                        @if($wc->is_active)
+                                            <span class="badge badge-success">Aktif</span>
+                                        @else
+                                            <span class="badge badge-secondary">Tidak Aktif</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-success btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Ubah" href="{{ route('cms.website-cover.edit', $wc->id) }}"><span class="icon-pencil"></span></a>
+                                        <a class="btn btn-danger btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus" onclick="confirmAlert('{{ route('cms.website-cover.delete', $wc->id) }}', 'Anda yakin akan menghapus website cover ini?')"><span class="icon-trash"></span></a>
                                     </td>
                                 </tr>
                                 @endforeach

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('content');
             $table->string('image_path')->nullable();
             $table->enum('status', ['draft', 'published'])->default('draft');
+            $table->text('meta_description')->nullable();
             $table->foreignId('created_by')->nullable()->references('id')->on('users')->onDelete('set null');
             $table->foreignId('updated_by')->nullable()->references('id')->on('users')->onDelete('set null');
             $table->timestamps();
