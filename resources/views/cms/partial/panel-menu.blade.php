@@ -108,8 +108,14 @@
             </li>
             <li class="nav-item {{ request()->routeIs('cms.website-cover.*') ? 'active' : '' }}">
                 <a href="{{ route('cms.website-cover.index') }}">
-                    <i class="fas fa-image"></i>
+                    <i class="fas fa-images"></i>
                     <p>Website Cover</p>
+                </a>
+            </li>
+            <li class="nav-item {{ request()->routeIs('cms.website-header.*') ? 'active' : '' }}">
+                <a href="{{ route('cms.website-header.index') }}">
+                    <i class="fas fa-image"></i>
+                    <p>Website Header</p>
                 </a>
             </li>
         </ul>

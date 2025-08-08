@@ -76,6 +76,13 @@ Route::prefix('panel')->group(function () {
         Route::get('/website-cover/hapus/{websiteCover}', [\App\Http\Controllers\Cms\WebsiteSetting\WebsiteCoverController::class, 'destroy'])->name('cms.website-cover.delete');
         Route::post('/website-cover/simpan-urutan', [\App\Http\Controllers\Cms\WebsiteSetting\WebsiteCoverController::class, 'saveOrder'])->name('cms.website-cover.save-order');
 
+        Route::get('/website-header', [\App\Http\Controllers\Cms\WebsiteSetting\WebsiteHeaderController::class, 'index'])->name('cms.website-header.index');
+        Route::get('/website-header/input', [\App\Http\Controllers\Cms\WebsiteSetting\WebsiteHeaderController::class, 'create'])->name('cms.website-header.create');
+        Route::post('/website-header/tambah', [\App\Http\Controllers\Cms\WebsiteSetting\WebsiteHeaderController::class, 'store'])->name('cms.website-header.store');
+        Route::get('/website-header/edit/{websiteHeader}', [\App\Http\Controllers\Cms\WebsiteSetting\WebsiteHeaderController::class, 'edit'])->name('cms.website-header.edit');
+        Route::post('/website-header/update/{websiteHeader}', [\App\Http\Controllers\Cms\WebsiteSetting\WebsiteHeaderController::class, 'update'])->name('cms.website-header.update');
+        Route::get('/website-header/hapus/{websiteHeader}', [\App\Http\Controllers\Cms\WebsiteSetting\WebsiteHeaderController::class, 'destroy'])->name('cms.website-header.delete');
+
     });
 
 });
