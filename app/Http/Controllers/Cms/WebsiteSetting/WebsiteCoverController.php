@@ -36,14 +36,19 @@ class WebsiteCoverController extends Controller
         $request->validate([
             'title' => 'nullable|string|max:255',
             'title_color' => 'nullable|string|max:7',
+            'title_size' => 'nullable|in:small,medium,large',
             'title_position' => 'required|in:left,right',
             'subtitle' => 'nullable|string|max:255',
             'subtitle_color' => 'nullable|string|max:7',
+            'paragraph' => 'nullable|string|max:500',
+            'paragraph_color' => 'nullable|string|max:7',
             'button_type' => 'nullable|in:border,filled,none',
             'button_text' => 'nullable|string|max:255',
-            'button_url' => 'nullable|url|max:255',
-            'image' => 'nullable|image|max:2048',
-            'background_path' => 'nullable|string|max:255',
+            'button_url' => 'nullable|url',
+            'image_path' => 'nullable|url',
+            'image_frame' => 'nullable|in:none,rounded,circle',
+            'is_image_floating' => 'boolean',
+            'background_path' => 'nullable|url',
             'overlay_color' => 'nullable|string|max:7',
             'overlay_opacity' => 'nullable|numeric|min:0|max:1',
             'order' => 'nullable|integer|min:0',
@@ -52,13 +57,18 @@ class WebsiteCoverController extends Controller
         $data = $request->only([
             'title',
             'title_color',
+            'title_size',
             'title_position',
             'subtitle',
             'subtitle_color',
+            'paragraph',
+            'paragraph_color',
             'button_type',
             'button_text',
             'button_url',
-            'image',
+            'image_path',
+            'image_frame',
+            'is_image_floating',
             'background_path',
             'overlay_color',
             'overlay_opacity',
@@ -110,14 +120,19 @@ class WebsiteCoverController extends Controller
         $request->validate([
             'title' => 'nullable|string|max:255',
             'title_color' => 'nullable|string|max:7',
+            'title_size' => 'nullable|in:small,medium,large',
             'title_position' => 'required|in:left,right',
             'subtitle' => 'nullable|string|max:255',
             'subtitle_color' => 'nullable|string|max:7',
+            'paragraph' => 'nullable|string|max:500',
+            'paragraph_color' => 'nullable|string|max:7',
             'button_type' => 'nullable|in:border,filled,none',
             'button_text' => 'nullable|string|max:255',
-            'button_url' => 'nullable|url|max:255',
-            'image_path' => 'nullable|string|max:255',
-            'background_path' => 'nullable|string|max:255',
+            'button_url' => 'nullable|url',
+            'image_path' => 'nullable|url',
+            'image_frame' => 'nullable|in:none,rounded,circle',
+            'is_image_floating' => 'boolean',
+            'background_path' => 'nullable|url',
             'overlay_color' => 'nullable|string|max:7',
             'overlay_opacity' => 'nullable|numeric|min:0|max:1',
             'is_active' => 'boolean',
@@ -126,13 +141,18 @@ class WebsiteCoverController extends Controller
         $data = $request->only([
             'title',
             'title_color',
+            'title_size',
             'title_position',
             'subtitle',
             'subtitle_color',
+            'paragraph',
+            'paragraph_color',
             'button_type',
             'button_text',
             'button_url',
             'image_path',
+            'image_frame',
+            'is_image_floating',
             'background_path',
             'overlay_color',
             'overlay_opacity',
@@ -159,6 +179,26 @@ class WebsiteCoverController extends Controller
         $websiteCover->delete();
 
         $notify = NotifyHelper::successfullyDeleted();
+        return redirect()->route('cms.website-cover.index')->with('notify', $notify);
+    }
+
+    public function saveOrder(Request $request)
+    {
+        $ids = $request->input('id', []);
+        if (empty($ids)) {
+            $notify = NotifyHelper::errorOccurred('Tidak ada website cover yang dapat diurutkan.');
+            return redirect()->route('cms.website-cover.index')->with('notify', $notify);
+        }
+
+        foreach ($ids as $index => $id) {
+            $websiteCover = WebsiteCover::find($id);
+            if ($websiteCover) {
+                $websiteCover->order = $index + 1; // Set order based on the index
+                $websiteCover->save();
+            }
+        }
+
+        $notify = NotifyHelper::successfullyUpdated();
         return redirect()->route('cms.website-cover.index')->with('notify', $notify);
     }
 }

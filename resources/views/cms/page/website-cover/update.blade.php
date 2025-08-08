@@ -58,8 +58,23 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="subtitle" class="text-wrap"><b>Sub Judul</b></label>
-                            <input type="text" class="form-control input-full" value="{{ $website_cover->subtitle }}" name="subtitle" id="subtitle">
+                            <label for="title_size" class="text-wrap"><b>Ukuran Judul</b></label>
+                            <select class="form-control input-full" name="title_size" id="title_size">
+                                <option value="small" {{ $website_cover->title_size == 'small' ? 'selected' : '' }}>Kecil</option>
+                                <option value="medium" {{ $website_cover->title_size == 'medium' ? 'selected' : '' }}>Sedang</option>
+                                <option value="large" {{ $website_cover->title_size == 'large' ? 'selected' : '' }}>Besar</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="paragraph" class="text-wrap"><b>Paragraf</b></label>
+                            <textarea class="form-control input-full" name="paragraph" id="paragraph">{{ $website_cover->paragraph }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="paragraph_color" class="text-wrap"><b>Warna Paragraf</b></label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" value="{{ $website_cover->paragraph_color }}" name="paragraph_color" id="paragraph_color" placeholder="#FFFFFF">
+                                <input type="color" class="form-control" id="paragraph_color_picker" value="{{ $website_cover->paragraph_color }}">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="subtitle" class="text-wrap"><b>Warna Sub Judul</b></label>
@@ -153,6 +168,21 @@
                             <hr>
                             <img id="imagePreview" class="img-fluid mt-2" src="{{ asset($website_cover->image_path) }}" alt="Preview Gambar" />
                         </div>
+                        <div class="form-group">
+                            <label for="image_frame" class="text-wrap"><b>Frame Gambar</b></label>
+                            <select class="form-control input-full" name="image_frame" id="image_frame">
+                                <option value="none" {{ $website_cover->image_frame == 'none' ? 'selected' : '' }}>Tanpa Frame</option>
+                                <option value="rounded" {{ $website_cover->image_frame == 'rounded' ? 'selected' : '' }}>Rounded</option>
+                                <option value="circle" {{ $website_cover->image_frame == 'circle' ? 'selected' : '' }}>Circle</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="is_image_floating" class="text-wrap"><b>Efek Gambar Bergerak</b></label>
+                            <select class="form-control input-full" name="is_image_floating" id="is_image_floating">
+                                <option value="0" {{ $website_cover->is_image_floating ? '' : 'selected' }}>Tidak Aktif</option>
+                                <option value="1" {{ $website_cover->is_image_floating ? 'selected' : '' }}>Aktif</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="card">
@@ -214,10 +244,32 @@
         $('#subtitle_color').val($(this).val());
     });
 
+    $('#paragraph_color_picker').on('input', function() {
+        $('#paragraph_color').val($(this).val());
+    });
+
     $('#overlay_color_picker').on('input', function() {
         $('#overlay_color').val($(this).val());
         $('.overlay').css('background-color', $(this).val());
         $('.overlay').css('opacity', $('#overlay_opacity').val() || 0.5);
+    });
+
+    $('#title_color').on('input', function() {
+        $('#title_color_picker').val($(this).val());
+    });
+
+    $('#subtitle_color').on('input', function() {
+        $('#subtitle_color_picker').val($(this).val());
+    });
+
+    $('#paragraph_color').on('input', function() {
+        $('#paragraph_color_picker').val($(this).val());
+    });
+
+    $('#overlay_color').on('input', function() {
+        $('.overlay').css('background-color', $(this).val());
+        $('.overlay').css('opacity', $('#overlay_opacity').val() || 0.5);
+        $('#overlay_color_picker').val($(this).val());
     });
 
     $('#overlay_opacity').on('input', function() {

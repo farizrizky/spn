@@ -34,9 +34,20 @@
                     <div class="hero-content">
                         <div class="section-top">
                             <span class="sub-title wow fadeIn" style="color: {{ $wc->subtitle_color }}" data-wow-duration="1s">{{ $wc->subtitle }}</span>
-                            <h1 class="title mt-20 wow fadeIn" data-wow-duration="1s" style="color: {{ $wc->title_color }}">
-                                {{ $wc->title }}
-                            </h1>
+                            @if($wc->title_size == 'large')
+                                <h1 class="title mt-20 wow fadeIn" data-wow-duration="1s" style="color: {{ $wc->title_color }}">
+                                    {{ $wc->title }}
+                                </h1>
+                            @elseif($wc->title_size == 'medium')
+                                <h2 class="title mt-20 wow fadeIn" data-wow-duration="1s" style="color: {{ $wc->title_color }}">
+                                    {{ $wc->title }}
+                                </h2>
+                            @elseif($wc->title_size == 'small')
+                                <h3 class="title mt-20 wow fadeIn" data-wow-duration="1s" style="color: {{ $wc->title_color }}">
+                                    {{ $wc->title }}
+                                </h3>
+                            @endif
+                            <p class="description wow fadeIn" data-wow-duration="1s" style="color: {{ $wc->paragraph_color }}">{{ $wc->paragraph }}</p>
                         </div>
 
                         @if($wc->button_type != 'none')
@@ -53,7 +64,19 @@
                     @else
                         <div class="hero-image">
                             @if($wc->image_path)
-                                <img src="{{ $wc->image_path }}" alt="hero" class="hero-image-1">
+                                <img src="{{ $wc->image_path }}" alt="hero" class="
+                                    @if($wc->image_frame == 'circle') 
+                                        hero-image-1 
+                                    @elseif($wc->image_frame == 'rounded') 
+                                        hero-image-2 
+                                    @else 
+                                        img-fluid 
+                                    @endif
+
+                                    @if($wc->is_image_floating)
+                                        hero-image-floating
+                                    @endif
+                                ">
                             @endif
                         </div>
                     @endif
@@ -61,9 +84,21 @@
 
                 <div class="col-lg-6">
                     @if($wc->title_position == 'left')
-                    <div class="hero-image">
+                   <div class="hero-image">
                         @if($wc->image_path)
-                            <img src="{{ $wc->image_path }}" alt="hero" class="hero-image-1">
+                            <img src="{{ $wc->image_path }}" alt="hero" class="
+                                @if($wc->image_frame == 'circle') 
+                                    hero-image-1 
+                                @elseif($wc->image_frame == 'rounded') 
+                                    hero-image-2 
+                                @else 
+                                    img-fluid 
+                                @endif
+
+                                @if($wc->is_image_floating)
+                                    hero-image-floating
+                                @endif
+                            ">
                         @endif
                     </div>
 
@@ -71,9 +106,20 @@
                     <div class="hero-content">
                         <div class="section-top">
                             <span class="sub-title wow fadeIn" style="color: {{ $wc->subtitle_color }}" data-wow-duration="1s">{{ $wc->subtitle }}</span>
-                            <h1 class="title mt-20 wow fadeIn" data-wow-duration="1s" style="color: {{ $wc->title_color }}">
-                                {{ $wc->title }}
-                            </h1>
+                            @if($wc->title_size == 'large')
+                                <h1 class="title mt-20 wow fadeIn" data-wow-duration="1s" style="color: {{ $wc->title_color }}">
+                                    {{ $wc->title }}
+                                </h1>
+                            @elseif($wc->title_size == 'medium')
+                                <h2 class="title mt-20 wow fadeIn" data-wow-duration="1s" style="color: {{ $wc->title_color }}">
+                                    {{ $wc->title }}
+                                </h2>
+                            @elseif($wc->title_size == 'small')
+                                <h3 class="title mt-20 wow fadeIn" data-wow-duration="1s" style="color: {{ $wc->title_color }}">
+                                    {{ $wc->title }}
+                                </h3>
+                            @endif
+                            <p class="description wow fadeIn" data-wow-duration="1s" style="color: {{ $wc->paragraph_color }}">{{ $wc->paragraph }}</p>
                         </div>
 
                         @if($wc->button_type != 'none')

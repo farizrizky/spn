@@ -221,7 +221,6 @@
             slick.$slides.find('.wow').each(function () {
                 const el = $(this);
                 el.removeClass('animated');        // Remove previous animation
-                el.removeAttr('style');            // Remove inline styles
                 el.css('visibility', 'hidden');    // Hide it first
             });
         });

@@ -74,6 +74,7 @@ Route::prefix('panel')->group(function () {
         Route::get('/website-cover/edit/{websiteCover}', [\App\Http\Controllers\Cms\WebsiteSetting\WebsiteCoverController::class, 'edit'])->name('cms.website-cover.edit');
         Route::post('/website-cover/update/{websiteCover}', [\App\Http\Controllers\Cms\WebsiteSetting\WebsiteCoverController::class, 'update'])->name('cms.website-cover.update');
         Route::get('/website-cover/hapus/{websiteCover}', [\App\Http\Controllers\Cms\WebsiteSetting\WebsiteCoverController::class, 'destroy'])->name('cms.website-cover.delete');
+        Route::post('/website-cover/simpan-urutan', [\App\Http\Controllers\Cms\WebsiteSetting\WebsiteCoverController::class, 'saveOrder'])->name('cms.website-cover.save-order');
 
     });
 

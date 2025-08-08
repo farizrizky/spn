@@ -678,9 +678,40 @@ img { width: 100%; height: auto; display: block; }
 
 .hero-area .hero-image { position: relative; }
 
-@media (max-width: 991.98px) { .hero-area .hero-image { margin-top: 40px; } }
+@media (max-width: 575.98px) {
+  /* Kolom gambar berada di urutan pertama (kiri di desktop) */
+  .hero-area .row > div:first-child .hero-image {
+    margin-bottom: 40px;
+    margin-top: 0;
+    text-align: center;
+  }
+
+  /* Kolom gambar berada di urutan kedua (kanan di desktop) */
+  .hero-area .row > div:last-child .hero-image {
+    margin-top: 40px;
+    margin-bottom: 0;
+    text-align: center;
+  }
+
+  /* Pastikan gambar tetap center */
+  .hero-area .hero-image img {
+    display: inline-block;
+  }
+}
+
+@media (max-width: 575.98px) {
+    .hero-area {
+        padding-top:200px !important; /* atau lebih kecil sesuai kebutuhan */
+    }
+}
 
 .hero-area .hero-image .hero-image-1 { width: 600px; height: 600px; border-radius: 50%; border: 20px solid rgba(255, 255, 255, 0.1); -o-object-fit: cover; object-fit: cover; margin-left: auto; }
+
+.hero-image-floating { animation: floatImage 4s ease-in-out infinite; }
+
+@keyframes floatImage { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
+
+.hero-area .hero-image .hero-image-2 { width: 600px; height: 600px; border-radius: 40px; object-fit: cover; border: 10px solid rgba(255, 255, 255, 0.2); box-shadow: 0 20px 30px rgba(0,0,0,0.2); }
 
 @media (min-width: 992px) and (max-width: 1199.98px) { .hero-area .hero-image .hero-image-1 { width: 500px; height: 500px; } }
 
@@ -688,9 +719,15 @@ img { width: 100%; height: auto; display: block; }
 
 @media (max-width: 575.98px) { .hero-area .hero-image .hero-image-1 { width: 330px; height: 330px; margin-left: 0; } }
 
-.hero-area .hero-image .hero-image-2 { width: 320px; height: 320px; border-radius: 50%; -o-object-fit: cover; object-fit: cover; padding: 20px; border: 2px solid rgba(255, 255, 255, 0.2); position: absolute; left: 0; bottom: 0; }
+@media (min-width: 992px) and (max-width: 1199.98px) { .hero-area .hero-image .hero-image-2 { width: 500px; height: 500px; } }
 
-@media (max-width: 575.98px) { .hero-area .hero-image .hero-image-2 { width: 160px; height: 160px; padding: 15px; } }
+@media (min-width: 576px) and (max-width: 767.98px) { .hero-area .hero-image .hero-image-2 { width: 500px; height: 500px; } }
+
+@media (max-width: 575.98px) { .hero-area .hero-image .hero-image-2 { width: 330px; height: 330px; margin-left: 0; } }
+
+/* .hero-area .hero-image .hero-image-2 { width: 320px; height: 320px; border-radius: 50%; -o-object-fit: cover; object-fit: cover; padding: 20px; border: 2px solid rgba(255, 255, 255, 0.2); position: absolute; left: 0; bottom: 0; } */
+
+/* @media (max-width: 575.98px) { .hero-area .hero-image .hero-image-2 { width: 160px; height: 160px; padding: 15px; } } */
 
 .hero-area .section-top { -webkit-animation: 1.5s fadeInUp; animation: 1.5s fadeInUp; }
 
