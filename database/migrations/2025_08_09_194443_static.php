@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('type', function (Blueprint $table) {
+        Schema::create('static', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
+            $table->string('title');
             $table->string('slug')->unique();
-            $table->text('image_path')->nullable();
-            $table->boolean('is_active')->default(true);
+            $table->text('meta_description')->nullable();
+            $table->integer('view_count')->default(0);
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('type');
+        Schema::dropIfExists('static');
     }
 };

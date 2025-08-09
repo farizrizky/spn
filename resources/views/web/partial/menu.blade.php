@@ -51,7 +51,7 @@
 
             <div class="col-xl-2 col-lg-3 col-6">
                 <div class="nav-right-content">
-                <img src="{{ asset('assets/web/images/repsol-white.png') }}" style="width:150px;" alt="search" class="icon">
+                <img src="{{ asset('assets/web/images/repsol-white.png') }}" style="width:150px;" alt="repsol-logo" class="icon">
                 </div>
             </div>
         </div>

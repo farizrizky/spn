@@ -38,12 +38,11 @@ class TypeController extends Controller
         $request->validate([
             'name' => 'required|string|max:150',
             'slug' => 'required|string|unique:type,slug|max:150',
-            'description' => 'nullable|string',
             'image_path' => 'nullable|string',
         ]);
 
-        $data = $request->only(['name', 'slug', 'description', 'image_path']);
-
+        $data = $request->only(['name', 'slug', 'image_path']);
+ 
         Type::create($data);
 
         $notify = NotifyHelper::successfullyCreated();
@@ -88,11 +87,10 @@ class TypeController extends Controller
         $request->validate([
             'name' => 'required|string|max:150',
             'slug' => 'required|string|unique:type,slug,' . $type->id . '|max:150',
-            'description' => 'nullable|string',
             'image_path' => 'nullable|string',
         ]);
 
-        $data = $request->only(['name', 'slug', 'description', 'image_path']);
+        $data = $request->only(['name', 'slug', 'image_path']);
         $type->update($data);
 
         $notify = NotifyHelper::successfullyUpdated();

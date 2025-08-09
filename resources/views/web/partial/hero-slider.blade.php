@@ -64,7 +64,7 @@
                     @else
                         <div class="hero-image">
                             @if($wc->image_path)
-                                <img src="{{ $wc->image_path }}" alt="hero" class="
+                                <img src="{{ $wc->image_path }}" alt="hero-image" class="
                                     @if($wc->image_frame == 'circle') 
                                         hero-image-1 
                                     @elseif($wc->image_frame == 'rounded') 
@@ -86,7 +86,7 @@
                     @if($wc->title_position == 'left')
                    <div class="hero-image">
                         @if($wc->image_path)
-                            <img src="{{ $wc->image_path }}" alt="hero" class="
+                            <img src="{{ $wc->image_path }}" alt="hero-image" class="
                                 @if($wc->image_frame == 'circle') 
                                     hero-image-1 
                                 @elseif($wc->image_frame == 'rounded') 

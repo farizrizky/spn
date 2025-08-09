@@ -49,9 +49,10 @@ class BlogController extends Controller
             'content' => 'required|string',
             'image_path' => 'nullable|string',
             'date' => 'required|date',
+            'meta_description' => 'nullable|string|max:160',
         ]);
 
-        $data = $request->only(['title', 'slug', 'blog_category', 'image_path', 'content', 'status', 'date']);
+        $data = $request->only(['title', 'slug', 'blog_category', 'image_path', 'content', 'status', 'date', 'meta_description']);
         $data['created_by'] = Auth::id();
         $data['updated_by'] = Auth::id();
         $createBlog = Blog::create($data);
@@ -117,9 +118,10 @@ class BlogController extends Controller
             'content' => 'required|string',
             'image_path' => 'nullable|string',
             'date' => 'required|date',
+            'meta_description' => 'nullable|string|max:160',
         ]);
 
-        $data = $request->only(['title', 'slug', 'blog_category', 'image_path', 'content', 'status', 'date']);
+        $data = $request->only(['title', 'slug', 'blog_category', 'image_path', 'content', 'status', 'date', 'meta_description']);
         $data['updated_by'] = Auth::id();
         $blog->update($data);
 

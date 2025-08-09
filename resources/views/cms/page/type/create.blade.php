@@ -34,13 +34,6 @@
                             </div>
                         </div>
                         <div class="form-group form-inline row">
-                            <label for="description" class="col-md-3 col-form-label text-wrap"><b>Deskripsi</b></label>
-                            <div class="col-md-9 p-0">
-                                <textarea class="form-control" name="description" id="editor" required></textarea>
-                                <div class="invalid-feedback">Deskripsi harus diisi</div>
-                            </div>
-                        </div>
-                        <div class="form-group form-inline row">
                             <label for="image" class="col-md-3 col-form-label text-wrap"><b>Gambar</b></label>
                             <div class="col-md-9 p-0">
                                 <input type="hidden" name="image_path" id="image_path" value="" required>

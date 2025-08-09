@@ -45,9 +45,11 @@ class ProductController extends Controller
             'name' => 'required|string|max:150',
             'slug' => 'required|string|max:150|unique:product,slug',
             'description' => 'required|string',
+            'status' => 'required|in:draft,published',
+            'meta_description' => 'nullable|string|max:160',
         ]);
 
-        $data = $request->only(['name', 'slug', 'description', 'status']);
+        $data = $request->only(['name', 'slug', 'description', 'status', 'meta_description']);
         $createProduct = Product::create($data);
 
         if ($request->images) {
@@ -131,9 +133,11 @@ class ProductController extends Controller
             'name' => 'required|string|max:150',
             'slug' => 'required|string|max:150|unique:product,slug,' . $product->id,
             'description' => 'required|string',
+            'status' => 'required|in:draft,published',
+            'meta_description' => 'nullable|string|max:160',
         ]);
 
-        $data = $request->only(['name', 'slug', 'description', 'status']);
+        $data = $request->only(['name', 'slug', 'description', 'status', 'meta_description']);
         $product->update($data);
 
         // Delete existing images

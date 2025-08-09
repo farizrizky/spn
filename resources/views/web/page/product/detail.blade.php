@@ -1,4 +1,7 @@
 @extends('web.template.web')
+@section('seo')
+    <meta name="description" content="{{ $product->meta_description }}">
+@endsection
 @section('content')
     {!! $partial_title !!}
     <style>

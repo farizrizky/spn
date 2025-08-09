@@ -28,7 +28,7 @@
                             <tbody>
                                 @foreach ($product as $p)
                                 <tr>
-                                    <td>{{ DateHelper::fullDateFormat($p->updated_at) }}</td>
+                                    <td>{{ $p->updated_at }}</td>
                                     <td>{{ $p->name }}</td>
                                     <td>
                                         @if($p->productType->isNotEmpty())

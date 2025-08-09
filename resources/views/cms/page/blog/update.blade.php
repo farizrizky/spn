@@ -41,6 +41,22 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="card">
+                    <div class="card-header">
+                         <h6><strong>SEO</strong></h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="meta_description"><b>Meta Deskripsi</b> (<span class="char-count">{{ strlen($blog->meta_description) }}</span>/160)</label>
+                            <textarea class="form-control" name="meta_description" id="meta_description">{{ $blog->meta_description }}</textarea>
+                            <div class="invalid-feedback">Meta deskripsi harus diisi</div>
+                            @error('meta_description')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="col-md-5">
@@ -194,6 +210,18 @@
         $('#image_path').val('');
         $('#noImage').show();
         $('#removeImage').hide();
+    });
+
+    $('.char-count').text($('#meta_description').val().length);
+
+    $('#meta_description').on('input', function () {
+        var count = $(this).val().length;
+        $('.char-count').text(count);
+        if (count > 160) {
+            //can't type anymore
+            $(this).val($(this).val().substring(0, 160));
+        }
+       
     });
 
 </script>

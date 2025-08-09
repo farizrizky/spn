@@ -28,7 +28,7 @@
                             <tbody>
                                 @foreach ($blog as $b)
                                 <tr>
-                                    <td>{{ DateHelper::fullDateFormatWithoutTime($b->date) }}</td>
+                                    <td>{{ $b->date }}</td>
                                     <td>{{ $b->title }}</td>
                                     <td>{{ $b->blogCategory?->name }}</td>
                                     <td>{{ $b->status == 'published' ? 'Published' : 'Draft' }}</td>

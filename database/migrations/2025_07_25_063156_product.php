@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('description');
             $table->enum('status', ['draft', 'published'])->default('draft');
             $table->text('meta_description')->nullable();
+            $table->integer('view_count')->default(0);
             $table->timestamps();
         });
     }
