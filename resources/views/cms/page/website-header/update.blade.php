@@ -36,7 +36,7 @@
             
         </div>
     </div>
-    <form method="POST" action="{{ route('cms.website-header.update', $websiteHeader->id) }}" class="needs-validation" novalidate enctype="multipart/form-data">
+    <form method="POST" action="{{ route('cms.website-header.update', $website_header->id) }}" class="needs-validation" novalidate enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-md-12">
@@ -45,7 +45,7 @@
                         <div class="form-group form-inline row">
                             <label for="name" class="col-md-3 col-form-label text-wrap"><b>Nama</b></label>
                             <div class="col-md-9 p-0">
-                                <input type="text" class="form-control input-full" value="{{ $websiteHeader->name }}" name="name" id="name" required>
+                                <input type="text" class="form-control input-full" value="{{ $website_header->name }}" name="name" id="name" required>
                                 <div class="invalid-feedback">Nama harus diisi</div>
                                 @error('name')
                                     <div class="text-danger">{{ $message }}</div>
@@ -56,8 +56,8 @@
                             <label for="text_color" class="col-md-3 col-form-label text-wrap"><b>Warna Teks</b></label>
                             <div class="col-md-9 p-0">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" value="#FFFFFF" name="text_color" id="text_color" placeholder="#FFFFFF">
-                                    <input type="color" class="form-control" id="text_color_picker" value="#FFFFFF">
+                                    <input type="text" class="form-control" value="{{ $website_header->text_color }}" name="text_color" id="text_color" placeholder="#FFFFFF">
+                                    <input type="color" class="form-control" id="text_color_picker" value="{{ $website_header->text_color }}">
                                 </div>
                             </div>
                         </div>
@@ -77,7 +77,7 @@
                                 </div>
                                 <hr>
                                 <div class="image-wrapper">
-                                    <input type="hidden" name="background_path" id="background_path" value="">
+                                    <input type="hidden" name="background_path" id="background_path" value="{{ $website_header->background_path }}">
                                     <img id="backgroundPreview" class="img-fluid mt-2" src="" alt="Preview Gambar"/>
                                     <div class="overlay"></div>
                                 </div>
@@ -87,8 +87,8 @@
                             <label for="text_color" class="col-md-3 col-form-label text-wrap"><b>Warna Overlay</b></label>
                             <div class="col-md-9 p-0">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" value="{{ old('overlay_color') }}" name="overlay_color" id="overlay_color" placeholder="#000000">
-                                    <input type="color" class="form-control" id="overlay_color_picker" value="#000000">
+                                    <input type="text" class="form-control" value="{{ $website_header->overlay_color }}" name="overlay_color" id="overlay_color" placeholder="#000000">
+                                    <input type="color" class="form-control" id="overlay_color_picker" value="{{ $website_header->overlay_color }}">
                                 </div>
                                 <small class="form-text text-muted">Warna overlay yang akan diterapkan di atas gambar background</small>
                             </div>
@@ -98,7 +98,7 @@
                             <div class="col-md-9 p-0">
                                 <div class="input-group">
                                     <label for="overlay_opacity" class="text-wrap"><b>Opacity Overlay</b></label>
-                                    <input type="number" class="form-control input-full" value="{{ old('overlay_opacity') }}" name="overlay_opacity" id="overlay_opacity" min="0" max="1" step="0.01" placeholder="0.5">
+                                    <input type="number" class="form-control input-full" value="{{ $website_header->overlay_opacity }}" name="overlay_opacity" id="overlay_opacity" min="0" max="1" step="0.01" placeholder="0.5">
                                     <small class="form-text text-muted">Nilai antara 0 (transparan) hingga 1 (tidak transparan)</small>
                                 </div>
                             </div>
@@ -107,8 +107,8 @@
                             <label for="text_color" class="col-md-3 col-form-label text-wrap"><b>Status</b></label>
                             <div class="col-md-9 p-0">
                                <select class="form-control input-full" name="is_active" id="is_active">
-                                    <option value="1" {{ old('is_active', 1) ? 'selected' : '' }}>Aktif</option>
-                                    <option value="0" {{ old('is_active', 0) ? 'selected' : '' }}>Tidak Aktif</option>
+                                    <option value="1" {{ $website_header->is_active ? 'selected' : '' }}>Aktif</option>
+                                    <option value="0" {{ !$website_header->is_active ? 'selected' : '' }}>Tidak Aktif</option>
                                 </select>
                             </div>
                         </div>
@@ -133,6 +133,13 @@
         $('#removeBackground').hide();
         $('#backgroundPreview').hide();
         
+        if ($('#background_path').val()) {
+            $('#backgroundPreview').attr('src', $('#background_path').val()).show();
+            $('#removeBackground').show();
+        }
+        
+        $('.overlay').css('background-color', $('#overlay_color').val() || '#000000');
+        $('.overlay').css('opacity', $('#overlay_opacity').val() || 0.5);
     });
 
     $('#text_color_picker').on('input', function() {

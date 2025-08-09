@@ -38,17 +38,27 @@
         font-weight: 600;
         color: #ffd369;
     }
+
+    .breadcrumb-area .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
 </style>
-<section class="breadcrumb-area" style="background-image: url('{{ asset('assets/web/images/about-1.jpg') }}');">
+<section class="breadcrumb-area" style="background-image: url('{{ $website_header->background_path }}');">
+    <div class="overlay" style="background-color: {{ $website_header->overlay_color }}; opacity: {{ $website_header->overlay_opacity }}"></div>
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h2 class="title">{{ $title }}</h2>
+                <h2 class="title" style="color: {{ $website_header->text_color }}">{{ $title }}</h2>
                 @if($title)
                     <ul class="breadcrumb-menu">
-                        <li><a href="{{ route('web.home') }}">Beranda</a></li>
-                        <li><span class="icon"><i class="ri-arrow-right-s-line"></i></span></li>
-                        <li class="active">{{ $title }}</li>
+                        <li><a href="{{ route('web.home') }}" style="color: {{ $website_header->text_color }}">Beranda</a></li>
+                        <li><span class="icon" style="color: {{ $website_header->text_color }}"><i class="ri-arrow-right-s-line"></i></span></li>
+                        <li class="active" style="color: {{ $website_header->text_color }}">{{ $title }}</li>
                     </ul>
                 @endif
             </div>

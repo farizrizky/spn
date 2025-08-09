@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\WebsiteCover;
+use App\Models\WebsiteHeader;
 
 class PartialController extends Controller
 {
@@ -21,6 +22,7 @@ class PartialController extends Controller
     public static function title($title = 'PT. Sindo Prima Niaga')
     {
         $data = [
+            'website_header' => WebsiteHeader::where('is_active', true)->first(),
             'title' => $title,
         ];
 

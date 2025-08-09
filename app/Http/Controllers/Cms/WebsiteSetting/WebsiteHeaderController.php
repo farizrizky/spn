@@ -50,12 +50,8 @@ class WebsiteHeaderController extends Controller
             'is_active',
         ]);
 
-        if($request->is_active === true){
-            $currentActive = WebsiteHeader::where('is_active', true)->first();
-            if($currentActive){
-                $currentActive->is_active = false;
-                $currentActive->save();
-            }
+        if($request->is_active == 1){
+            WebsiteHeader::where('is_active', true)->update(['is_active' => false]);
         }
 
         WebsiteHeader::create($data);
@@ -77,7 +73,15 @@ class WebsiteHeaderController extends Controller
      */
     public function edit(WebsiteHeader $websiteHeader)
     {
-        //
+        if (!$websiteHeader) {
+            $notify = NotifyHelper::notFound();
+            return redirect()->route('cms.website-header.index')->with('notify', $notify);
+        }
+
+        $data = [
+            'website_header' => $websiteHeader
+        ];
+        return view('cms.page.website-header.update', $data);
     }
 
     /**
@@ -85,7 +89,37 @@ class WebsiteHeaderController extends Controller
      */
     public function update(Request $request, WebsiteHeader $websiteHeader)
     {
-        //
+        if (!$websiteHeader) {
+            $notify = NotifyHelper::notFound();
+            return redirect()->route('cms.website-header.index')->with('notify', $notify);
+        }
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'text_color' => 'nullable|string|max:7',
+            'background_path' => 'nullable|url',
+            'overlay_color' => 'nullable|string|max:7',
+            'overlay_opacity' => 'nullable|numeric|min:0|max:1',
+            'is_active' => 'boolean',
+        ]);
+
+        if($request->is_active == 1){
+            WebsiteHeader::where('is_active', true)
+                ->whereNotIn('id', [$websiteHeader->id])
+                ->update(['is_active' => false]);
+        }
+
+        $websiteHeader->update($request->only([
+            'name',
+            'text_color',
+            'background_path',
+            'overlay_color',
+            'overlay_opacity',
+            'is_active',
+        ]));
+
+        $notify = NotifyHelper::successfullyUpdated();
+        return redirect()->route('cms.website-header.index')->with('notify', $notify);
     }
 
     /**
@@ -93,6 +127,14 @@ class WebsiteHeaderController extends Controller
      */
     public function destroy(WebsiteHeader $websiteHeader)
     {
-        //
+        if (!$websiteHeader) {
+            $notify = NotifyHelper::notFound();
+            return redirect()->route('cms.website-header.index')->with('notify', $notify);
+        }
+
+        $websiteHeader->delete();
+
+        $notify = NotifyHelper::successfullyDeleted();
+        return redirect()->route('cms.website-header.index')->with('notify', $notify);
     }
 }
