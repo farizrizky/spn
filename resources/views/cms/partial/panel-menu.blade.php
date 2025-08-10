@@ -93,13 +93,6 @@
                     <p>Data Kontak</p>
                 </a>
             </li>
-            <br>
-            <li class="nav-item {{ request()->routeIs('cms.file.*') ? 'active' : '' }}">
-                <a href="{{ route('cms.file') }}">
-                    <i class="fas fa-folder"></i>
-                    <p>File</p>
-                </a>
-            </li>
             <li class="nav-section">
                 <span class="sidebar-mini-icon">
                 <i class="fa fa-ellipsis-h"></i>
@@ -116,6 +109,30 @@
                 <a href="{{ route('cms.website-header.index') }}">
                     <i class="fas fa-image"></i>
                     <p>Website Header</p>
+                </a>
+            </li>
+            <li class="nav-item {{ request()->routeIs('cms.website-header.*') ? 'active' : '' }}">
+                <a href="{{ route('cms.static.index') }}">
+                    <i class="fas fa-link"></i>
+                    <p>Halaman Statis</p>
+                </a>
+            </li>
+            <li class="nav-section">
+                <span class="sidebar-mini-icon">
+                <i class="fa fa-ellipsis-h"></i>
+                </span>
+                <h4 class="text-section">Utilitas</h4>
+            </li>
+            <li class="nav-item {{ request()->routeIs('cms.file.*') ? 'active' : '' }}">
+                <a href="{{ route('cms.file') }}">
+                    <i class="fas fa-folder"></i>
+                    <p>File</p>
+                </a>
+            </li>
+            <li class="nav-item {{ request()->routeIs('cms.visitor-log.*') ? 'active' : '' }}">
+                <a href="{{ route('cms.visitor-log.index') }}">
+                    <i class="fas fa-user"></i>
+                    <p>Visitor Log</p>
                 </a>
             </li>
         </ul>

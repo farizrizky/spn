@@ -10,8 +10,8 @@ Route::prefix('panel')->group(function () {
     Route::post('/login', [\App\Http\Controllers\Cms\Auth\LoginController::class, 'authenticate'])->name('cms.login');
 
     Route::middleware('auth')->group(function () {
-        Route::get('/', [\App\Http\Controllers\Cms\DashboardController::class, 'index'])->name('cms.dashboard');
-        Route::get('/dashboard', [\App\Http\Controllers\Cms\DashboardController::class, 'index'])->name('cms.dashboard.index');
+        Route::get('/', [\App\Http\Controllers\Cms\Dashboard\DashboardController::class, 'index'])->name('cms.dashboard');
+        Route::get('/dashboard', [\App\Http\Controllers\Cms\Dashboard\DashboardController::class, 'index'])->name('cms.dashboard.index');
         Route::get('/logout', [\App\Http\Controllers\Cms\Auth\LogoutController::class, 'logout'])->name('cms.logout');
 
 
@@ -83,6 +83,11 @@ Route::prefix('panel')->group(function () {
         Route::post('/website-header/update/{websiteHeader}', [\App\Http\Controllers\Cms\WebsiteSetting\WebsiteHeaderController::class, 'update'])->name('cms.website-header.update');
         Route::get('/website-header/hapus/{websiteHeader}', [\App\Http\Controllers\Cms\WebsiteSetting\WebsiteHeaderController::class, 'destroy'])->name('cms.website-header.delete');
 
+        Route::get('/static-page', [\App\Http\Controllers\Cms\WebsiteSetting\StaticController::class, 'index'])->name('cms.static.index');
+        Route::get('/static-page/edit/{staticPage}', [\App\Http\Controllers\Cms\WebsiteSetting\StaticController::class, 'edit'])->name('cms.static.edit');
+        Route::post('/static-page/update/{staticPage}', [\App\Http\Controllers\Cms\WebsiteSetting\StaticController::class, 'update'])->name('cms.static.update');
+
+        Route::get('/visitor-log', [\App\Http\Controllers\Cms\Utility\VisitorLog::class, 'index'])->name('cms.visitor-log.index');  
     });
 
 });

@@ -13,32 +13,38 @@ class StaticSeeder extends Seeder
      */
     private $pages = [
         [           
-            'slug' => '/',
+            'page' => 'home',
+            'title' => 'Welcome to SPN Official',
             'meta_description' => '',
             'view_count' => 0,
         ],
         [
-            'slug' => 'profil',
+            'page' => 'profile',
+            'title' => 'Profil PT. Sindo Prima Niaga',
             'meta_description' => '',
             'view_count' => 0,
         ],
         [
-            'slug' => 'award',
+            'page' => 'award',
+            'title' => 'Award',
             'meta_description' => '',
             'view_count' => 0,
         ],
         [
-            'slug' => 'kontak',
+            'page' => 'kontak',
+            'title' => 'Hubungi Kami',
             'meta_description' => '',
             'view_count' => 0,
         ],
         [
-            'slug' => 'consignment-project',
+            'page' => 'consignment-project',
+            'title' => 'Consignment Project',
             'meta_description' => '',
             'view_count' => 0,
         ],
         [
-            'slug' => 'layanan-distribusi',
+            'page' => 'layanan-distribusi',
+            'title' => 'Layanan Distribusi',
             'meta_description' => '',
             'view_count' => 0,
         ],
@@ -46,6 +52,7 @@ class StaticSeeder extends Seeder
     ];
     public function run(): void
     {
+        StaticPage::truncate(); // Clear existing records
         foreach ($this->pages as $page) {
             StaticPage::create($page);
         }

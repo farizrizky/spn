@@ -1,13 +1,12 @@
+
+<title>PT. Sindo Prima Niaga - {{ $title ?? 'Professional, Fast, Save, and Competitive' }}</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="{{ $meta_description ?? 'Distributor resmi Repsol Lubricants. Menyediakan produk pelumas berkualitas dan layanan terbaik.' }}">
 
-<title>PT. Sindo Prima Niaga - {{ $title ?? 'Professional, Fast, Save, and Competitive' }}</title>
-@yield('seo')
-<meta name="description" content="{{ 'PT. Sindo Prima Niaga - Distributor Resmi Repsol. Menyediakan produk pelumas berkualitas dan layanan terbaik.' }}">
 
-<link rel="shortcut icon" href="{{ asset('assets/web/images/logo-rectangle.png') }}">
-
+<link rel="shortcut icon" href="{{ asset('assets/web/images/logo-rectangle.png') }}" alt="PT. Sindo Prima Niaga">
 <link rel="stylesheet" href="{{ asset('assets/web/css/animate.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/web/css/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/web/css/magnific-popup.css') }}">

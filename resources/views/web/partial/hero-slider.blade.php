@@ -1,3 +1,6 @@
+@php
+    $website_cover = DataHelper::getWebsiteCover();
+@endphp
 <style>
     .hero-area {
         position: relative;

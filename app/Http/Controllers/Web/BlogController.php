@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Helpers\DataHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\BlogCategory;
@@ -89,7 +90,7 @@ class BlogController extends Controller
         return view('web.page.blog.list', $data);
     }
 
-    public function detail($slug)
+    public function detail(Request $request,$slug)
     {
         $blog = Blog::with('user', 'blogCategory', 'blogTag')->where(['slug' => $slug, 'status' => 'published']);
         if (!$blog->exists()) {
@@ -97,6 +98,7 @@ class BlogController extends Controller
         }
         $data = [
             'title' => $blog->first()->title,
+            'meta_description' => $blog->first()->meta_description,
             'partial_title' => PartialController::title($blog->first()->title),
             'blog_category' => BlogCategory::select('id', 'name', 'slug')->get(),
             'recent_blog' => Blog::with('user', 'blogCategory', 'blogTag')
@@ -106,7 +108,14 @@ class BlogController extends Controller
                 ->get(),
             'blog' => $blog->first()
         ];
-        
+
+        // Update view count
+     
+        $url = route('web.blog-detail', ['slug' => $slug]);
+        if (!DataHelper::urlVisited($request->ip(), $url)) {
+            $blog->first()->increment('view_count');
+        }
+
         return view('web.page.blog.detail', $data);
     }
 }

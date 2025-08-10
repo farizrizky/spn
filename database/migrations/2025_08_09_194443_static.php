@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('static', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->string('page');
             $table->string('title');
-            $table->string('slug')->unique();
             $table->text('meta_description')->nullable();
             $table->integer('view_count')->default(0);
             $table->timestamps();

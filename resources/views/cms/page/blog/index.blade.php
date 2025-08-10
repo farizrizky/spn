@@ -15,13 +15,14 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="basic-datatables" class="table table-bordered table-striped" width="100%">
+                        <table id="basic-datatable" class="table table-bordered table-striped" width="100%">
                             <thead> 
                                 <tr class="table-primary">
                                     <th>Tanggal</th>
                                     <th>Judul</th>
                                     <th>Kategori</th>
                                     <th>Status</th>
+                                    <th>Jumlah Dilihat</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -32,6 +33,7 @@
                                     <td>{{ $b->title }}</td>
                                     <td>{{ $b->blogCategory?->name }}</td>
                                     <td>{{ $b->status == 'published' ? 'Published' : 'Draft' }}</td>
+                                    <td>{{ $b->view_count }}</td>
                                     <td>
                                         <a class="btn btn-success btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Ubah" href="{{ route('cms.blog.edit', $b->id) }}"><span class="icon-pencil"></span></a>
                                         <a class="btn btn-danger btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus" onclick="confirmAlert('{{ route('cms.blog.delete', $b->id) }}', 'Anda yakin akan menghapus blog ini?')"><span class="icon-trash"></span></a>
@@ -46,4 +48,13 @@
         </div>
     </div>
 </div>
+@endsection
+@section('script')
+<script>
+    $(document).ready(function() {
+        $('#basic-datatable').DataTable({
+            "order": [[ 0, "desc" ]]
+        });
+    });
+</script>
 @endsection

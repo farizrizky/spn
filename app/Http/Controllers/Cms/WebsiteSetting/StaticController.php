@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Cms\Static;
+namespace App\Http\Controllers\Cms\WebsiteSetting;
 
 use App\Helpers\NotifyHelper;
 use App\Http\Controllers\Controller;
@@ -14,7 +14,10 @@ class StaticController extends Controller
      */
     public function index()
     {
-        return view('cms.static.index');
+        $data = [
+            'static' => StaticPage::all()
+        ];
+        return view('cms.page.static.index', $data);
     }
 
     /**
@@ -55,7 +58,7 @@ class StaticController extends Controller
             'static'=> $staticPage
         ];
 
-        return view('cms.static.update', $data);
+        return view('cms.page.static.update', $data);
     }
 
     /**
@@ -63,9 +66,12 @@ class StaticController extends Controller
      */
     public function update(Request $request, StaticPage $staticPage)
     {
-        $data = $request->validate([
+        $request->validate([
+            'title' => 'required|string|max:255',
             'meta_description' => 'nullable|string|max:255'
         ]);
+
+        $data = $request->only(['title', 'meta_description']);
 
         $staticPage->update($data);
 

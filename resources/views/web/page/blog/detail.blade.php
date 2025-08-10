@@ -1,7 +1,4 @@
 @extends('web.template.web')
-@section('seo')
-    <meta name="description" content="{{ $blog->meta_description }}">
-@endsection
 @section('content')
     {!! $partial_title !!}
     <section class="blog-details pt-120 pb-120">

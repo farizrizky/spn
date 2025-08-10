@@ -37,7 +37,5 @@ class PartialController extends Controller
 
         return view('web.partial.recent-blog', $data);
     }
-
-
     
 }

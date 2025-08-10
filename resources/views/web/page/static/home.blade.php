@@ -2,7 +2,7 @@
 
 @section('content')
 <!-- hero area starts -->
-{!! $partial_hero !!}
+    @include('web.partial.hero-slider')
 <!-- about area starts -->
 
     @include('web.partial.about')

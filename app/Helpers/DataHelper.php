@@ -33,4 +33,24 @@ Class DataHelper{
        $phone = preg_replace('/[^0-9]/', '', $phone->value);
        return "https://wa.me/{$phone}";
     }
-}
+
+    public static function getWebsiteCover()
+    {
+        return \App\Models\WebsiteCover::where('is_active', true)->get();
+    }
+
+    public static function urlVisited($ipAddress, $url)
+    {
+        $today = now()->format('Y-m-d');
+        $visited = \App\Models\Visitor::where('ip_address', $ipAddress)
+            ->whereDate('created_at', $today)
+            ->where('url', $url)
+            ->count();
+
+        if($visited > 1) {
+            return true;
+        }
+
+        return false;
+    }
+}   

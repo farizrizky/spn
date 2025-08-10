@@ -15,6 +15,14 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('ip_address')->nullable();
             $table->text('url')->nullable();
+            $table->text('user_agent')->nullable();
+            $table->string('referer')->nullable();
+            $table->string('method')->nullable();
+            $table->string('country')->nullable();
+            $table->string('region')->nullable();
+            $table->string('city')->nullable();
+            $table->decimal('latitude', 10, 7)->nullable();
+            $table->decimal('longitude', 10, 7)->nullable();
             $table->timestamps();
         });
     }

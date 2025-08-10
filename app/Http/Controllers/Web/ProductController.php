@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Helpers\DataHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Type;
@@ -89,7 +90,7 @@ class ProductController extends Controller
         return view('web.page.product.list', $data);
     }
 
-    public function detail($slug)
+    public function detail(Request $request,$slug)
     {
         $product = Product::where(['slug' => $slug, 'status' => 'published']);
         if (!$product->exists()) {
@@ -97,10 +98,16 @@ class ProductController extends Controller
         }
         $data = [
             'title' => 'Produk '.$product->first()->name,
+            'meta_description' => $product->first()->meta_description,
             'partial_title' => PartialController::title($product->first()->name),
             'product' => $product->first()
         ];
-        
+
+        $url = route('web.product-detail', ['slug' => $slug]);
+        if (!DataHelper::urlVisited($request->ip(), $url)) {
+            $product->first()->increment('view_count');
+        }
+
         return view('web.page.product.detail', $data);
     }
 }

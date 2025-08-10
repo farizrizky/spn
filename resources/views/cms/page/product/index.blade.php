@@ -15,13 +15,14 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="basic-datatables" class="table table-bordered table-striped" width="100%">
+                        <table id="basic-datatable" class="table table-bordered table-striped" width="100%">
                             <thead> 
                                 <tr class="table-primary">
                                     <th>Terakhir Diperbarui</th>
                                     <th>Nama Produk</th>
                                     <th>Kategori</th>
                                     <th>Status</th>
+                                    <th>Jumlah Dilihat</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -38,6 +39,7 @@
                                         @endif
                                     </td>
                                     <td>{{ $p->status == 'published' ? 'Published' : 'Draft' }}</td>
+                                    <td>{{ $p->view_count }}</td>
                                     <td>
                                         <a class="btn btn-success btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Ubah" href="{{ route('cms.product.edit', $p->id) }}"><span class="icon-pencil"></span></a>
                                         <a class="btn btn-danger btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus" onclick="confirmAlert('{{ route('cms.product.delete', $p->id) }}', 'Anda yakin akan menghapus produk ini?')"><span class="icon-trash"></span></a>
@@ -53,3 +55,14 @@
     </div>
 </div>
 @endsection
+
+@section('script')
+<script>
+    $(document).ready(function() {
+        $('#basic-datatable').DataTable({
+            "order": [[ 0, "desc" ]]
+        });
+    });
+</script>
+@endsection
+
