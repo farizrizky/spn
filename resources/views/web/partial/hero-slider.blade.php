@@ -151,8 +151,6 @@
     
     $(document).ready(function() {
         // Initialize the hero area with a parallax effect
-       $('.slick-arrow').remove();
-       $('.slick-dots').remove();
     });
 </script>
 @endsection

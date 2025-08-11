@@ -203,7 +203,7 @@
             autoplay: true,
             autoplaySpeed: 3000,
             infinite: true,
-            dots: true,
+            dots: false,
             arrows: false,
         });
 
