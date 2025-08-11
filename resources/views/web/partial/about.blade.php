@@ -12,7 +12,7 @@
                             <h3>+</h3>
                            
                         </div>
-                        <p class="text-center">Drum Terjual<br> ke 5 perusahaan</p>
+                        <p class="text-center">Drum Terjual<br> ke berbagai perusahaan</p>
                     </div>
                     <div class="col-6 d-flex flex-column align-items-center counter-item border-start">
                         <div class="counter-number d-flex">
