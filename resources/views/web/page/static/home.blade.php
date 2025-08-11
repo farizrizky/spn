@@ -7,6 +7,8 @@
 
     @include('web.partial.about')
 
+    {{-- @include('web.partial.summary') --}}
+
     @include('web.partial.type')
 
     @include('web.partial.service2')

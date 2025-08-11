@@ -3,7 +3,23 @@
         <div class="row gx-xl-5 align-items-center">
             <div class="col-lg-6 wow fadeInLeft" data-wow-delay=".2s">
                 <div class="about-images">
-                    <img src="{{ asset('assets/web/images/he4.jpg') }}" alt="about" style="border-radius: 10px;">
+                    <img src="{{ asset('assets/web/images/he4.jpg') }}" alt="about" style="border-radius: 10px;max-height: 600px; object-fit: cover;">
+                </div>
+                 <div class="row mt-4 pt-2 pb-4">
+                    <div class="col-6 d-flex flex-column align-items-center counter-item">
+                        <div class="counter-number d-flex">
+                            <h3 class="counter">2.000</h3>
+                            <h3>+</h3>
+                           
+                        </div>
+                        <p class="text-center">Drum Terjual<br> ke 5 perusahaan</p>
+                    </div>
+                    <div class="col-6 d-flex flex-column align-items-center counter-item border-start">
+                        <div class="counter-number d-flex">
+                            <h3 class="counter">3</h3>
+                        </div>
+                        <p class="text-center">Lokasi Distribusi <br>(Bengkulu, Jambi, Batam)</p>
+                    </div>
                 </div>
             </div>
 
