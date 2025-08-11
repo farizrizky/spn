@@ -69,6 +69,13 @@ Route::prefix('panel')->group(function () {
         Route::post('/client/update/{client}', [\App\Http\Controllers\Cms\Client\ClientController::class, 'update'])->name('cms.client.update');
         Route::get('/client/hapus/{client}', [\App\Http\Controllers\Cms\Client\ClientController::class, 'destroy'])->name('cms.client.delete');
 
+        Route::get('/testimonial', [\App\Http\Controllers\Cms\Client\TestimonialController::class, 'index'])->name('cms.testimonial.index');
+        Route::get('/testimonial/input', [\App\Http\Controllers\Cms\Client\TestimonialController::class, 'create'])->name('cms.testimonial.create');
+        Route::post('/testimonial/tambah', [\App\Http\Controllers\Cms\Client\TestimonialController::class, 'store'])->name('cms.testimonial.store');
+        Route::get('/testimonial/edit/{testimonial}', [\App\Http\Controllers\Cms\Client\TestimonialController::class, 'edit'])->name('cms.testimonial.edit');
+        Route::post('/testimonial/update/{testimonial}', [\App\Http\Controllers\Cms\Client\TestimonialController::class, 'update'])->name('cms.testimonial.update');
+        Route::get('/testimonial/hapus/{testimonial}', [\App\Http\Controllers\Cms\Client\TestimonialController::class, 'destroy'])->name('cms.testimonial.delete');
+
         Route::post('file/ajax/load', [\App\Http\Controllers\Cms\Utility\FileManager::class, 'loadFiles'])->name('cms.file.load');
         Route::get('/file/{type?}', [\App\Http\Controllers\Cms\Utility\FileManager::class, 'index'])->name('cms.file');
         Route::get('/file/hapus/{file}', [\App\Http\Controllers\Cms\Utility\FileManager::class, 'destroy'])->name('cms.file.delete');

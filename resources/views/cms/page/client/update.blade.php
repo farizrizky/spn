@@ -63,7 +63,7 @@
     </div>
 </div>
 @include('cms.page.files.custom-url')
-@include('cms.page.files.upload-file', ['multiple' => true, 'allow' => 'image/*'])
+@include('cms.page.files.upload-file', ['multiple' => false, 'allow' => 'image/*'])
 @endsection
 
 @section('script')

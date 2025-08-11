@@ -105,12 +105,12 @@
                     <p>Client</p>
                 </a>
             </li>
-            {{-- <li class="nav-item {{ request()->routeIs('cms.testimonial.*') ? 'active' : '' }}">
+            <li class="nav-item {{ request()->routeIs('cms.testimonial.*') ? 'active' : '' }}">
                 <a href="{{ route('cms.testimonial.index') }}">
                     <i class="fas fa-comment-dots"></i>
                     <p>Testimonial</p>
                 </a>
-            </li> --}}
+            </li>
             <li class="nav-section">
                 <span class="sidebar-mini-icon">
                 <i class="fa fa-ellipsis-h"></i>
