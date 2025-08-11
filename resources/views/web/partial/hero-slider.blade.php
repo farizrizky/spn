@@ -36,25 +36,25 @@
                     @if($wc->title_position == 'left')
                     <div class="hero-content">
                         <div class="section-top">
-                            <span class="sub-title wow fadeIn" style="color: {{ $wc->subtitle_color }}" data-wow-duration="1s">{{ $wc->subtitle }}</span>
+                            <span class="sub-title wows fadeIn" style="color: {{ $wc->subtitle_color }}" data-wows-duration="1s">{{ $wc->subtitle }}</span>
                             @if($wc->title_size == 'large')
-                                <h1 class="title mt-20 wow fadeIn" data-wow-duration="1s" style="color: {{ $wc->title_color }}">
+                                <h1 class="title mt-20 wows fadeIn" data-wows-duration="1s" style="color: {{ $wc->title_color }}">
                                     {{ $wc->title }}
                                 </h1>
                             @elseif($wc->title_size == 'medium')
-                                <h2 class="title mt-20 wow fadeIn" data-wow-duration="1s" style="color: {{ $wc->title_color }}">
+                                <h2 class="title mt-20 wows fadeIn" data-wows-duration="1s" style="color: {{ $wc->title_color }}">
                                     {{ $wc->title }}
                                 </h2>
                             @elseif($wc->title_size == 'small')
-                                <h3 class="title mt-20 wow fadeIn" data-wow-duration="1s" style="color: {{ $wc->title_color }}">
+                                <h3 class="title mt-20 wows fadeIn" data-wows-duration="1s" style="color: {{ $wc->title_color }}">
                                     {{ $wc->title }}
                                 </h3>
                             @endif
-                            <p class="description wow fadeIn" data-wow-duration="1s" style="color: {{ $wc->paragraph_color }}">{{ $wc->paragraph }}</p>
+                            <p class="description wows fadeIn" data-wows-duration="1s" style="color: {{ $wc->paragraph_color }}">{{ $wc->paragraph }}</p>
                         </div>
 
                         @if($wc->button_type != 'none')
-                            <div class="button-group mt-30 wow fadeInUp" data-wow-duration="1s">
+                            <div class="button-group mt-30 wows fadeInUp" data-wows-duration="1s">
                                 @if($wc->button_type == 'border')
                                     <a href="{{ $wc->button_url }}" class="primary-btn secondary-bg"><span class="text">{{ $wc->button_text }}</span> <span class="icon"><i class="ri-arrow-right-double-line"></i></span></a>
                                 @elseif($wc->button_type == 'filled')
@@ -108,25 +108,25 @@
                     @else
                     <div class="hero-content">
                         <div class="section-top">
-                            <span class="sub-title wow fadeIn" style="color: {{ $wc->subtitle_color }}" data-wow-duration="1s">{{ $wc->subtitle }}</span>
+                            <span class="sub-title wows fadeIn" style="color: {{ $wc->subtitle_color }}" data-wows-duration="1s">{{ $wc->subtitle }}</span>
                             @if($wc->title_size == 'large')
-                                <h1 class="title mt-20 wow fadeIn" data-wow-duration="1s" style="color: {{ $wc->title_color }}">
+                                <h1 class="title mt-20 wows fadeIn" data-wows-duration="1s" style="color: {{ $wc->title_color }}">
                                     {{ $wc->title }}
                                 </h1>
                             @elseif($wc->title_size == 'medium')
-                                <h2 class="title mt-20 wow fadeIn" data-wow-duration="1s" style="color: {{ $wc->title_color }}">
+                                <h2 class="title mt-20 wows fadeIn" data-wows-duration="1s" style="color: {{ $wc->title_color }}">
                                     {{ $wc->title }}
                                 </h2>
                             @elseif($wc->title_size == 'small')
-                                <h3 class="title mt-20 wow fadeIn" data-wow-duration="1s" style="color: {{ $wc->title_color }}">
+                                <h3 class="title mt-20 wows fadeIn" data-wows-duration="1s" style="color: {{ $wc->title_color }}">
                                     {{ $wc->title }}
                                 </h3>
                             @endif
-                            <p class="description wow fadeIn" data-wow-duration="1s" style="color: {{ $wc->paragraph_color }}">{{ $wc->paragraph }}</p>
+                            <p class="description wows fadeIn" data-wows-duration="1s" style="color: {{ $wc->paragraph_color }}">{{ $wc->paragraph }}</p>
                         </div>
 
                         @if($wc->button_type != 'none')
-                            <div class="button-group mt-30 wow fadeInUp" data-wow-duration="1s">
+                            <div class="button-group mt-30 wows fadeInUp" data-wows-duration="1s">
                                 @if($wc->button_type == 'border')
                                     <a href="{{ $wc->button_url }}" class="primary-btn secondary-bg"><span class="text">{{ $wc->button_text }}</span> <span class="icon"><i class="ri-arrow-right-double-line"></i></span></a>
                                 @elseif($wc->button_type == 'filled')

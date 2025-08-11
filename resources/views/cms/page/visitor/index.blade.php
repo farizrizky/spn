@@ -23,11 +23,6 @@
                                         <th>Referer</th>
                                         <th>Method</th>
                                         <th>Url</th>
-                                        <th>Negara</th>
-                                        <th>Wilayah</th>
-                                        <th>Kota</th>
-                                        <th>Latitude</th>
-                                        <th>Longitude</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -40,11 +35,6 @@
                                         <td>{{ $v->referer }}</td>
                                         <td>{{ $v->method }}</td>
                                         <td>{{ $v->url }}</td>
-                                        <td>{{ $v->country }}</td>
-                                        <td>{{ $v->region }}</td>
-                                        <td>{{ $v->city }}</td>
-                                        <td>{{ $v->latitude }}</td>
-                                        <td>{{ $v->longitude }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>

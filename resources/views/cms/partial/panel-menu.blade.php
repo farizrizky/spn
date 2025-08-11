@@ -97,6 +97,24 @@
                 <span class="sidebar-mini-icon">
                 <i class="fa fa-ellipsis-h"></i>
                 </span>
+                <h4 class="text-section">Client & Testimonial</h4>
+            </li>
+            <li class="nav-item {{ request()->routeIs('cms.client.*') ? 'active' : '' }}">
+                <a href="{{ route('cms.client.index') }}">
+                    <i class="fas fa-user"></i>
+                    <p>Client</p>
+                </a>
+            </li>
+            {{-- <li class="nav-item {{ request()->routeIs('cms.testimonial.*') ? 'active' : '' }}">
+                <a href="{{ route('cms.testimonial.index') }}">
+                    <i class="fas fa-comment-dots"></i>
+                    <p>Testimonial</p>
+                </a>
+            </li> --}}
+            <li class="nav-section">
+                <span class="sidebar-mini-icon">
+                <i class="fa fa-ellipsis-h"></i>
+                </span>
                 <h4 class="text-section">Pengaturan Website</h4>
             </li>
             <li class="nav-item {{ request()->routeIs('cms.website-cover.*') ? 'active' : '' }}">

@@ -213,12 +213,20 @@
 
         $('.hero-slider').on('beforeChange', function (event, slick, index) {
             // Trigger WOW animations on slide change
-            const wow = new WOW();
-            wow.sync(); // Sync WOW to ensure animations are ready
-            
+            const wows = new WOW(
+                {
+                    boxClass: 'wows',
+                    animateClass: 'animated',
+                    offset: 0,
+                    mobile: true,
+                    live: true
+                }
+            );
+            wows.sync(); // Sync WOW to ensure animations are ready
+
             // Reset animations for the current slide
             slick.$slides.removeClass('animated');
-            slick.$slides.find('.wow').each(function () {
+            slick.$slides.find('.wows').each(function () {
                 const el = $(this);
                 el.removeClass('animated');        // Remove previous animation
                 el.css('visibility', 'hidden');    // Hide it first
@@ -235,8 +243,16 @@
             });
 
             // Reinitialize WOW for the current slide
-            const wow = new WOW();
-            wow.init();
+            const wows = new WOW(
+                {
+                    boxClass: 'wows',
+                    animateClass: 'animated',
+                    offset: 0,
+                    mobile: true,
+                    live: true
+                }
+            );
+            wows.init();
         });
         
 

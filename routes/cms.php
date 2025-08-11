@@ -62,6 +62,13 @@ Route::prefix('panel')->group(function () {
         Route::post('/data-kontak/update/{contactData}', [\App\Http\Controllers\Cms\Contact\ContactDataController::class, 'update'])->name('cms.contact-data.update');
         Route::get('/data-kontak/hapus/{contactData}', [\App\Http\Controllers\Cms\Contact\ContactDataController::class, 'destroy'])->name('cms.contact-data.delete');
         
+        Route::get('/client', [\App\Http\Controllers\Cms\Client\ClientController::class, 'index'])->name('cms.client.index');
+        Route::get('/client/input', [\App\Http\Controllers\Cms\Client\ClientController::class, 'create'])->name('cms.client.create');
+        Route::post('/client/tambah', [\App\Http\Controllers\Cms\Client\ClientController::class, 'store'])->name('cms.client.store');
+        Route::get('/client/edit/{client}', [\App\Http\Controllers\Cms\Client\ClientController::class, 'edit'])->name('cms.client.edit');
+        Route::post('/client/update/{client}', [\App\Http\Controllers\Cms\Client\ClientController::class, 'update'])->name('cms.client.update');
+        Route::get('/client/hapus/{client}', [\App\Http\Controllers\Cms\Client\ClientController::class, 'destroy'])->name('cms.client.delete');
+
         Route::post('file/ajax/load', [\App\Http\Controllers\Cms\Utility\FileManager::class, 'loadFiles'])->name('cms.file.load');
         Route::get('/file/{type?}', [\App\Http\Controllers\Cms\Utility\FileManager::class, 'index'])->name('cms.file');
         Route::get('/file/hapus/{file}', [\App\Http\Controllers\Cms\Utility\FileManager::class, 'destroy'])->name('cms.file.delete');
@@ -82,7 +89,7 @@ Route::prefix('panel')->group(function () {
         Route::get('/website-header/edit/{websiteHeader}', [\App\Http\Controllers\Cms\WebsiteSetting\WebsiteHeaderController::class, 'edit'])->name('cms.website-header.edit');
         Route::post('/website-header/update/{websiteHeader}', [\App\Http\Controllers\Cms\WebsiteSetting\WebsiteHeaderController::class, 'update'])->name('cms.website-header.update');
         Route::get('/website-header/hapus/{websiteHeader}', [\App\Http\Controllers\Cms\WebsiteSetting\WebsiteHeaderController::class, 'destroy'])->name('cms.website-header.delete');
-
+        
         Route::get('/static-page', [\App\Http\Controllers\Cms\WebsiteSetting\StaticController::class, 'index'])->name('cms.static.index');
         Route::get('/static-page/edit/{staticPage}', [\App\Http\Controllers\Cms\WebsiteSetting\StaticController::class, 'edit'])->name('cms.static.edit');
         Route::post('/static-page/update/{staticPage}', [\App\Http\Controllers\Cms\WebsiteSetting\StaticController::class, 'update'])->name('cms.static.update');
