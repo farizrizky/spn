@@ -37,5 +37,12 @@ class PartialController extends Controller
 
         return view('web.partial.recent-blog', $data);
     }
+
+    public function client(){
+        $data = [
+            'client' => Client::where('is_active', true)->get(),
+        ];
+        return view('web.partial.client', $data);
+    }
     
 }

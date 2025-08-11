@@ -11,7 +11,9 @@
 
     @include('web.partial.service2')
 
-    @include('web.partial.business-partner')
+    @include('web.partial.client')
+
+    
 
     <section class="testimonial-area py-120">
         <div class="container">

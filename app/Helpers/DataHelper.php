@@ -39,6 +39,10 @@ Class DataHelper{
         return \App\Models\WebsiteCover::where('is_active', true)->get();
     }
 
+    public static function getClient(){
+        return \App\Models\Client::where('is_active', true)->get();
+    }
+
     public static function urlVisited($ipAddress, $url)
     {
         $today = now()->format('Y-m-d');
