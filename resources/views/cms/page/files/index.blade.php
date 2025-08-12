@@ -16,7 +16,7 @@
             </select>
         </div>
         <div class="ms-md-auto py-2 py-md-0">
-            <a data-allow="*" id="openFileUpload" class="btn btn-primary"><i class="fas fa-plus"></i> Upload File</a>
+            <a data-allow="*" class="btn btn-primary openFileUpload"><i class="fas fa-plus"></i> Upload File</a>
         </div>
     </div>
     <div class="row">
@@ -24,7 +24,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="basic-datatables" class="table table-bordered table-striped" width="100%">
+                        <table id="basic-datatable" class="table table-bordered table-striped" width="100%">
                             <thead> 
                                 <tr class="table-primary">
                                     <th>Tanggal Upload</th>
@@ -90,6 +90,12 @@
 
 @section('script')
 <script>
+
+    $(document).ready(function() {
+        $('#basic-datatable').DataTable({
+            "order": [[ 0, "desc" ]]
+        });
+    });
     
     window.addEventListener('fileUploadClosed', function () {
         location.reload();
@@ -105,3 +111,4 @@
     }
 
 </script>
+@endsection
