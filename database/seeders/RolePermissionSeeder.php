@@ -12,7 +12,7 @@ class RolePermissionSeeder extends Seeder
      */
     private $permissions = [
         'Blog.Lihat Blog',
-        'Blog.Lihat Blog Sendiri',
+        'Blog.Kelola Blog',
         'Kategori Blog.Lihat Kategori Blog',
         'Kategori Blog.Kelola Kategori Blog',
         'Tag.Lihat Tag',
@@ -48,20 +48,6 @@ class RolePermissionSeeder extends Seeder
 
     private $roles = [
         'Administrator',
-        'Editor',
-    ];
-
-    private $rolePermissions = [
-        'Editor'=> [
-            'Blog.Lihat Blog',
-            'Blog.Kelola Blog',
-            'Blog Kategori.Lihat Blog Kategori',
-            'Blog Kategori.Kelola Blog Kategori',
-            'Tag.Lihat Tag',
-            'Tag.Kelola Tag',
-            'File.Lihat File',
-            'File.Kelola File'
-        ]
     ];
 
     public function run(): void
@@ -72,13 +58,6 @@ class RolePermissionSeeder extends Seeder
 
         foreach ($this->roles as $role) {
             \Spatie\Permission\Models\Role::create(['name' => $role]);
-        }
-
-        foreach ($this->rolePermissions as $role => $permissions) {
-            $roleModel = \Spatie\Permission\Models\Role::findByName($role);
-            foreach ($permissions as $permission) {
-                $roleModel->givePermissionTo($permission);
-            }
         }
     }
 }
