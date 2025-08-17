@@ -101,7 +101,34 @@ Route::prefix('panel')->group(function () {
         Route::get('/static-page/edit/{staticPage}', [\App\Http\Controllers\Cms\WebsiteSetting\StaticController::class, 'edit'])->name('cms.static.edit');
         Route::post('/static-page/update/{staticPage}', [\App\Http\Controllers\Cms\WebsiteSetting\StaticController::class, 'update'])->name('cms.static.update');
 
+        Route::get('/user', [\App\Http\Controllers\Cms\Auth\UserController::class, 'index'])->name('cms.user.index');
+        Route::get('/user/input', [\App\Http\Controllers\Cms\Auth\UserController::class, 'create'])->name('cms.user.create');
+        Route::post('/user/tambah', [\App\Http\Controllers\Cms\Auth\UserController::class, 'store'])->name('cms.user.store');
+        Route::get('/user/edit/{user}', [\App\Http\Controllers\Cms\Auth\UserController::class, 'edit'])->name('cms.user.edit');
+        Route::post('/user/update/{user}', [\App\Http\Controllers\Cms\Auth\UserController::class, 'update'])->name('cms.user.update');
+        Route::get('/user/hapus/{user}', [\App\Http\Controllers\Cms\Auth\UserController::class, 'destroy'])->name('cms.user.delete');
+        Route::get('/user/profil/{user}', [\App\Http\Controllers\Cms\Auth\UserController::class, 'profile'])->name('cms.user.profile');
+        Route::post('/user/profil/update/{user}', [\App\Http\Controllers\Cms\Auth\UserController::class, 'updateProfile'])->name('cms.user.profile.update');
+        Route::get('/user/ubah-password/{user}', [\App\Http\Controllers\Cms\Auth\UserController::class, 'changePassword'])->name('cms.user.password');
+        Route::post('/user/ubah-password/{user}', [\App\Http\Controllers\Cms\Auth\UserController::class, 'updatePassword'])->name('cms.user.password.update');
+        Route::get('/user/reset-password/{user}', [\App\Http\Controllers\Cms\Auth\UserController::class, 'resetPassword'])->name('cms.user.reset-password');
+
+        Route::get('/role', [\App\Http\Controllers\Cms\Auth\RoleController::class, 'index'])->name('cms.role.index');
+        Route::get('/role/input', [\App\Http\Controllers\Cms\Auth\RoleController::class, 'create'])->name('cms.role.create');
+        Route::post('/role/tambah', [\App\Http\Controllers\Cms\Auth\RoleController::class, 'store'])->name('cms.role.store');
+        Route::get('/role/edit/{role}', [\App\Http\Controllers\Cms\Auth\RoleController::class, 'edit'])->name('cms.role.edit');
+        Route::post('/role/update/{role}', [\App\Http\Controllers\Cms\Auth\RoleController::class, 'update'])->name('cms.role.update');
+        Route::get('/role/hapus/{role}', [\App\Http\Controllers\Cms\Auth\RoleController::class, 'destroy'])->name('cms.role.delete');
+
+        Route::get('/permission', [\App\Http\Controllers\Cms\Auth\PermissionController::class, 'index'])->name('cms.permission.index');
+        Route::get('/permission/input', [\App\Http\Controllers\Cms\Auth\PermissionController::class, 'create'])->name('cms.permission.create');
+        Route::post('/permission/tambah', [\App\Http\Controllers\Cms\Auth\PermissionController::class, 'store'])->name('cms.permission.store');
+        Route::get('/permission/edit/{permission}', [\App\Http\Controllers\Cms\Auth\PermissionController::class, 'edit'])->name('cms.permission.edit');
+        Route::post('/permission/update/{permission}', [\App\Http\Controllers\Cms\Auth\PermissionController::class, 'update'])->name('cms.permission.update');
+        Route::get('/permission/hapus/{permission}', [\App\Http\Controllers\Cms\Auth\PermissionController::class, 'destroy'])->name('cms.permission.delete');
+
         Route::get('/visitor-log', [\App\Http\Controllers\Cms\Utility\VisitorLog::class, 'index'])->name('cms.visitor-log.index');  
+        
     });
 
 });

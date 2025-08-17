@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Cms\Utility;
 use App\Http\Controllers\Controller;
 use App\Models\Visitor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class VisitorLog extends Controller
 {
@@ -13,6 +14,7 @@ class VisitorLog extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny', Visitor::class);
         $data = [
             'visitor' => Visitor::all()
         ];

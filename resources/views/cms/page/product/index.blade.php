@@ -7,7 +7,9 @@
             <h3 class="fw-bold mb-3">Produk</h3>
         </div>
         <div class="ms-md-auto py-2 py-md-0">
+            @can('Produk.Kelola Produk')
             <a href="{{ route('cms.product.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Buat Produk</a>
+            @endcan
         </div>
     </div>
     <div class="row">
@@ -23,7 +25,9 @@
                                     <th>Kategori</th>
                                     <th>Status</th>
                                     <th>Jumlah Dilihat</th>
+                                    @can('Produk.Kelola Produk')
                                     <th>Aksi</th>
+                                    @endcan
                                 </tr>
                             </thead>
                             <tbody>
@@ -40,10 +44,12 @@
                                     </td>
                                     <td>{{ $p->status == 'published' ? 'Published' : 'Draft' }}</td>
                                     <td>{{ $p->view_count }}</td>
+                                    @can('Produk.Kelola Produk')
                                     <td>
                                         <a class="btn btn-success btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Ubah" href="{{ route('cms.product.edit', $p->id) }}"><span class="icon-pencil"></span></a>
                                         <a class="btn btn-danger btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus" onclick="confirmAlert('{{ route('cms.product.delete', $p->id) }}', 'Anda yakin akan menghapus produk ini?')"><span class="icon-trash"></span></a>
                                     </td>
+                                    @endcan
                                 </tr>
                                 @endforeach
                             </tbody>

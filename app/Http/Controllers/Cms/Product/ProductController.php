@@ -10,6 +10,7 @@ use App\Models\ProductImage;
 use App\Models\ProductType;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
@@ -19,6 +20,7 @@ class ProductController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny', Product::class);
         $data = [
             'product' => Product::with('productType')->get(),
         ];
@@ -30,6 +32,7 @@ class ProductController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', Product::class);
         $data = [
             'type' => Type::select('id', 'name')->where('is_active', '1')->get(),
         ];
@@ -41,6 +44,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Product::class);
         $request->validate([
             'name' => 'required|string|max:150',
             'slug' => 'required|string|max:150|unique:product,slug',
@@ -107,6 +111,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        Gate::authorize('update', $product);
         if (!$product) {
             $notify = NotifyHelper::notFound();
             return redirect()->route('cms.product.index')->with('notify', $notify);
@@ -124,6 +129,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        Gate::authorize('update', $product);
         if (!$product) {
             $notify = NotifyHelper::notFound();
             return redirect()->route('cms.product.index')->with('notify', $notify);
@@ -194,6 +200,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        Gate::authorize('delete', $product);
         if (!$product) {
             $notify = NotifyHelper::notFound();
             return redirect()->route('cms.product.index')->with('notify', $notify);

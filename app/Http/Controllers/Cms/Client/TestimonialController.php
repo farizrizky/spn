@@ -6,6 +6,7 @@ use App\Helpers\NotifyHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class TestimonialController extends Controller
 {
@@ -14,6 +15,7 @@ class TestimonialController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny', Testimonial::class);
         $data = [
             'testimonial' => Testimonial::all()
         ];
@@ -25,6 +27,7 @@ class TestimonialController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', Testimonial::class);
         return view('cms.page.testimonial.create');
     }
 
@@ -33,6 +36,7 @@ class TestimonialController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Testimonial::class);
         $request->validate([
             'name' => 'required|string|max:255',
             'job' => 'required|string|max:255',
@@ -63,6 +67,7 @@ class TestimonialController extends Controller
      */
     public function edit(Testimonial $testimonial)
     {
+        Gate::authorize('update', $testimonial);
         if(!$testimonial) {
             $notify = NotifyHelper::notFound();
             return redirect()->route('cms.testimonial.index')->with('notify', $notify);
@@ -80,6 +85,7 @@ class TestimonialController extends Controller
      */
     public function update(Request $request, Testimonial $testimonial)
     {
+        Gate::authorize('update', $testimonial);
         if(!$testimonial) {
             $notify = NotifyHelper::notFound();
             return redirect()->route('cms.testimonial.index')->with('notify', $notify);
@@ -107,6 +113,7 @@ class TestimonialController extends Controller
      */
     public function destroy(Testimonial $testimonial)
     {
+        Gate::authorize('delete', $testimonial);
         if(!$testimonial) {
             $notify = NotifyHelper::notFound();
             return redirect()->route('cms.testimonial.index')->with('notify', $notify);

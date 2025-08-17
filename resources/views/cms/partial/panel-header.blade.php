@@ -30,6 +30,19 @@
                 <ul class="dropdown-menu dropdown-user animated fadeIn">
                     <div class="dropdown-user-scroll scrollbar-outer">
                         <li>
+                            <a class="dropdown-item py-2" href="{{ route('cms.user.profile', Auth::user()->id) }}">
+                                <i class="fas fa-user"></i>
+                                Ubah Profil
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item py-2" href="{{ route('cms.user.password', Auth::user()->id) }}">
+                                <i class="fas fa-lock"></i>
+                                Ubah Password
+                            </a>
+                        </li>
+                        <hr>
+                        <li>
                             <a class="dropdown-item" href="{{ route('cms.logout') }}">
                                 <i class="fas fa-power-off"></i>
                                 Logout

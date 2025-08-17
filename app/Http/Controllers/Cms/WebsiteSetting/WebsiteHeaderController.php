@@ -6,6 +6,7 @@ use App\Helpers\NotifyHelper;
 use App\Http\Controllers\Controller;
 use App\Models\WebsiteHeader;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class WebsiteHeaderController extends Controller
 {
@@ -14,6 +15,7 @@ class WebsiteHeaderController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny', WebsiteHeader::class);
         $data = [
             'website_header' => WebsiteHeader::get(),
         ];
@@ -25,6 +27,7 @@ class WebsiteHeaderController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', WebsiteHeader::class);
         return view('cms.page.website-header.create');
     }
 
@@ -33,6 +36,7 @@ class WebsiteHeaderController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', WebsiteHeader::class);
         $request->validate([
             'name' => 'required|string|max:255',
             'text_color' => 'nullable|string|max:7',
@@ -73,6 +77,7 @@ class WebsiteHeaderController extends Controller
      */
     public function edit(WebsiteHeader $websiteHeader)
     {
+        Gate::authorize('update', $websiteHeader);
         if (!$websiteHeader) {
             $notify = NotifyHelper::notFound();
             return redirect()->route('cms.website-header.index')->with('notify', $notify);
@@ -89,6 +94,7 @@ class WebsiteHeaderController extends Controller
      */
     public function update(Request $request, WebsiteHeader $websiteHeader)
     {
+        Gate::authorize('update', $websiteHeader);
         if (!$websiteHeader) {
             $notify = NotifyHelper::notFound();
             return redirect()->route('cms.website-header.index')->with('notify', $notify);
@@ -127,6 +133,7 @@ class WebsiteHeaderController extends Controller
      */
     public function destroy(WebsiteHeader $websiteHeader)
     {
+        Gate::authorize('delete', $websiteHeader);
         if (!$websiteHeader) {
             $notify = NotifyHelper::notFound();
             return redirect()->route('cms.website-header.index')->with('notify', $notify);

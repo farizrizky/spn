@@ -6,11 +6,13 @@ use App\Helpers\NotifyHelper;
 use App\Http\Controllers\Controller;
 use App\Models\ContactForm;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ContactFormController extends Controller
 {
     public function index()
     {
+        Gate::authorize('viewAny', ContactForm::class);
         $data = [
             'contact_form' => ContactForm::orderBy('created_at', 'desc')->get(),
         ];
@@ -20,6 +22,7 @@ class ContactFormController extends Controller
 
     public function show(ContactForm $contactForm)
     {
+        Gate::authorize('view', $contactForm);
         if(!$contactForm) {
             $notify = NotifyHelper::notFound();
             return redirect()->route('cms.contact-form.index')->with('notify', $notify);
@@ -33,6 +36,7 @@ class ContactFormController extends Controller
 
     public function destroy(ContactForm $contactForm)
     {
+        Gate::authorize('delete', $contactForm);
         if(!$contactForm) {
             $notify = NotifyHelper::notFound();
             return redirect()->route('cms.contact-form.index')->with('notify', $notify);
@@ -45,6 +49,7 @@ class ContactFormController extends Controller
 
     public function changeStatus(ContactForm $contactForm)
     {
+        Gate::authorize('update', $contactForm);
         if(!$contactForm) {
             $notify = NotifyHelper::notFound();
             return redirect()->route('cms.contact-form.index')->with('notify', $notify);

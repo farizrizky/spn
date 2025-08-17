@@ -6,6 +6,7 @@ use App\Helpers\NotifyHelper;
 use App\Http\Controllers\Controller;
 use App\Models\ContactData;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ContactDataController extends Controller
 {
@@ -14,6 +15,7 @@ class ContactDataController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny', ContactData::class);
         $data = [
             'contactData' => ContactData::all(),
         ];
@@ -25,6 +27,7 @@ class ContactDataController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', ContactData::class);
         return view('cms.page.contact-data.create');
     }
 
@@ -33,6 +36,7 @@ class ContactDataController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', ContactData::class);
         $request->validate([
             'name' => 'required|string|unique:contact_data,name|max:255',
             'value' => 'nullable|string',
@@ -60,6 +64,7 @@ class ContactDataController extends Controller
      */
     public function edit(ContactData $contactData)
     {
+        Gate::authorize('update', $contactData);
         if (!$contactData) {
             $notify = NotifyHelper::notFound();
             return redirect()->route('cms.contact-data.index')->with('notify', $notify);
@@ -76,6 +81,7 @@ class ContactDataController extends Controller
      */
     public function update(Request $request, ContactData $contactData)
     {
+        Gate::authorize('update', $contactData);
         if (!$contactData) {
             $notify = NotifyHelper::notFound();
             return redirect()->route('cms.contact-data.index')->with('notify', $notify);
@@ -100,6 +106,7 @@ class ContactDataController extends Controller
      */
     public function destroy(ContactData $contactData)
     {
+        Gate::authorize('delete', $contactData);
         if (!$contactData) {
             $notify = NotifyHelper::notFound();
             return redirect()->route('cms.contact-data.index')->with('notify', $notify);

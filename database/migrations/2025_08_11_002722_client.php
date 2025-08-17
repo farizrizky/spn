@@ -13,11 +13,8 @@ return new class extends Migration
     {
         Schema::create('client', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
-            $table->string('job');
-            $table->text('testimonial');
+            $table->string('name')->unique();
             $table->text('image_path');
-            $table->text('logo_path');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

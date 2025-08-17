@@ -12,7 +12,9 @@
 
                         <ul class="blog-meta mb-20">
                             <li><a href="#"><span class="icon"><i class="ri-calendar-line"></i></span> {{ DateHelper::fullDateFormatWithoutTime($blog->date) }}</a></li>
+                             @if($blog->user)
                             <li><a href="#"><span class="icon"><i class="ri-user-line"></i></span> oleh {{ $blog->user->name }}</a></li>
+                            @endif
                             <li><a href="{{ route('web.blog-category', ['slug' => $blog->blogCategory->slug]) }}"><span class="icon"><i class="ri-book-line"></i></span> {{ $blog->blogCategory->name }}</a></li>
                         </ul>
                         <h3 class="title">{{ $blog->title }}</h3>

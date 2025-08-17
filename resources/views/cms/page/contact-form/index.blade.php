@@ -21,7 +21,9 @@
                                     <th>Telepon</th>
                                     <th>Subjek</th>
                                     <th>Status</th>
+                                    @can('Contact Form.Kelola Form Kontak')
                                     <th>Aksi</th>
+                                    @endcan
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,10 +41,12 @@
                                             <span class="badge bg-warning">Belum Dibaca</span>
                                         @endif
                                     </td>
+                                    @can('Contact Form.Kelola Form Kontak')
                                     <td>
                                         <a class="btn btn-info btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail" href="{{ route('cms.contact-form.detail', $cf->id) }}"><span class="icon-eye"></span></a>
                                         <a class="btn btn-danger btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus" onclick="confirmAlert('{{ route('cms.contact-form.delete', $cf->id) }}', 'Anda yakin akan menghapus pesan ini?')"><span class="icon-trash"></span></a>
                                     </td>
+                                    @endcan
                                 </tr>
                                 @endforeach
                             </tbody>

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class TypeController extends Controller
 {
@@ -15,6 +16,7 @@ class TypeController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny', Type::class);
         $data = [
             'type' => Type::all(),
         ];
@@ -27,6 +29,7 @@ class TypeController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', Type::class);
         return view('cms.page.type.create');
     }
 
@@ -35,6 +38,7 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Type::class);
         $request->validate([
             'name' => 'required|string|max:150',
             'slug' => 'required|string|unique:type,slug|max:150',
@@ -62,6 +66,7 @@ class TypeController extends Controller
      */
     public function edit(Type $type)
     {
+        Gate::authorize('update', $type);
         if(!$type) {
              $notify = NotifyHelper::notFound();
             return back()->with('notify', $notify);
@@ -79,6 +84,7 @@ class TypeController extends Controller
      */
     public function update(Request $request, Type $type)
     {
+        Gate::authorize('update', $type);
         if(!$type) {
             $notify = NotifyHelper::notFound();
             return back()->with('notify', $notify);
@@ -102,6 +108,7 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
+        Gate::authorize('delete', $type);
         if(!$type) {
             $notify = NotifyHelper::notFound();
             return back()->with('notify', $notify)->withInput();

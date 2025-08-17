@@ -15,8 +15,8 @@
         <div class="service-slider mt-50 wow fadeInRight" data-wow-delay=".2s">
             @foreach($data_type as $type)
                 <div class="single-service single-card dark-bg " data-background="{{ $type->image_path }}" style="border-style:none;">
-                    <h5 class="title mb-100"><a href="{{ route('web.product', ['type' => $type->slug]) }}" class="text-white">{{ $type->name }}</a></h5>
-                    <a href="{{ route('web.product', ['type' => $type->slug]) }}" class="secondary-btn primary-bg"><span class="text">Selengkapnya</span> <span class="icon"><i class="ri-arrow-right-double-line"></i></span></a>
+                    <h5 class="title mb-100"><a href="{{ route('web.product-type-detail',  $type->slug) }}" class="text-white">{{ $type->name }}</a></h5>
+                    <a href="{{ route('web.product-type-detail', $type->slug) }}" class="secondary-btn primary-bg"><span class="text">Selengkapnya</span> <span class="icon"><i class="ri-arrow-right-double-line"></i></span></a>
                 </div>
             @endforeach
         </div>

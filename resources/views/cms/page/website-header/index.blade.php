@@ -7,7 +7,9 @@
             <h3 class="fw-bold mb-3">Website Header</h3>
         </div>
         <div class="ms-md-auto py-2 py-md-0">
+            @can('Website Header.Kelola Website Header')
             <a href="{{ route('cms.website-header.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Buat Website Header</a>
+            @endcan
         </div>
     </div>
     <div class="row">
@@ -21,7 +23,9 @@
                                 <tr class="table-primary">
                                     <th>Nama</th>
                                     <th>Status</th>
+                                    @can('Website Header.Kelola Website Header')
                                     <th>Aksi</th>
+                                    @endcan
                                 </tr>
                             </thead>
                             <tbody>
@@ -35,10 +39,12 @@
                                             <span class="badge badge-danger">Tidak Aktif</span>
                                         @endif
                                     </td>
+                                    @can('Website Header.Kelola Website Header')
                                     <td>
                                         <a class="btn btn-success btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Ubah" href="{{ route('cms.website-header.edit', $wh->id) }}"><span class="icon-pencil"></span></a>
                                         <a class="btn btn-danger btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus" onclick="confirmAlert('{{ route('cms.website-header.delete', $wh->id) }}', 'Anda yakin akan menghapus website header ini?')"><span class="icon-trash"></span></a>
                                     </td>
+                                    @endcan
                                 </tr>
                                 @endforeach
                             </tbody>

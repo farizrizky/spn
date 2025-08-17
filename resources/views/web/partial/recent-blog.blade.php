@@ -22,7 +22,9 @@
                         <div class="blog-content" style="height: 300px; overflow: hidden;">
                             <ul class="blog-meta mb-20">
                                 <li><a href="#"><span class="icon"><i class="ri-calendar-line"></i></span> {{ DateHelper::fullDateFormatWithoutTime($b->date) }}</a></li>
+                                @if($b->user)
                                 <li><a href="#"><span class="icon"><i class="ri-user-line"></i></span> by {{ $b->user->name }}</a></li>
+                                @endif
                             </ul>
 
                             <h5 class="title"><a href="{{ route('web.blog-detail', $b->slug) }}">{{ $b->title }}</a></h5>

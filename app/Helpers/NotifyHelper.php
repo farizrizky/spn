@@ -1,7 +1,6 @@
 <?php
 namespace App\Helpers;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\App;
+
 Class NotifyHelper{
 
     public static function successfullyCreated()
@@ -34,7 +33,7 @@ Class NotifyHelper{
     public static function errorOccurred($message = "")
     {
         return [
-            'state' => 'error',
+            'state' => 'danger',
             'title' => "Terjadi Kesalahan",
             'message' => $message ?: "Maaf, terjadi kesalahan saat memproses permintaan Anda."
         ];
@@ -43,13 +42,13 @@ Class NotifyHelper{
     public static function notFound()
     {
         return [
-            'state' => 'error',
+            'state' => 'danger',
             'title' => "Tidak Ditemukan",
             'message' => "Data tidak ditemukan."
         ];
     }
 
-    public function notify($state, $title, $message)
+    public static function notify($state, $title, $message)
     {
         return [
             'state' => $state,

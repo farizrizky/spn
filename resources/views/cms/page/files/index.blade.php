@@ -16,7 +16,9 @@
             </select>
         </div>
         <div class="ms-md-auto py-2 py-md-0">
+            @can('File.Kelola File')
             <a data-allow="*" class="btn btn-primary openFileUpload"><i class="fas fa-plus"></i> Upload File</a>
+            @endcan
         </div>
     </div>
     <div class="row">
@@ -73,7 +75,9 @@
                                     <td>{{ $f->path }}</td>
                                     <td>
                                         <a class="btn btn-success btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Copy Path" onclick="copyPath('{{ asset('storage/'.$f->path) }}')"><span class="fas fa-clipboard"></span></a>
+                                        @can('File.Kelola File')
                                         <a class="btn btn-danger btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus" onclick="confirmAlert('{{ route('cms.file.delete', $f->id) }}', 'Anda yakin akan menghapus file ini?')"><span class="icon-trash"></span></a>
+                                        @endcan
                                     </td>
                                 </tr>
                                 @endforeach

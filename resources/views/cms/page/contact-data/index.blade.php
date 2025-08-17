@@ -7,7 +7,9 @@
             <h3 class="fw-bold mb-3">Data Kontak</h3>
         </div>
         <div class="ms-md-auto py-2 py-md-0">
+            @can('Data Kontak.Kelola Data Kontak')
             <a href="{{ route('cms.contact-data.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Buat Data Kontak</a>
+            @endcan
         </div>
     </div>
     <div class="row">
@@ -22,7 +24,9 @@
                                     <th>Nilai</th>
                                     <th>URL</th>
                                     <th>Ikon</th>
+                                    @can('Data Kontak.Kelola Data Kontak')
                                     <th>Aksi</th>
+                                    @endcan
                                 </tr>
                             </thead>
                             <tbody>
@@ -32,10 +36,12 @@
                                     <td>{{ $cd->value }}</td>
                                     <td>{{ $cd->url }}</td>
                                     <td>{{ $cd->icon }}</td>
+                                    @can('Data Kontak.Kelola Data Kontak')
                                     <td>
                                         <a class="btn btn-success btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Ubah" href="{{ route('cms.contact-data.edit', $cd->id) }}"><span class="icon-pencil"></span></a>
                                         <a class="btn btn-danger btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus" onclick="confirmAlert('{{ route('cms.contact-data.delete', $cd->id) }}', 'Anda yakin akan menghapus data kontak ini?')"><span class="icon-trash"></span></a>
                                     </td>
+                                    @endcan
                                 </tr>
                                 @endforeach
                             </tbody>

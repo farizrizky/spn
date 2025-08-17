@@ -10,6 +10,7 @@ use App\Models\BlogTag;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 
 class BlogController extends Controller
@@ -19,6 +20,7 @@ class BlogController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny', Blog::class);
         $data = [
             'blog' => Blog::with(['blogCategory', 'blogTag'])->get(),
         ];
@@ -30,6 +32,7 @@ class BlogController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', Blog::class);
         $data = [
             'blog_category' => BlogCategory::select('id', 'name')->get(),
             'tag' => Tag::select('id', 'name')->get(),
@@ -42,6 +45,7 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Blog::class);
         $request->validate([
             'title' => 'required|string|max:150',
             'slug' => 'required|string|max:150|unique:blog,slug',
@@ -88,6 +92,7 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
+        Gate::authorize('update', $blog);
         if (!$blog) {
             $notify = NotifyHelper::notFound();
             return redirect()->route('cms.blog.index')->with('notify', $notify);
@@ -106,6 +111,7 @@ class BlogController extends Controller
      */
     public function update(Request $request, Blog $blog)
     {
+        Gate::authorize('update', $blog);
         if (!$blog) {
             $notify = NotifyHelper::notFound();
             return redirect()->route('cms.blog.index')->with('notify', $notify);
@@ -150,6 +156,7 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
+        Gate::authorize('delete', $blog);
         if (!$blog) {
             $notify = NotifyHelper::notFound();
             return redirect()->route('cms.blog.index')->with('notify', $notify);

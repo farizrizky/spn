@@ -6,6 +6,7 @@ use App\Helpers\NotifyHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class TagController extends Controller
 {
@@ -14,6 +15,7 @@ class TagController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny', Tag::class);
         $data = [
             'tag' => Tag::all(),
         ];
@@ -25,6 +27,7 @@ class TagController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', Tag::class);
         return view('cms.page.tag.create');
     }
 
@@ -33,6 +36,7 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Tag::class);
         $request->validate([
             'name' => 'required|string|max:150',
             'slug' => 'required|string|unique:tag,slug|max:150',
@@ -58,6 +62,7 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
+        Gate::authorize('update', $tag);
         if (!$tag) {
             $notify = NotifyHelper::notFound();
             return redirect()->route('cms.tag.index')->with('notify', $notify);
@@ -75,6 +80,7 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
+        Gate::authorize('update', $tag);
         if (!$tag) {
             $notify = NotifyHelper::notFound();
             return redirect()->route('cms.tag.index')->with('notify', $notify);
@@ -97,6 +103,7 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
+        Gate::authorize('delete', $tag);
         if (!$tag) {
             $notify = NotifyHelper::notFound();
             return redirect()->route('cms.tag.index')->with('notify', $notify);

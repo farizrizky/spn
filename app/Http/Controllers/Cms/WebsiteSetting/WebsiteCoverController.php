@@ -6,6 +6,7 @@ use App\Helpers\NotifyHelper;
 use App\Http\Controllers\Controller;
 use App\Models\WebsiteCover;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class WebsiteCoverController extends Controller
 {
@@ -14,6 +15,7 @@ class WebsiteCoverController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny', WebsiteCover::class);
         $data = [
             'website_cover' => WebsiteCover::orderBy('order', 'asc')->get(),
         ];
@@ -33,6 +35,7 @@ class WebsiteCoverController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', WebsiteCover::class);
         $request->validate([
             'title' => 'nullable|string|max:255',
             'title_color' => 'nullable|string|max:7',
@@ -96,6 +99,7 @@ class WebsiteCoverController extends Controller
      */
     public function edit(WebsiteCover $websiteCover)
     {
+        Gate::authorize('update', $websiteCover);
         if (!$websiteCover) {
             $notify = NotifyHelper::notFound();
             return redirect()->route('cms.website-cover.index')->with('notify', $notify);
@@ -112,6 +116,7 @@ class WebsiteCoverController extends Controller
      */
     public function update(Request $request, WebsiteCover $websiteCover)
     {
+        Gate::authorize('update', $websiteCover);
         if (!$websiteCover) {
             $notify = NotifyHelper::notFound();
             return redirect()->route('cms.website-cover.index')->with('notify', $notify);
@@ -171,6 +176,7 @@ class WebsiteCoverController extends Controller
      */
     public function destroy(WebsiteCover $websiteCover)
     {
+        Gate::authorize('delete', $websiteCover);
         if (!$websiteCover) {
             $notify = NotifyHelper::notFound();
             return redirect()->route('cms.website-cover.index')->with('notify', $notify);
@@ -184,6 +190,7 @@ class WebsiteCoverController extends Controller
 
     public function saveOrder(Request $request)
     {
+        Gate::authorize('update', WebsiteCover::class);
         $ids = $request->input('id', []);
         if (empty($ids)) {
             $notify = NotifyHelper::errorOccurred('Tidak ada website cover yang dapat diurutkan.');

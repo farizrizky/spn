@@ -271,7 +271,6 @@
 
     window.addEventListener('fileUploaded', function(event) {
         var data = event.detail;
-        console.log(data);
         if (data.key === 'background') {
             $('#background_path').val(data.urls[0]);
             $('#backgroundPreview').attr('src', data.urls[0]).show();
@@ -285,7 +284,6 @@
 
     window.addEventListener('fileUrlAdded', function(event) {
         var data = event.detail;
-        console.log(data);
         if (data.key === 'background') {
             $('#background_path').val(data.url);
             $('#backgroundPreview').attr('src', data.url).show();

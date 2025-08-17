@@ -7,7 +7,9 @@
             <h3 class="fw-bold mb-3">Testimonial</h3>
         </div>
         <div class="ms-md-auto py-2 py-md-0">
+            @can('Testimonial.Kelola Testimonial')
             <a href="{{ route('cms.testimonial.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Buat Testimonial</a>
+            @endcan
         </div>
     </div>
     <div class="row">
@@ -23,7 +25,9 @@
                                     <th>Gambar</th>
                                     <th>Logo</th>
                                     <th>Status</th>
+                                    @can('Testimonial.Kelola Testimonial')
                                     <th>Aksi</th>
+                                    @endcan
                                 </tr>
                             </thead>
                             <tbody>
@@ -40,10 +44,12 @@
                                     <td>
                                         <span class="badge {{ $t->is_active ? 'bg-success' : 'bg-danger' }}">{{ $t->is_active ? 'Aktif' : 'Tidak Aktif' }}</span>
                                     </td>
+                                    @can('Testimonial.Kelola Testimonial')
                                     <td>
                                         <a class="btn btn-success btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Ubah" href="{{ route('cms.testimonial.edit', $t->id) }}"><span class="icon-pencil"></span></a>
                                         <a class="btn btn-danger btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus" onclick="confirmAlert('{{ route('cms.testimonial.delete', $t->id) }}', 'Anda yakin akan menghapus testimonial ini?')"><span class="icon-trash"></span></a>
                                     </td>
+                                    @endcan
                                 </tr>
                                 @endforeach
                             </tbody>

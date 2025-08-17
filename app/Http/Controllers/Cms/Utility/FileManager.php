@@ -6,6 +6,7 @@ use App\Helpers\NotifyHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Files;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -13,6 +14,7 @@ use Illuminate\Support\Str;
 class FileManager extends Controller
 {
     public function index($type = 'all'){
+        Gate::authorize('viewAny', Files::class);
         if ($type === 'all') {
             $files = Files::all();
         } else {
@@ -27,6 +29,7 @@ class FileManager extends Controller
     }
 
     public function destroy(Files $file){
+        Gate::authorize('delete', $file);
         if(!$file) {
             $notify = NotifyHelper::notFound();
             return redirect()->back()->with('notify', $notify);
@@ -45,6 +48,7 @@ class FileManager extends Controller
 
     public function uploadFile(Request $request) 
     {
+        Gate::authorize('create', Files::class);
         $urls = [];
 
         if (request()->hasFile('files')) {

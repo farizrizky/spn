@@ -6,6 +6,7 @@ use App\Helpers\NotifyHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ClientController extends Controller
 {
@@ -14,6 +15,7 @@ class ClientController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny', Client::class);
         $data = [
             'client' => Client::all()
         ];
@@ -26,6 +28,7 @@ class ClientController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', Client::class);
         return view('cms.page.client.create');
     }
 
@@ -34,6 +37,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Client::class);
         $request->validate([
             'name' => 'required|string|max:255|unique:client',
             'image_path' => 'nullable|string|max:255',
@@ -59,6 +63,7 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
+        Gate::authorize('update', $client);
         if (!$client) {
             $notify = NotifyHelper::notFound();
             return redirect()->route('cms.client.index')->with('notify', $notify);
@@ -76,6 +81,7 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
+        Gate::authorize('update', $client);
         if (!$client) {
             $notify = NotifyHelper::notFound();
             return redirect()->route('cms.client.index')->with('notify', $notify);
@@ -98,6 +104,7 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
+        Gate::authorize('delete', $client);
         if (!$client) {
             $notify = NotifyHelper::notFound();
             return redirect()->route('cms.client.index')->with('notify', $notify);

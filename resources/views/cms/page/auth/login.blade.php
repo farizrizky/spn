@@ -28,7 +28,6 @@
     </div>
     <div class="card-action d-grid">
         <button class="btn btn-primary" name="submit">Login</button>
-        <a href="#" class="">Lupa Password?</a>
     </div>
     </form>
 </div>

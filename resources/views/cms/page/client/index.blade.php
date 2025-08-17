@@ -7,7 +7,9 @@
             <h3 class="fw-bold mb-3">Client</h3>
         </div>
         <div class="ms-md-auto py-2 py-md-0">
+            @can('Client.Kelola Client')
             <a href="{{ route('cms.client.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Buat Client</a>
+            @endcan
         </div>
     </div>
     <div class="row">
@@ -21,7 +23,9 @@
                                     <th>Client</th>
                                     <th>Gambar / Logo</th>
                                     <th>Status</th>
+                                    @can('Client.Kelola Client')
                                     <th>Aksi</th>
+                                    @endcan
                                 </tr>
                             </thead>
                             <tbody>
@@ -34,10 +38,12 @@
                                     <td>
                                         <span class="badge {{ $c->is_active ? 'bg-success' : 'bg-danger' }}">{{ $c->is_active ? 'Aktif' : 'Tidak Aktif' }}</span>
                                     </td>
+                                    @can('Client.Kelola Client')
                                     <td>
                                         <a class="btn btn-success btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Ubah" href="{{ route('cms.client.edit', $c->id) }}"><span class="icon-pencil"></span></a>
                                         <a class="btn btn-danger btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus" onclick="confirmAlert('{{ route('cms.client.delete', $c->id) }}', 'Anda yakin akan menghapus client ini?')"><span class="icon-trash"></span></a>
                                     </td>
+                                    @endcan
                                 </tr>
                                 @endforeach
                             </tbody>

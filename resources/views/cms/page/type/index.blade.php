@@ -7,7 +7,9 @@
             <h3 class="fw-bold mb-3">Kategori Produk</h3>
         </div>
         <div class="ms-md-auto py-2 py-md-0">
+            @can('Kategori Produk.Kelola Kategori Produk')
             <a href="{{ route('cms.type.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Buat Kategori Produk</a>
+            @endcan
         </div>
     </div>
     <div class="row">
@@ -19,17 +21,21 @@
                             <thead> 
                                 <tr class="table-primary">
                                     <th>Kategori</th>
+                                    @can('Kategori Produk.Kelola Kategori Produk')
                                     <th>Aksi</th>
+                                    @endcan
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($type as $t)
                                 <tr>
                                     <td>{{ $t->name }}</td>
+                                    @can('Kategori Produk.Kelola Kategori Produk')
                                     <td>
                                         <a class="btn btn-success btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Ubah" href="{{ route('cms.type.edit', $t->id) }}"><span class="icon-pencil"></span></a>
                                         <a class="btn btn-danger btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus" onclick="confirmAlert('{{ route('cms.type.delete', $t->id) }}', 'Anda yakin akan menghapus tipe ini?')"><span class="icon-trash"></span></a>
                                     </td>
+                                    @endcan
                                 </tr>
                                 @endforeach
                             </tbody>

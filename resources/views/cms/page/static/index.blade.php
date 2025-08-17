@@ -19,7 +19,9 @@
                                     <th>Judul</th>
                                     <th>Meta Deskripsi</th>
                                     <th>Dikunjungi</th>
+                                    @can('Halaman Statis.Kelola Halaman Statis')
                                     <th>Aksi</th>
+                                    @endcan
                                 </tr>
                             </thead>
                             <tbody>
@@ -29,9 +31,11 @@
                                     <td>{{ $s->title }}</td>
                                     <td>{{ $s->meta_description }}</td>
                                     <td>{{ $s->view_count }}</td>
+                                    @can('Halaman Statis.Kelola Halaman Statis')
                                     <td>
                                         <a class="btn btn-success btn-sm m-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Ubah" href="{{ route('cms.static.edit', $s->id) }}"><span class="icon-pencil"></span></a>
                                     </td>
+                                    @endcan
                                 </tr>
                                 @endforeach
                             </tbody>

@@ -6,6 +6,7 @@ use App\Helpers\NotifyHelper;
 use App\Http\Controllers\Controller;
 use App\Models\StaticPage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class StaticController extends Controller
 {
@@ -14,6 +15,7 @@ class StaticController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny', StaticPage::class);
         $data = [
             'static' => StaticPage::all()
         ];

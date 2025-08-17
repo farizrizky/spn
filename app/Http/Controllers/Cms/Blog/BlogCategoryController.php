@@ -6,6 +6,7 @@ use App\Helpers\NotifyHelper;
 use App\Http\Controllers\Controller;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class BlogCategoryController extends Controller
 {
@@ -14,6 +15,7 @@ class BlogCategoryController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny', BlogCategory::class);
         $data = [
             'blog_category' => BlogCategory::all(),
         ];
@@ -25,6 +27,7 @@ class BlogCategoryController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', BlogCategory::class);
         return view('cms.page.blog-category.create');
     }
 
@@ -33,6 +36,7 @@ class BlogCategoryController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', BlogCategory::class);
         $request->validate([
             'name' => 'required|string|max:150',
             'slug' => 'required|string|unique:blog_category,slug|max:150',
@@ -58,6 +62,7 @@ class BlogCategoryController extends Controller
      */
     public function edit(BlogCategory $blogCategory)
     {
+        Gate::authorize('update', $blogCategory);
         if(!$blogCategory) {
             $notify = NotifyHelper::notFound();
             return redirect()->route('cms.blog-category.index')->with('notify', $notify);
@@ -75,6 +80,7 @@ class BlogCategoryController extends Controller
      */
     public function update(Request $request, BlogCategory $blogCategory)
     {
+        Gate::authorize('update', $blogCategory);
         if (!$blogCategory) {
             $notify = NotifyHelper::notFound();
             return redirect()->route('cms.blog-category.index')->with('notify', $notify);
@@ -97,6 +103,7 @@ class BlogCategoryController extends Controller
      */
     public function destroy(BlogCategory $blogCategory)
     {
+        Gate::authorize('delete', $blogCategory);
         if (!$blogCategory) {
             $notify = NotifyHelper::notFound();
             return redirect()->route('cms.blog-category.index')->with('notify', $notify);
