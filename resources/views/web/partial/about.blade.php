@@ -1,3 +1,27 @@
+<style>
+    /* Default (desktop) gap pakai bawaan bootstrap */
+.row.about-row {
+  --bs-gutter-x: 1.5rem; /* default 24px */
+  --bs-gutter-y: 1.5rem;
+}
+
+/* HP: jarak hanya 2px */
+@media (max-width: 767.98px) {
+  .row.about-row {
+    --bs-gutter-x: 2px;
+    --bs-gutter-y: 10px;
+  }
+}
+
+.about-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;   /* biar selalu penuh */
+  border-radius: 10px;
+}
+
+</style>
 <section class="about-area py-120">
     <div class="container">
         <div class="row gx-xl-5 align-items-center">
@@ -35,47 +59,50 @@
                     <p class="mt-20">
                         Kami adalah perusahaan agen pelumas kendaraan, alat berat, dan peralatan mesin berat lainnya yang berkantor pusat di Jakarta. Perusahaan kami berkembang dan terus bergerak maju menjadi penyedia pelumas komersial unggul yang senantiasa memenuhi kebutuhan pelanggannya, terutama untuk segmen manufaktur, pertambangan, komersial, perkebunan, transportasi, konstruksi, juga kelautan dan perikanan. <br><br>
                     </p>
-                    <div class="about-items mt-30">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="about-item">
-                                    <h6 class="title">Ketersediaan Lengkap</h6>
-                                    <div class="d-flex align-items-center gap-3 mt-20">
-                                        <img src="{{ asset('assets/web/images/crude.png') }}" alt="icon">           
+                    <div class="about-items mt-10">
+                        <div class="row about-row">
+                            <div class="col-12 col-md-6 d-flex align-items-stretch">
+                                <div class="about-item h-100 w-100 shadow-sm rounded-5 p-3">
+                                    <h6 class="title fw-bold">Ketersediaan Lengkap</h6>
+                                    <div class="d-flex align-items-center gap-3 mt-2">
+                                        <img src="{{ asset('assets/web/images/crude.png') }}" alt="icon">
                                         <span>Menyediakan pelumas sesuai kebutuhan anda</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="about-item">
-                                    <h6 class="title">Pengiriman Tepat Waktu</h6>
-                                    <div class="d-flex align-items-center gap-3 mt-20">
+
+                            <div class="col-12 col-md-6 d-flex align-items-stretch">
+                                <div class="about-item h-100 w-100 shadow-sm rounded-5 p-3">
+                                    <h6 class="title fw-bold">Pengiriman Tepat Waktu</h6>
+                                    <div class="d-flex align-items-center gap-3 mt-2">
                                         <img src="{{ asset('assets/web/images/tanker-truck.png') }}" alt="icon">
                                         <span>Memastikan pendistribusian tepat waktu</span>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row mt-30">
-                            <div class="col-sm-6">
-                                <div class="about-item">
-                                    <h6 class="title">Bantuan Teknis</h6>
-                                    <div class="d-flex align-items-center gap-3 mt-20">
+
+                            <div class="col-12 col-md-6 d-flex align-items-stretch">
+                                <div class="about-item h-100 w-100 shadow-sm rounded-5 p-3">
+                                    <h6 class="title fw-bold">Bantuan Teknis</h6>
+                                    <div class="d-flex align-items-center gap-3 mt-2">
                                         <img src="{{ asset('assets/web/images/mechanic.png') }}" alt="icon">
                                         <span>Memberikan dukungan teknis terkait produk</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="about-item">
-                                    <h6 class="title">Layanan Di Tempat</h6>
-                                    <div class="d-flex align-items-center gap-3 mt-20">
+
+                            <div class="col-12 col-md-6 d-flex align-items-stretch">
+                                <div class="about-item h-100 w-100 shadow-sm rounded-5 p-3">
+                                    <h6 class="title fw-bold">Layanan Di Tempat</h6>
+                                    <div class="d-flex align-items-center gap-3 mt-2">
                                         <img src="{{ asset('assets/web/images/professional-services.png') }}" alt="icon">
                                         <span>Memberikan layanan di tempat sesuai kebutuhan</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+
                         <div class="button-group mt-30">
                             <a href="{{ route('web.profile') }}" class="primary-btn"><span class="text">Selengkapnya</span> <span class="icon"><i class="ri-arrow-right-double-line"></i></span></a>
 
