@@ -52,10 +52,6 @@ class ProductController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(9);
 
-        if ($product->isEmpty()) {
-            return redirect()->route('web.not-found');
-        }
-
         $data = [
             'title' => $type->first()->name,
             'partial_title' => PartialController::title($type->first()->name),
@@ -76,10 +72,6 @@ class ProductController extends Controller
             })
             ->orderBy('created_at', 'desc')
             ->paginate(9);
-
-        if ($product->isEmpty()) {
-            return redirect()->route('web.not-found');
-        }
 
         $data = [
             'title' => 'Hasil Pencarian: ' . $search,
