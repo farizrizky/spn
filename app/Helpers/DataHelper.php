@@ -36,7 +36,7 @@ Class DataHelper{
 
     public static function getWebsiteCover()
     {
-        return \App\Models\WebsiteCover::where('is_active', true)->get();
+        return \App\Models\WebsiteCover::where('is_active', true)->orderBy('order', 'asc')->get();
     }
 
     public static function getClient(){

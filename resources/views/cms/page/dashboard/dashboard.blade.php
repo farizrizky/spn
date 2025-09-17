@@ -94,7 +94,7 @@
                             @foreach($top_product as $tp)
                             <div class="item-list">
                                 <div class="avatar">
-                                <img src="{{ $tp->productImage->first()->image_path }}" alt="..." class="avatar-img rounded-circle"/>
+                                <img src="{{ $tp->productImage->first()?->image_path }}" alt="..." class="avatar-img rounded-circle"/>
                                 </div>
                                 <div class="info-user ms-3">
                                     <div class="username">{{ $tp->name }}</div>

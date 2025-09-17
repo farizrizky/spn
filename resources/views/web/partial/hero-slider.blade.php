@@ -32,7 +32,7 @@
         <div class="overlay" style="background-color: {{ $wc->overlay_color }}; opacity: {{ $wc->overlay_opacity ?? 0.5 }};"></div>
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-6">
+                <div class="col-lg-7">
                     @if($wc->title_position == 'left')
                     <div class="hero-content">
                         <div class="section-top">
@@ -85,7 +85,7 @@
                     @endif
                 </div>
 
-                <div class="col-lg-6">
+                <div class="col-lg-5">
                     @if($wc->title_position == 'left')
                    <div class="hero-image">
                         @if($wc->image_path)
