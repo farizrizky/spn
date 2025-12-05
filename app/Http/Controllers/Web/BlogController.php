@@ -17,7 +17,7 @@ class BlogController extends Controller
             ->paginate(9);
 
         $data = [
-            'title' => 'Informasi',
+            'title' => 'Informasi - PT. Sindo Prima Niaga',
             'partial_title' => $partial_title ?? PartialController::title('Informasi'),
             'blog' => $blog
         ];
@@ -37,7 +37,7 @@ class BlogController extends Controller
             ->paginate(9);
 
         $data = [
-            'title' => $blogCategory->first()->name,
+            'title' => 'Kategori Blog - '.$blogCategory->first()->name,
             'partial_title' => PartialController::title($blogCategory->first()->name),
             'blog' => $blog
         ];
@@ -97,7 +97,7 @@ class BlogController extends Controller
             return redirect()->route('web.not-found');
         }
         $data = [
-            'title' => $blog->first()->title,
+            'title' => 'Blog - '.$blog->first()->title,
             'meta_description' => $blog->first()->meta_description,
             'partial_title' => PartialController::title($blog->first()->title),
             'blog_category' => BlogCategory::select('id', 'name', 'slug')->get(),

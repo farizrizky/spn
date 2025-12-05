@@ -18,7 +18,7 @@ class ProductController extends Controller
             ->paginate(9);
 
         $data = [
-            'title' => 'Daftar Produk',
+            'title' => 'Daftar Produk - PT. Sindo Prima Niaga',
             'partial_title' => PartialController::title('Daftar Produk'),
             'product' => $product
         ];
@@ -29,7 +29,7 @@ class ProductController extends Controller
     public function type()
     {
         $data = [
-            'title' => 'Kategori Produk',
+            'title' => 'Kategori Produk - PT. Sindo Prima Niaga',
             'partial_title' => PartialController::title('Kategori Produk'),
             'type' => Type::all()
         ];
@@ -53,7 +53,7 @@ class ProductController extends Controller
             ->paginate(9);
 
         $data = [
-            'title' => $type->first()->name,
+            'title' => 'Kategori Produk - '.$type->first()->name,
             'partial_title' => PartialController::title($type->first()->name),
             'product' => $product
         ];
@@ -89,7 +89,7 @@ class ProductController extends Controller
             return redirect()->route('web.not-found');
         }
         $data = [
-            'title' => 'Produk '.$product->first()->name,
+            'title' => 'Produk - '.$product->first()->name,
             'meta_description' => $product->first()->meta_description,
             'partial_title' => PartialController::title($product->first()->name),
             'product' => $product->first()

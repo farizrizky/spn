@@ -180,14 +180,14 @@
                 </a>
             </li>
             @endcanany
-            @canany(['Visitor Log.Lihat Visitor Log', 'Visitor Log.Kelola Visitor Log'])
-            <li class="nav-item {{ request()->routeIs('cms.visitor-log.*') ? 'active' : '' }}">
-                <a href="{{ route('cms.visitor-log.index') }}">
-                    <i class="fas fa-user"></i>
-                    <p>Visitor Log</p>
-                </a>
-            </li>
-            @endcanany
+            <!--@canany(['Visitor Log.Lihat Visitor Log', 'Visitor Log.Kelola Visitor Log'])-->
+            <!--<li class="nav-item {{ request()->routeIs('cms.visitor-log.*') ? 'active' : '' }}">-->
+            <!--    <a href="{{ route('cms.visitor-log.index') }}">-->
+            <!--        <i class="fas fa-user"></i>-->
+            <!--        <p>Visitor Log</p>-->
+            <!--    </a>-->
+            <!--</li>-->
+            <!--@endcanany-->
             @canany(['User.Lihat User', 'User.Kelola User', 'Role.Lihat Role', 'Role.Kelola Role', 'Permission.Lihat Permission', 'Permission.Kelola Permission'])
             <li class="nav-section">
                 <span class="sidebar-mini-icon">

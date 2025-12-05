@@ -26,7 +26,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="meta_description"><b>Meta Deskripsi</b> (<span class="char-count">{{ strlen($static->meta_description) }}</span>/160)</label>
+                            <label for="meta_description"><b>Meta Deskripsi</b> (<span class="char-count">{{ strlen($static->meta_description) }}</span>/200)</label>
                             <textarea class="form-control" name="meta_description" id="meta_description">{{ $static->meta_description }}</textarea>
                         </div>
                     </div>
@@ -48,9 +48,9 @@
     $('#meta_description').on('input', function () {
         var count = $(this).val().length;
         $('.char-count').text(count);
-        if (count > 160) {
+        if (count > 200) {
             //can't type anymore
-            $(this).val($(this).val().substring(0, 160));
+            $(this).val($(this).val().substring(0, 200));
         }
        
     });
